@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Chore" representedClassName="Chore" syncable="YES" codeGenerationType="class">
+        <attribute name="dayTodo" optional="YES" attributeType="String"/>
+        <attribute name="doneBy" optional="YES" attributeType="String"/>
+        <attribute name="firID" optional="YES" attributeType="String"/>
+        <attribute name="hasTimeLimit" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isCustom" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="timeLimit" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="timeSpent" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="type" attributeType="String"/>
+        <attribute name="value" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Family" representedClassName="Family" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="mail" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Member" representedClassName="Member" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="points" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="time" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="Chore" positionX="-63" positionY="-18" width="128" height="194"/>
+        <element name="Family" positionX="-63" positionY="63" width="128" height="59"/>
+        <element name="Member" positionX="-63" positionY="54" width="128" height="104"/>
+    </elements>
+</model>
