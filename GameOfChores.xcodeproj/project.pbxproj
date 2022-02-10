@@ -39,6 +39,9 @@
 		41D2F66027B3BBE10077E721 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 41D2F65F27B3BBE10077E721 /* FirebaseMessaging */; };
 		41D2F66227B3E8BB0077E721 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2F66127B3E8BB0077E721 /* FirebaseManager.swift */; };
 		41D2F66627B3F0E30077E721 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41D2F66527B3F0E30077E721 /* GoogleService-Info.plist */; };
+		41D2F66827B406780077E721 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2F66727B406780077E721 /* LoginView.swift */; };
+		41D2F66A27B406ED0077E721 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2F66927B406ED0077E721 /* LoginViewModel.swift */; };
+		41D2F66C27B40BE90077E721 /* FirConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2F66B27B40BE90077E721 /* FirConnectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +75,9 @@
 		41AD11292792FC9C00595F65 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
 		41D2F66127B3E8BB0077E721 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		41D2F66527B3F0E30077E721 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		41D2F66727B406780077E721 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		41D2F66927B406ED0077E721 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		41D2F66B27B40BE90077E721 /* FirConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirConnectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +139,10 @@
 		41A9440F278483AC0045E8EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				41A0A0E4278DCC8A0042D428 /* StartMenuView.swift */,
+				41D2F66727B406780077E721 /* LoginView.swift */,
+				41D2F66B27B40BE90077E721 /* FirConnectView.swift */,
 				41A7CA3C2799C686002C3709 /* AddFamilyView.swift */,
+				41A0A0E4278DCC8A0042D428 /* StartMenuView.swift */,
 				41A94418278485BD0045E8EA /* TodoView.swift */,
 				41A57EEA279D696A002CCDE9 /* PlannerView.swift */,
 				41A9441F278492F90045E8EA /* AddChoreView.swift */,
@@ -148,12 +156,13 @@
 		41A94410278483B60045E8EA /* Viewmodels */ = {
 			isa = PBXGroup;
 			children = (
+				41D2F66927B406ED0077E721 /* LoginViewModel.swift */,
+				41A7CA3E2799C76C002C3709 /* AddFamilyViewModel.swift */,
 				41A9441A278486280045E8EA /* TodoViewModel.swift */,
 				41A57EEC279D69E4002CCDE9 /* PlannerViewModel.swift */,
 				41A94421278493840045E8EA /* AddChoreViewModel.swift */,
 				41AD11272792F13800595F65 /* ChoreDetailViewModel.swift */,
 				41A7CA382799B33E002C3709 /* FamilyViewViewModel.swift */,
-				41A7CA3E2799C76C002C3709 /* AddFamilyViewModel.swift */,
 			);
 			path = Viewmodels;
 			sourceTree = "<group>";
@@ -294,8 +303,11 @@
 				41A57EEB279D696A002CCDE9 /* PlannerView.swift in Sources */,
 				41A65E88278203EE004091EC /* ContentView.swift in Sources */,
 				41A7CA372799ACDB002C3709 /* FamilyView.swift in Sources */,
+				41D2F66C27B40BE90077E721 /* FirConnectView.swift in Sources */,
 				41AD112A2792FC9C00595F65 /* MemberRow.swift in Sources */,
+				41D2F66A27B406ED0077E721 /* LoginViewModel.swift in Sources */,
 				41A0A0E5278DCC8A0042D428 /* StartMenuView.swift in Sources */,
+				41D2F66827B406780077E721 /* LoginView.swift in Sources */,
 				41A65E9727820457004091EC /* CoreDataManager.swift in Sources */,
 				41A65E86278203EE004091EC /* GamOfChoresApp.swift in Sources */,
 				41A94414278484690045E8EA /* BaseModel.swift in Sources */,

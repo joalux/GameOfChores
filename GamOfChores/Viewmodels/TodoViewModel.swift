@@ -22,6 +22,7 @@ class TodoViewModel: NSObject, ObservableObject {
          for chore in chores {
              print(chore.type)
              print(chore.isCompleted)
+             print("Day to do")
              print(chore.dayTodo)
          }
     }
@@ -36,8 +37,13 @@ class TodoViewModel: NSObject, ObservableObject {
         fetchChores()
     }
     
+    func getWeeoDay(){
+        
+    }
+    
 }
 
+/*
 extension TodoViewModel: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -49,3 +55,4 @@ extension TodoViewModel: NSFetchedResultsControllerDelegate {
         self.chores = chores
     }
 }
+*/

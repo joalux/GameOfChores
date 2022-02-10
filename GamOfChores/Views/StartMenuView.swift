@@ -84,6 +84,9 @@ struct StartMenuView: View {
                 }).padding(.bottom)
             }
         }.navigationBarHidden(true)
+            .onAppear {
+                coreManager.getFamily()
+            }
            
     }
 }

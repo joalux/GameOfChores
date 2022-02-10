@@ -20,7 +20,7 @@ struct GamOfChoresApp: App {
         WindowGroup {
            let context = CoreDataManager.shared.container.viewContext
 
-            StartMenuView()
+            LoginView()
                .environment(\.managedObjectContext, context)
 
             

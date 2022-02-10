@@ -17,6 +17,7 @@ class FamilyViewViewModel: ObservableObject {
     func getFamily(){
         familyMembers = CoreDataManager.shared.getFamilyMembers()
         family = CoreDataManager.shared.getFamily()
+       
         
         for member in familyMembers {
             print(member.name)

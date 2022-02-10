@@ -115,6 +115,7 @@ struct dayView: View {
             
             Button(action: {
                 print("Adding chore")
+                print(weekDay)
                 goAddView = true
                 
                 }) {

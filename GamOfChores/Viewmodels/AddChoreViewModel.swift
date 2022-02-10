@@ -39,9 +39,10 @@ class AddChoreViewModel: ObservableObject {
     
     func setDay(activeDay: String?){
         
-        if activeDay != nil {
-            print("Setting active day: \(activeDay)")
-            dayToDo = activeDay!
+        if let activeDay = activeDay {
+            print("Day to do= \(activeDay)")
+            dayToDo = activeDay
+            
         }
         else {
             print("no day, setting current!")
@@ -91,32 +92,4 @@ class AddChoreViewModel: ObservableObject {
             print(error.localizedDescription)
         }
     }
-        
-    /*
-    
-    func addChore(type: String, value: Int, custom: Bool, timeLimit: Double, dayTodo: String ) {
-        print("Adding new chore!!")
-        do {
-            var chore = Chore(context: context)
-            
-            if custom {
-                chore.isCustom = true
-            }
-            else {
-                chore.isCustom = false
-            }
-            chore.type = type
-            
-            chore.value = Int64(value)
-            chore.dayTodo = dayTodo
-            
-            chore.timeLimit = timeLimit
-            
-            try chore.save()
-            
-        } catch {
-            print("________ERROR_________")
-            print(error.localizedDescription)
-        }
-    }*/
 }

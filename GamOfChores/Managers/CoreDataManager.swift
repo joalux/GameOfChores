@@ -20,7 +20,7 @@ class CoreDataManager: ObservableObject {
 
     var chores = [Chore]()
     var familyMembers = [Member]()
-    var family = Family()
+    //var family = Family()
     
     init() {
         container = NSPersistentContainer(name: "GOC_Model")
@@ -41,21 +41,38 @@ class CoreDataManager: ObservableObject {
 
     }
     
-    func getFamily() -> Family {
+    func fetchFamily() -> Bool{
+        var hasFamily = false
         do {
             try familyFetcher.performFetch()
             guard let coreFamilies = familyFetcher.fetchedObjects else {
-                print("Returning empty!!!")
-                return Family()
+                print("NO Family!!!")
+                return hasFamily
+             
             }
-            print("HAS FETCHED Family!!!!")
-            print(coreFamilies.first?.id)
-            family = coreFamilies.first ?? Family()
-            
+            print("HAS FETCHED families!!!!")
+            print(coreFamilies.count)
+            hasFamily = true
+                        
         } catch {
             print(error)
         }
-        return family
+        return hasFamily
+    }
+   
+    
+    func getFamily() -> Family{
+        let coreFamily = familyFetcher.fetchedObjects?.first
+        print(coreFamily)
+        if let coreFamily = coreFamily {
+            return coreFamily
+        }
+        else {
+            print("NO FAM")
+            return Family()
+        }
+       
+        
     }
     
     func fetchChores() -> [Chore]{
@@ -92,7 +109,6 @@ class CoreDataManager: ObservableObject {
                 if member.id == nil {
                     member.id = UUID()
                 }
-               save()
             }
             
         } catch {
@@ -102,13 +118,15 @@ class CoreDataManager: ObservableObject {
     }
     
     func save() {
-        if container.viewContext.hasChanges {
-            do {
-                try container.viewContext.save()
-            } catch {
-                print("An error occurred while saving: \(error)")
-            }
+ 
+        print("Saving changes!!")
+        do {
+            try container.viewContext.save()
+            print("Save success!!")
+        } catch {
+            print("An error occurred while saving: \(error)")
         }
+    
     }
     
     

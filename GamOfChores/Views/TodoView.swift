@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TodoView: View {
         
-    @ObservedObject private var vm = TodoViewModel()
+    @ObservedObject var vm = TodoViewModel()
         
     @State var showingAddSheet = false
     @State var showAddView = false

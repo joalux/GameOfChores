@@ -9,11 +9,13 @@ import SwiftUI
 
 struct AddFamilyView: View {
     
-    @ObservedObject var vm = AddNewFamilyViewModel()
+    @ObservedObject private var vm = AddNewFamilyViewModel()
     
     @State var memberName = ""
     
     @State var doSignUp = false
+    
+    @FocusState private var showingKeyboard: Bool
 
     var body: some View {
         VStack {
@@ -42,6 +44,8 @@ struct AddFamilyView: View {
                 .padding(.trailing, 40.0)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .autocapitalization(.none)
+                .focused($showingKeyboard)
+                .disableAutocorrection(true)
             
             HStack {
                
@@ -49,6 +53,7 @@ struct AddFamilyView: View {
                     print("Action")
                     vm.memberNames.append(memberName)
                     memberName = ""
+                    showingKeyboard = false
                     
                 }, label: {
                     Text("Add")
