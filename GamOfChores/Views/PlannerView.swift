@@ -19,7 +19,6 @@ struct PlannerView: View {
     var body: some View {
         
         VStack {
-            Text("Selected \(vm.currentDayIndex) \(vm.chores.count)")
             TabView(selection: $vm.currentDayIndex) {
                 dayView(weekDay: "Monday",chores: vm.chores, index: $vm.currentDayIndex)
                 .tag(1)
@@ -38,36 +37,6 @@ struct PlannerView: View {
                 
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
         }
-        
-        /*
-        VStack {
-            Text("Selected \(index)")
-            TabView(selection: $index) {
-                ForEach(0..<7) { i in
-                    Text(i)
-                }
-                
-            }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        }
-        */
-        /*
-        VStack {
-            Text("Selected index: \(index)")
-            TabView(selection: $index) {
-               
-                Text("selected: \(index)")
-                ForEach(vm.weekDaysFull, id: \.self) { day in
-                    
-                    dayView(weekDay: day, chores: vm.chores, index: $index)
-                }.tag(index)
-            }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-                .onAppear {
-                    UITabBar.appearance().barTintColor = .blue
-                    
-                }
-        }*/
-        
         .onAppear {
             vm.fetchChores()
            vm.getDayOfWeek()
@@ -96,7 +65,7 @@ struct dayView: View {
         VStack {
            // NavigationLink(destination: AddChoreView(weekDay: weekDay), isActive: $goAddView) { EmptyView() }
             
-            Text("\(weekDay), index: \(index), Chores: \(chores.count)")
+            Text("\(weekDay)")
                 .font(.system(size: 35, weight: .bold, design: .default))
             Divider().background(Color.blue)
 

@@ -11,6 +11,7 @@
 		41A0FE26279C58050090C9F3 /* Family+Extemsions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A0FE25279C58050090C9F3 /* Family+Extemsions.swift */; };
 		41A0FE2A279C6DFB0090C9F3 /* TopListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A0FE29279C6DFB0090C9F3 /* TopListRow.swift */; };
 		41A1272D27A2CD0A00CBFDE7 /* WeekDaysRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A1272C27A2CD0A00CBFDE7 /* WeekDaysRow.swift */; };
+		41A3FAA027B938E300D38900 /* SettingsVuew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A3FA9F27B938E300D38900 /* SettingsVuew.swift */; };
 		41A57EEB279D696A002CCDE9 /* PlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A57EEA279D696A002CCDE9 /* PlannerView.swift */; };
 		41A57EED279D69E4002CCDE9 /* PlannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A57EEC279D69E4002CCDE9 /* PlannerViewModel.swift */; };
 		41A65E86278203EE004091EC /* GamOfChoresApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A65E85278203EE004091EC /* GamOfChoresApp.swift */; };
@@ -31,6 +32,8 @@
 		41A94420278492F90045E8EA /* AddChoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9441F278492F90045E8EA /* AddChoreView.swift */; };
 		41A94422278493840045E8EA /* AddChoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A94421278493840045E8EA /* AddChoreViewModel.swift */; };
 		41A94424278496CA0045E8EA /* ChoreRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A94423278496CA0045E8EA /* ChoreRow.swift */; };
+		41A9F0A827B82D7A00211865 /* MemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9F0A727B82D7A00211865 /* MemberView.swift */; };
+		41A9F0AA27B82F6700211865 /* MemberViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9F0A927B82F6700211865 /* MemberViewViewModel.swift */; };
 		41AD11262792F0F600595F65 /* ChoreDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD11252792F0F600595F65 /* ChoreDetailView.swift */; };
 		41AD11282792F13800595F65 /* ChoreDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD11272792F13800595F65 /* ChoreDetailViewModel.swift */; };
 		41AD112A2792FC9C00595F65 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD11292792FC9C00595F65 /* MemberRow.swift */; };
@@ -49,6 +52,7 @@
 		41A0FE25279C58050090C9F3 /* Family+Extemsions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Family+Extemsions.swift"; sourceTree = "<group>"; };
 		41A0FE29279C6DFB0090C9F3 /* TopListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopListRow.swift; sourceTree = "<group>"; };
 		41A1272C27A2CD0A00CBFDE7 /* WeekDaysRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDaysRow.swift; sourceTree = "<group>"; };
+		41A3FA9F27B938E300D38900 /* SettingsVuew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVuew.swift; sourceTree = "<group>"; };
 		41A57EEA279D696A002CCDE9 /* PlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
 		41A57EEC279D69E4002CCDE9 /* PlannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewModel.swift; sourceTree = "<group>"; };
 		41A65E82278203EE004091EC /* GameOfChores.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameOfChores.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +74,8 @@
 		41A9441F278492F90045E8EA /* AddChoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddChoreView.swift; path = GamOfChores/Views/AddChoreView.swift; sourceTree = SOURCE_ROOT; };
 		41A94421278493840045E8EA /* AddChoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChoreViewModel.swift; sourceTree = "<group>"; };
 		41A94423278496CA0045E8EA /* ChoreRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoreRow.swift; sourceTree = "<group>"; };
+		41A9F0A727B82D7A00211865 /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
+		41A9F0A927B82F6700211865 /* MemberViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewViewModel.swift; sourceTree = "<group>"; };
 		41AD11252792F0F600595F65 /* ChoreDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoreDetailView.swift; sourceTree = "<group>"; };
 		41AD11272792F13800595F65 /* ChoreDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoreDetailViewModel.swift; sourceTree = "<group>"; };
 		41AD11292792FC9C00595F65 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
@@ -141,13 +147,15 @@
 			children = (
 				41D2F66727B406780077E721 /* LoginView.swift */,
 				41D2F66B27B40BE90077E721 /* FirConnectView.swift */,
-				41A7CA3C2799C686002C3709 /* AddFamilyView.swift */,
 				41A0A0E4278DCC8A0042D428 /* StartMenuView.swift */,
+				41A7CA3C2799C686002C3709 /* AddFamilyView.swift */,
 				41A94418278485BD0045E8EA /* TodoView.swift */,
+				41A7CA362799ACDB002C3709 /* FamilyView.swift */,
+				41A9F0A727B82D7A00211865 /* MemberView.swift */,
 				41A57EEA279D696A002CCDE9 /* PlannerView.swift */,
 				41A9441F278492F90045E8EA /* AddChoreView.swift */,
 				41AD11252792F0F600595F65 /* ChoreDetailView.swift */,
-				41A7CA362799ACDB002C3709 /* FamilyView.swift */,
+				41A3FA9F27B938E300D38900 /* SettingsVuew.swift */,
 				41A9441E278491EE0045E8EA /* Rows */,
 			);
 			path = Views;
@@ -163,6 +171,7 @@
 				41A94421278493840045E8EA /* AddChoreViewModel.swift */,
 				41AD11272792F13800595F65 /* ChoreDetailViewModel.swift */,
 				41A7CA382799B33E002C3709 /* FamilyViewViewModel.swift */,
+				41A9F0A927B82F6700211865 /* MemberViewViewModel.swift */,
 			);
 			path = Viewmodels;
 			sourceTree = "<group>";
@@ -289,6 +298,7 @@
 				41A7CA3B2799C399002C3709 /* Memeber+Extensions.swift in Sources */,
 				41A65E952782042E004091EC /* GOC_Model.xcdatamodeld in Sources */,
 				41A94420278492F90045E8EA /* AddChoreView.swift in Sources */,
+				41A3FAA027B938E300D38900 /* SettingsVuew.swift in Sources */,
 				41A94417278485030045E8EA /* Chore+Extensions.swift in Sources */,
 				41A57EED279D69E4002CCDE9 /* PlannerViewModel.swift in Sources */,
 				41AD11262792F0F600595F65 /* ChoreDetailView.swift in Sources */,
@@ -296,12 +306,14 @@
 				41A1272D27A2CD0A00CBFDE7 /* WeekDaysRow.swift in Sources */,
 				41A0FE26279C58050090C9F3 /* Family+Extemsions.swift in Sources */,
 				41AD11282792F13800595F65 /* ChoreDetailViewModel.swift in Sources */,
+				41A9F0AA27B82F6700211865 /* MemberViewViewModel.swift in Sources */,
 				41A7CA3D2799C686002C3709 /* AddFamilyView.swift in Sources */,
 				41A94419278485BD0045E8EA /* TodoView.swift in Sources */,
 				41A7CA3F2799C76C002C3709 /* AddFamilyViewModel.swift in Sources */,
 				41A94424278496CA0045E8EA /* ChoreRow.swift in Sources */,
 				41A57EEB279D696A002CCDE9 /* PlannerView.swift in Sources */,
 				41A65E88278203EE004091EC /* ContentView.swift in Sources */,
+				41A9F0A827B82D7A00211865 /* MemberView.swift in Sources */,
 				41A7CA372799ACDB002C3709 /* FamilyView.swift in Sources */,
 				41D2F66C27B40BE90077E721 /* FirConnectView.swift in Sources */,
 				41AD112A2792FC9C00595F65 /* MemberRow.swift in Sources */,

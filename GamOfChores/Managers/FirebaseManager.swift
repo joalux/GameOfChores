@@ -8,7 +8,6 @@
 import Foundation
 import Firebase
 
-
 class FireBaseManager: ObservableObject {
     
     static let shared = FireBaseManager()
@@ -20,9 +19,9 @@ class FireBaseManager: ObservableObject {
     var firFamily = Family()
     
     func signUp(email: String, pass1: String, pass2: String) {
-        // [START create_user]
+      
              Auth.auth().createUser(withEmail: email, password: pass1) { authResult, error in
-               // [START_EXCLUDE]
+             
                  guard let user = authResult?.user, error == nil else {
                    print("Error signing up!")
                      return

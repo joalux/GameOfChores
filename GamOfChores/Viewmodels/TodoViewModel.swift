@@ -19,8 +19,10 @@ class TodoViewModel: NSObject, ObservableObject {
     
      func fetchChores(){
         chores = CoreDataManager.shared.fetchChores()
+         print("Has chores= \(chores.count)")
          for chore in chores {
              print(chore.type)
+             print("Completed")
              print(chore.isCompleted)
              print("Day to do")
              print(chore.dayTodo)
@@ -37,22 +39,16 @@ class TodoViewModel: NSObject, ObservableObject {
         fetchChores()
     }
     
-    func getWeeoDay(){
+    func setCurrentDay() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        dateFormatter.locale = Locale(identifier: "en")
+        var currentDay = dateFormatter.string(from: Date())
+        
+        print("_________")
+        print(currentDay)
+        dayTodo = currentDay
         
     }
     
 }
-
-/*
-extension TodoViewModel: NSFetchedResultsControllerDelegate {
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        print("__________DID CHANGE CONTENT___________")
-        guard let chores = controller.fetchedObjects as? [Chore] else {
-            return
-        }
-        
-        self.chores = chores
-    }
-}
-*/

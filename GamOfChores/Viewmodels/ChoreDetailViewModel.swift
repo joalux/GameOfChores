@@ -129,10 +129,12 @@ class ChoreDetailViewModel: ObservableObject {
         
         for member in selectedMembers {
             print("MEMBER: \(member.name), \(member.isSelected)")
-          
             print("Adding points to: \(member.name)")
             member.points += selectedChore.value
             member.time += Double(timeSpent)
+            
+            
+            selectedChore.doneBy! += "\(member.name!), "
             
             do {
                 try member.save()

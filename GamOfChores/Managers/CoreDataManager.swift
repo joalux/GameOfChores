@@ -52,7 +52,12 @@ class CoreDataManager: ObservableObject {
             }
             print("HAS FETCHED families!!!!")
             print(coreFamilies.count)
-            hasFamily = true
+            if coreFamilies.count == 0 {
+                hasFamily = false
+            }
+            else {
+                hasFamily = true
+            }
                         
         } catch {
             print(error)

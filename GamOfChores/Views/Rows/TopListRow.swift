@@ -12,7 +12,7 @@ struct TopListRow: View {
     @State var member = Member()
     
     var body: some View {
-        NavigationLink(destination: EmptyView()) {
+        NavigationLink(destination: MemberView(selectedMember: member)) {
         
         HStack {
             

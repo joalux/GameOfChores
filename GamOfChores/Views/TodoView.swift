@@ -23,7 +23,7 @@ struct TodoView: View {
 
             VStack{
                 
-                NavigationLink(destination: AddChoreView(weekDay: currentDay), isActive: $goAddView) { EmptyView() }
+                NavigationLink(destination: AddChoreView(weekDay: vm.dayTodo), isActive: $goAddView) { EmptyView() }
 
 
                 List{
@@ -84,6 +84,7 @@ struct TodoView: View {
                     .font(.subheadline)
                 
                 Button(action: {
+                    vm.setCurrentDay()
                     self.goAddView = true
                     }) {
                         Text("Add chore")

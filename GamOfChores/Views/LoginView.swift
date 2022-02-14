@@ -50,6 +50,7 @@ struct LoginView: View {
                             .cornerRadius(10)
                     }).padding(.bottom, 70)
                     
+                    /*
                     Button(action: {
     
                         vm.addNewFamilly()
@@ -80,7 +81,7 @@ struct LoginView: View {
                             .cornerRadius(10)
                     }).padding(.bottom, 70)
                     
-                    
+                    */
                   
                 }}.alert(isPresented:$vm.showConnectAlert) {
                     Alert(

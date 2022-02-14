@@ -18,8 +18,8 @@ struct multiMemberSelectionRow: View {
     }
     
     var body: some View {
-        HStack(alignment: .center) {
-            
+        HStack() {
+            Spacer()
             Text(self.member.name ?? "no name")
                 .font(.title)
                 .fontWeight(.bold)
@@ -29,7 +29,8 @@ struct multiMemberSelectionRow: View {
                 Image(systemName: "checkmark")
                     .foregroundColor(.blue)
             }
-        }.padding(.leading)
+            Spacer()
+        }
 
         .onTapGesture {
             if self.isSelected {
@@ -89,33 +90,21 @@ struct ChoreDetailView: View {
             }
             
             Divider().background(Color.blue)
-            Text("tap to select participants , count: \(selectedMembers.count)")
+            Text("tap to select participants")
             
             List(vm.familyMembers, selection: $selectedMembers) { member in
                 multiMemberSelectionRow(member: member, selectedMembers: $selectedMembers)
             }.listStyle(.plain)
-            .frame(width: 250,alignment: .center)
+            .frame(width: 250)
             .listStyle(.plain)
             .padding(.horizontal)
-            /*
-            List {
-                ForEach($vm.familyMembers){ $member in
-                    MemberRow(member: member, addMode: false)
-                    
-                }
-            }.frame(width: 250,alignment: .leading)
-                .listStyle(.plain)
-            .padding(.horizontal)*/
+         
           
             Divider().background(Color.blue)
 
             HStack {
                 Button(action: {
-                    for member in vm.familyMembers {
-                        if member.isSelected {
-                            print(member.name)
-                        }
-                    }
+                    
                     vm.setTimer(reset: false)
              
                 }) {
@@ -151,9 +140,9 @@ struct ChoreDetailView: View {
                     })
                 })
                 .alert(isPresented: $showComplete, content: {
-                    Alert(title: Text("Chore is done!"), message: Text("You will get \(vm.selectedChore.value) points + \(vm.timeSpent) extra points and \(vm.timeSpent) minutes for this chore."), dismissButton: .default(Text("Ok")){
+                    Alert(title: Text("Chore is done!"), message: Text("You will get \(selectedChore.value) points + \(vm.timeSpent) extra points and \(vm.timeSpent) minutes for this chore."), dismissButton: .default(Text("Ok")){
                         
-                        vm.completeChore(selectedMembers: selectedMembers)
+                       // vm.completeChore(selectedMembers: selectedMembers)
                         self.presentationMode.wrappedValue.dismiss()
                        
                     })
@@ -162,6 +151,7 @@ struct ChoreDetailView: View {
             }
                 Button(action: {
                     print("Completing chore!!")
+                    
                     vm.pauseTimer()
                     for selectedMember in selectedMembers {
                         print(selectedMember.name)
@@ -170,7 +160,7 @@ struct ChoreDetailView: View {
                     
                     vm.completeChore(selectedMembers: selectedMembers)
 
-                    //showComplete = true
+                    showComplete = true
                     
                 }, label: {
                     Text("Complete Chore")

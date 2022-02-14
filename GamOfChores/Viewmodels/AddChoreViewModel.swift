@@ -84,6 +84,7 @@ class AddChoreViewModel: ObservableObject {
             newChore.timeLimit = timeLimit
             print("Chore day = \(dayToDo)")
             newChore.dayTodo = dayToDo
+            newChore.doneBy = ""
             
             try newChore.save()
             
