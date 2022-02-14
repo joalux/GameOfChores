@@ -24,7 +24,6 @@ class AddChoreViewModel: ObservableObject {
     @Published var timeLimit = 0.0
     
     @State var hasTimeLimit = false
-
     
     let types = ["Dishes", "Laundry", "Cleaning", "Dinner", "Lunch", "Breakfast", "Windows", "Toilets"]
     
@@ -35,6 +34,10 @@ class AddChoreViewModel: ObservableObject {
     
     init(){
        // setDay()
+    }
+    
+    func choreTimeLimitString(timeLimit: Double) -> String {
+        "\(timeLimit) m"
     }
     
     func setDay(activeDay: String?){

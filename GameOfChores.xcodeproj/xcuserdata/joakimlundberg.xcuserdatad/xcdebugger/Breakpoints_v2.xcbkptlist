@@ -30,8 +30,8 @@
             filePath = "GamOfChores/Viewmodels/AddChoreViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "addNewChore(isCustom:hasTimeLimit:)"
             landmarkType = "7">
          </BreakpointContent>

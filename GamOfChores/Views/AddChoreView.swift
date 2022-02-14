@@ -68,7 +68,7 @@ struct AddChoreView: View {
                         .font(.system(size: 25, weight: .medium, design: .default))
                     
                     if hasTimeLimit {
-                        Text("\(vm.timeLimit, specifier: "%.0f") m")
+                        Text(vm.choreTimeLimitString(timeLimit: vm.timeLimit))
                             .font(.system(size: 25, weight: .medium, design: .default))
                     }
                 }

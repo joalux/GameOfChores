@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddFamilyView: View {
     
-    @ObservedObject private var vm = AddNewFamilyViewModel()
+    @StateObject private var vm = AddNewFamilyViewModel()
     
     @State var memberName = ""
     

@@ -11,7 +11,7 @@ import SwiftUI
 
 class AddNewFamilyViewModel: ObservableObject {
         
-    @State var memberName = ""
+    @Published var memberName = ""
     @Published var memberNames = [String]()
     
     func addFamMembers(){

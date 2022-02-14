@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import ShortcutFoundation
 
 struct SettingsVuew: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(String.getDateString(date: Date(), format: .weekday))
     }
 }
 

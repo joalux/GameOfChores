@@ -37,6 +37,8 @@
 		41AD11262792F0F600595F65 /* ChoreDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD11252792F0F600595F65 /* ChoreDetailView.swift */; };
 		41AD11282792F13800595F65 /* ChoreDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD11272792F13800595F65 /* ChoreDetailViewModel.swift */; };
 		41AD112A2792FC9C00595F65 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD11292792FC9C00595F65 /* MemberRow.swift */; };
+		41CF7DD527BA6AED003D7E56 /* ShortcutFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 41CF7DD427BA6AED003D7E56 /* ShortcutFoundation */; };
+		41CF7DD827BA6CDC003D7E56 /* ShortcutSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 41CF7DD727BA6CDC003D7E56 /* ShortcutSwiftUI */; };
 		41D2F65C27B3BBE10077E721 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 41D2F65B27B3BBE10077E721 /* FirebaseAuth */; };
 		41D2F65E27B3BBE10077E721 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 41D2F65D27B3BBE10077E721 /* FirebaseFirestore */; };
 		41D2F66027B3BBE10077E721 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 41D2F65F27B3BBE10077E721 /* FirebaseMessaging */; };
@@ -92,6 +94,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				41D2F66027B3BBE10077E721 /* FirebaseMessaging in Frameworks */,
+				41CF7DD827BA6CDC003D7E56 /* ShortcutSwiftUI in Frameworks */,
+				41CF7DD527BA6AED003D7E56 /* ShortcutFoundation in Frameworks */,
 				41D2F65C27B3BBE10077E721 /* FirebaseAuth in Frameworks */,
 				41D2F65E27B3BBE10077E721 /* FirebaseFirestore in Frameworks */,
 			);
@@ -234,6 +238,8 @@
 				41D2F65B27B3BBE10077E721 /* FirebaseAuth */,
 				41D2F65D27B3BBE10077E721 /* FirebaseFirestore */,
 				41D2F65F27B3BBE10077E721 /* FirebaseMessaging */,
+				41CF7DD427BA6AED003D7E56 /* ShortcutFoundation */,
+				41CF7DD727BA6CDC003D7E56 /* ShortcutSwiftUI */,
 			);
 			productName = GamOfChores;
 			productReference = 41A65E82278203EE004091EC /* GameOfChores.app */;
@@ -265,6 +271,8 @@
 			mainGroup = 41A65E79278203EE004091EC;
 			packageReferences = (
 				41D2F65A27B3BBE10077E721 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				41CF7DD327BA6AED003D7E56 /* XCRemoteSwiftPackageReference "shortcut-foundation-ios" */,
+				41CF7DD627BA6CDC003D7E56 /* XCRemoteSwiftPackageReference "shortcut-swiftui-ios" */,
 			);
 			productRefGroup = 41A65E83278203EE004091EC /* Products */;
 			projectDirPath = "";
@@ -529,6 +537,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		41CF7DD327BA6AED003D7E56 /* XCRemoteSwiftPackageReference "shortcut-foundation-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/shortcut/shortcut-foundation-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		41CF7DD627BA6CDC003D7E56 /* XCRemoteSwiftPackageReference "shortcut-swiftui-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/shortcut/shortcut-swiftui-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 		41D2F65A27B3BBE10077E721 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -540,6 +564,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		41CF7DD427BA6AED003D7E56 /* ShortcutFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41CF7DD327BA6AED003D7E56 /* XCRemoteSwiftPackageReference "shortcut-foundation-ios" */;
+			productName = ShortcutFoundation;
+		};
+		41CF7DD727BA6CDC003D7E56 /* ShortcutSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41CF7DD627BA6CDC003D7E56 /* XCRemoteSwiftPackageReference "shortcut-swiftui-ios" */;
+			productName = ShortcutSwiftUI;
+		};
 		41D2F65B27B3BBE10077E721 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 41D2F65A27B3BBE10077E721 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
