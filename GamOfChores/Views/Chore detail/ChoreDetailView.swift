@@ -44,7 +44,7 @@ struct multiMemberSelectionRow: View {
 
 struct ChoreDetailView: View {
     
-    @ObservedObject var vm = ChoreDetailViewModel()
+    @StateObject var vm = ChoreDetailViewModel()
     
     @Environment(\.presentationMode) var presentationMode
     

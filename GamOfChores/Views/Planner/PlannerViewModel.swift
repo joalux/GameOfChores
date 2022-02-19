@@ -19,9 +19,9 @@ class PlannerViewModel: ObservableObject {
     
     @Published var chores = [Chore]()
     
-    @Published var currentDayIndex = 0
+    @State var currentDayIndex = 0
     @Published var dayIndeces = 0...6
-    
+        
     @Published var selectedDay = ""
     
     init(){
@@ -29,7 +29,7 @@ class PlannerViewModel: ObservableObject {
     }
     
     func fetchChores(){
-        chores = CoreDataManager.shared.fetchChores()
+        chores = CoreDataManager.shared.getChores()
        
     }
     

@@ -85,6 +85,8 @@ class AddChoreViewModel: ObservableObject {
             newChore.hasTimeLimit = hasTimeLimit
             
             newChore.timeLimit = timeLimit
+            
+            newChore.isCompleted = false
             print("Chore day = \(dayToDo)")
             newChore.dayTodo = dayToDo
             newChore.doneBy = ""

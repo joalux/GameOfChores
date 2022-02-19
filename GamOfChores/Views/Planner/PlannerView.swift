@@ -12,30 +12,33 @@ import CoreData
 
 struct PlannerView: View {
     
-    @ObservedObject private var vm = PlannerViewModel()
+    @StateObject private var vm = PlannerViewModel()
     
     @State var index = 6
-    
+    @State var currentDayIndex = 0
+        
     var body: some View {
         
         VStack {
-            TabView(selection: $vm.currentDayIndex) {
-                dayView(weekDay: "Monday",chores: vm.chores, index: $vm.currentDayIndex)
+            TabView(selection: $currentDayIndex) {
+                dayView(weekDay: vm.weekDaysFull[currentDayIndex],chores: vm.chores, index: $currentDayIndex)
                 .tag(1)
-                dayView(weekDay: "Tuesday", chores: vm.chores, index: $vm.currentDayIndex)
+                dayView(weekDay: vm.weekDaysFull[currentDayIndex], chores: vm.chores, index: $currentDayIndex)
                 .tag(2)
-                dayView(weekDay: "Wednesday", chores: vm.chores, index: $vm.currentDayIndex)
+                dayView(weekDay: vm.weekDaysFull[currentDayIndex], chores: vm.chores, index: $currentDayIndex)
                 .tag(3)
-                dayView(weekDay: "Thursday", chores: vm.chores, index: $vm.currentDayIndex)
+                dayView(weekDay: vm.weekDaysFull[currentDayIndex], chores: vm.chores, index: $currentDayIndex)
                 .tag(4)
-                dayView(weekDay: "Friday", chores: vm.chores, index: $vm.currentDayIndex)
+                dayView(weekDay: vm.weekDaysFull[currentDayIndex], chores: vm.chores, index: $currentDayIndex)
                 .tag(5)
-                dayView(weekDay: "Saturday", chores: vm.chores, index: $vm.currentDayIndex)
+                dayView(weekDay: vm.weekDaysFull[currentDayIndex], chores: vm.chores, index: $currentDayIndex)
                 .tag(6)
-                dayView(weekDay: "Sunday", chores: vm.chores, index: $vm.currentDayIndex)
+                dayView(weekDay: vm.weekDaysFull[currentDayIndex], chores: vm.chores, index: $currentDayIndex)
                 .tag(7)
                 
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            
+            WeekDaysRow(dayIndex: $currentDayIndex)
         }
         .onAppear {
             vm.fetchChores()
@@ -44,11 +47,6 @@ struct PlannerView: View {
     }
 }
 
-struct PlannerView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlannerView()
-    }
-}
 
 struct dayView: View {
     
@@ -65,7 +63,7 @@ struct dayView: View {
         VStack {
            // NavigationLink(destination: AddChoreView(weekDay: weekDay), isActive: $goAddView) { EmptyView() }
             
-            Text("\(weekDay)")
+            Text("\(weekDay) index: \(index)")
                 .font(.system(size: 35, weight: .bold, design: .default))
             Divider().background(Color.blue)
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TodoView: View {
         
-    @ObservedObject var vm = TodoViewModel()
+    @StateObject var vm = TodoViewModel()
         
     @State var showingAddSheet = false
     @State var showAddView = false
@@ -21,7 +21,7 @@ struct TodoView: View {
 
     var body: some View {
 
-            VStack{
+        VStack(spacing: 10){
                 
                 NavigationLink(destination: AddChoreView(weekDay: vm.dayTodo), isActive: $goAddView) { EmptyView() }
 
@@ -29,7 +29,7 @@ struct TodoView: View {
                 List{
                     Section(header: Text("Monday")) {
                         ForEach(vm.chores, id: \.id) { chore in
-                            if chore.dayTodo == "Monday" {
+                            if chore.dayTodo == "Monday" && chore.isCompleted == false {
                                 ChoreRow(chore: chore)
                             }
                         }.onDelete(perform: deleteChore)

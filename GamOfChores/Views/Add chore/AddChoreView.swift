@@ -11,14 +11,14 @@ import CoreData
 struct AddChoreView: View {
         
     @Environment(\.presentationMode) var presentatioMode
-    @Environment(\.managedObjectContext) var viewContext
+   // @Environment(\.managedObjectContext) var viewContext
     
-    @ObservedObject private var vm = AddChoreViewModel()
+    @StateObject private var vm = AddChoreViewModel()
         
     @State var customChore = false
     @State var hasTimeLimit = false
     
-    var weekDay: String? = ""
+   var weekDay: String? = ""
     
     /*
     init(vm: AddChoreViewModel){

@@ -1,0 +1,129 @@
+//
+//  SettingsView.swift
+//  GameOfChores
+//
+//  Created by joakim lundberg on 2022-02-15.
+//
+
+import SwiftUI
+
+struct SettingsView: View {
+    @State var showingFamSheet = false
+    @State var showingDataSheet = false
+    @State var showingConnectSheet = false
+    
+    @State var showingAbout = false
+    
+    @State var showSignOutAlert = false
+    
+    @State var doSignOut = false
+    
+    var body: some View {
+        VStack {
+            
+            NavigationLink(destination: LoginView(), isActive: self.$doSignOut) {
+                EmptyView()
+            }
+            .hidden()
+            
+            Button(action: {
+                print("Manage family")
+                showingFamSheet.toggle()
+            }, label: {
+                Text("Manage family")
+                    .padding()
+                    .frame(width: 220.0, height: 55.0)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .cornerRadius(10)
+            }).padding(.bottom)
+                .sheet(isPresented: $showingFamSheet) {
+                    ManageFamilyView()
+                }
+            
+            Button(action: {
+                showingDataSheet.toggle()
+            }, label: {
+                Text("Manage data")
+                    .padding()
+                    .frame(width: 220.0, height: 55.0)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .cornerRadius(10)
+            }).padding(.bottom)
+                .sheet(isPresented: $showingDataSheet) {
+                    
+                }
+            
+            Button(action: {
+                
+                print("Connect")
+                showingConnectSheet.toggle()
+                
+            }, label: {
+                Text("Connect")
+                    .padding()
+                    .frame(width: 220.0, height: 55.0)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .cornerRadius(10)
+            }).padding(.bottom)
+            
+                .sheet(isPresented: self.$showingConnectSheet){
+                    FirConnectView()
+                }
+            
+            Button(action: {
+                print("About")
+                showingAbout.toggle()
+            }, label: {
+                Text("About")
+                    .padding()
+                    .frame(width: 220.0, height: 55.0)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .cornerRadius(10)
+            }).padding(.bottom)
+                .sheet(isPresented: $showingAbout){
+                    
+                }
+            
+            Button(action: {
+                print("Signing out")
+                showSignOutAlert = true
+                // SignOut()
+            }, label: {
+                Text("Sign out")
+                    .padding()
+                    .frame(width: 190.0, height: 45.0)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .font(.subheadline)
+                    .cornerRadius(10)
+            }).padding(.bottom)
+            
+        }.padding(.bottom, 20)
+            .navigationBarTitle("")
+            .alert(isPresented: $showSignOutAlert, content: {
+                
+                Alert(title: Text("Sign out?"), message: Text("Do you want to sign out? If you are not connected, you will lose your family data saved on you device."),primaryButton: .default(Text("no")) {
+                    print("No...")
+                },secondaryButton: .destructive(Text("yes")) {
+                    print("Deleting...")
+                    doSignOut = true
+                }
+                )
+            }
+        )
+    }
+}
+
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView()
+    }
+}

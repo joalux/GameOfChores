@@ -13,32 +13,30 @@ class MemberViewViewModel: ObservableObject {
     
     var selectedMember: Member?
 
-    @State var completedChores = [Chore]()
+    @Published var completedChores = [Chore]()
     
     func getCompleted(){
         print("________Fetching user chores!!")
-        var allChores = CoreDataManager.shared.fetchChores()
+        var allChores = CoreDataManager.shared.getChores()
         
         for chore in allChores {
             print("__Done by")
             print(chore.doneBy ?? "no memebers")
             
             var doneBy = chore.doneBy!.components(separatedBy: ",")
+         
             
-            for member in doneBy {
-                print(member)
-            }
-            doneBy.removeLast()
+            //doneBy.removeLast()
             print("Done by count= \(doneBy.count)")
+            print("Done by = \(doneBy)")
             
-            for name in doneBy {
-                print(name)
-                print(selectedMember!.name!)
-                if name.contains(selectedMember!.name!){
-                    print("HAS DONE IT!!!")
-                    completedChores.append(chore)
-                }
+            print(selectedMember!.name!)
+            if doneBy.contains(selectedMember!.name!){
+                print("HAS DONE IT!!!")
+                completedChores.append(chore)
+                print("Complete count: \(completedChores.count)")
             }
+            
         }
     }
 }

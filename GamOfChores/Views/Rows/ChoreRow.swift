@@ -10,6 +10,9 @@ import SwiftUI
 struct ChoreRow: View {
     @StateObject var chore: Chore
     
+    let formatter = DateFormatter()
+    @State var dateCompleString = ""
+    
     var body: some View {
       
         NavigationLink(destination: ChoreDetailView(selectedChore: chore)) {
@@ -36,21 +39,34 @@ struct ChoreRow: View {
             Spacer()
             
             if chore.isCompleted {
-                Text("Completed")
+                Text("\(dateCompleString)")
                     .font(.system(size: 12, weight: .semibold, design: .default))
-            }
-         
-            VStack {
-                Text(" \(chore.value) p")
-                        .font(.system(size: 18, weight: .semibold, design: .default))
-                    .padding(.bottom, 5)
-                if chore.hasTimeLimit {
-                    Text(" \(chore.timeLimit, specifier: "%.0f") m")
+                
+                VStack {
+                    Text(" \(chore.value) p")
                             .font(.system(size: 18, weight: .semibold, design: .default))
+                        .padding(.bottom, 5)
+               
+                        Text(" \(chore.timeSpent, specifier: "%.0f") m")
+                                .font(.system(size: 18, weight: .semibold, design: .default))
+                    
                 }
             }
-                
+                else {
+                    VStack {
+                        Text(" \(chore.value) p")
+                                .font(.system(size: 18, weight: .semibold, design: .default))
+                            .padding(.bottom, 5)
+                        if chore.hasTimeLimit {
+                            Text(" \(chore.timeLimit, specifier: "%.0f") m")
+                                    .font(.system(size: 18, weight: .semibold, design: .default))
+                        }
+                    }
+                }
             }.frame(height: 60)
+        }.onAppear {
+            formatter.dateFormat = "HH:mm E, d MMM"
+            self.dateCompleString = formatter.string(from: chore.timeCompleted ?? Date())
         }
     }
 }

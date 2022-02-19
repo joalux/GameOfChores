@@ -18,7 +18,7 @@ struct AddFamilyView: View {
     @FocusState private var showingKeyboard: Bool
 
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             NavigationLink(destination: StartMenuView(), isActive: self.$doSignUp) {
                EmptyView()
              }.hidden()

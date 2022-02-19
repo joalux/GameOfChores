@@ -11,15 +11,18 @@
 		41A0FE26279C58050090C9F3 /* Family+Extemsions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A0FE25279C58050090C9F3 /* Family+Extemsions.swift */; };
 		41A0FE2A279C6DFB0090C9F3 /* TopListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A0FE29279C6DFB0090C9F3 /* TopListRow.swift */; };
 		41A1272D27A2CD0A00CBFDE7 /* WeekDaysRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A1272C27A2CD0A00CBFDE7 /* WeekDaysRow.swift */; };
-		41A3FAA027B938E300D38900 /* SettingsVuew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A3FA9F27B938E300D38900 /* SettingsVuew.swift */; };
+		41A385CD27BBE54C00EFC9FB /* CompleteChoreRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A385CC27BBE54C00EFC9FB /* CompleteChoreRow.swift */; };
+		41A385CF27BBF0E400EFC9FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A385CE27BBF0E400EFC9FB /* SettingsView.swift */; };
 		41A57EEB279D696A002CCDE9 /* PlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A57EEA279D696A002CCDE9 /* PlannerView.swift */; };
 		41A57EED279D69E4002CCDE9 /* PlannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A57EEC279D69E4002CCDE9 /* PlannerViewModel.swift */; };
+		41A65D6327BE8EC4007CE615 /* ManageFamilyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A65D6227BE8EC4007CE615 /* ManageFamilyView.swift */; };
 		41A65E86278203EE004091EC /* GamOfChoresApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A65E85278203EE004091EC /* GamOfChoresApp.swift */; };
 		41A65E88278203EE004091EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A65E87278203EE004091EC /* ContentView.swift */; };
 		41A65E8A278203EF004091EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41A65E89278203EF004091EC /* Assets.xcassets */; };
 		41A65E8D278203EF004091EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41A65E8C278203EF004091EC /* Preview Assets.xcassets */; };
 		41A65E952782042E004091EC /* GOC_Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41A65E932782042E004091EC /* GOC_Model.xcdatamodeld */; };
 		41A65E9727820457004091EC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A65E9627820457004091EC /* CoreDataManager.swift */; };
+		41A761A727C119A900D501DF /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A761A627C119A900D501DF /* SettingsViewModel.swift */; };
 		41A7CA372799ACDB002C3709 /* FamilyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A7CA362799ACDB002C3709 /* FamilyView.swift */; };
 		41A7CA392799B33E002C3709 /* FamilyViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A7CA382799B33E002C3709 /* FamilyViewViewModel.swift */; };
 		41A7CA3B2799C399002C3709 /* Memeber+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A7CA3A2799C399002C3709 /* Memeber+Extensions.swift */; };
@@ -39,6 +42,7 @@
 		41AD112A2792FC9C00595F65 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD11292792FC9C00595F65 /* MemberRow.swift */; };
 		41CF7DD527BA6AED003D7E56 /* ShortcutFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 41CF7DD427BA6AED003D7E56 /* ShortcutFoundation */; };
 		41CF7DD827BA6CDC003D7E56 /* ShortcutSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 41CF7DD727BA6CDC003D7E56 /* ShortcutSwiftUI */; };
+		41CF7DDF27BA7EC3003D7E56 /* FirConnectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CF7DDE27BA7EC3003D7E56 /* FirConnectViewModel.swift */; };
 		41D2F65C27B3BBE10077E721 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 41D2F65B27B3BBE10077E721 /* FirebaseAuth */; };
 		41D2F65E27B3BBE10077E721 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 41D2F65D27B3BBE10077E721 /* FirebaseFirestore */; };
 		41D2F66027B3BBE10077E721 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 41D2F65F27B3BBE10077E721 /* FirebaseMessaging */; };
@@ -54,9 +58,11 @@
 		41A0FE25279C58050090C9F3 /* Family+Extemsions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Family+Extemsions.swift"; sourceTree = "<group>"; };
 		41A0FE29279C6DFB0090C9F3 /* TopListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopListRow.swift; sourceTree = "<group>"; };
 		41A1272C27A2CD0A00CBFDE7 /* WeekDaysRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDaysRow.swift; sourceTree = "<group>"; };
-		41A3FA9F27B938E300D38900 /* SettingsVuew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVuew.swift; sourceTree = "<group>"; };
+		41A385CC27BBE54C00EFC9FB /* CompleteChoreRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteChoreRow.swift; sourceTree = "<group>"; };
+		41A385CE27BBF0E400EFC9FB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		41A57EEA279D696A002CCDE9 /* PlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
 		41A57EEC279D69E4002CCDE9 /* PlannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewModel.swift; sourceTree = "<group>"; };
+		41A65D6227BE8EC4007CE615 /* ManageFamilyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageFamilyView.swift; sourceTree = "<group>"; };
 		41A65E82278203EE004091EC /* GameOfChores.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameOfChores.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41A65E85278203EE004091EC /* GamOfChoresApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamOfChoresApp.swift; sourceTree = "<group>"; };
 		41A65E87278203EE004091EC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +70,7 @@
 		41A65E8C278203EF004091EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		41A65E942782042E004091EC /* GOC_Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOC_Model.xcdatamodel; sourceTree = "<group>"; };
 		41A65E9627820457004091EC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		41A761A627C119A900D501DF /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		41A7CA362799ACDB002C3709 /* FamilyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyView.swift; sourceTree = "<group>"; };
 		41A7CA382799B33E002C3709 /* FamilyViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyViewViewModel.swift; sourceTree = "<group>"; };
 		41A7CA3A2799C399002C3709 /* Memeber+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Memeber+Extensions.swift"; sourceTree = "<group>"; };
@@ -73,7 +80,7 @@
 		41A94416278485030045E8EA /* Chore+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chore+Extensions.swift"; sourceTree = "<group>"; };
 		41A94418278485BD0045E8EA /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		41A9441A278486280045E8EA /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
-		41A9441F278492F90045E8EA /* AddChoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddChoreView.swift; path = GamOfChores/Views/AddChoreView.swift; sourceTree = SOURCE_ROOT; };
+		41A9441F278492F90045E8EA /* AddChoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddChoreView.swift; path = "GamOfChores/Views/Add chore/AddChoreView.swift"; sourceTree = SOURCE_ROOT; };
 		41A94421278493840045E8EA /* AddChoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChoreViewModel.swift; sourceTree = "<group>"; };
 		41A94423278496CA0045E8EA /* ChoreRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoreRow.swift; sourceTree = "<group>"; };
 		41A9F0A727B82D7A00211865 /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
@@ -81,6 +88,7 @@
 		41AD11252792F0F600595F65 /* ChoreDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoreDetailView.swift; sourceTree = "<group>"; };
 		41AD11272792F13800595F65 /* ChoreDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoreDetailViewModel.swift; sourceTree = "<group>"; };
 		41AD11292792FC9C00595F65 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
+		41CF7DDE27BA7EC3003D7E56 /* FirConnectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirConnectViewModel.swift; sourceTree = "<group>"; };
 		41D2F66127B3E8BB0077E721 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		41D2F66527B3F0E30077E721 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		41D2F66727B406780077E721 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -104,6 +112,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41A385D027BBF21300EFC9FB /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				41A385CE27BBF0E400EFC9FB /* SettingsView.swift */,
+				41A65D6227BE8EC4007CE615 /* ManageFamilyView.swift */,
+				41A761A627C119A900D501DF /* SettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		41A65E79278203EE004091EC = {
 			isa = PBXGroup;
 			children = (
@@ -123,7 +141,6 @@
 		41A65E84278203EE004091EC /* GamOfChores */ = {
 			isa = PBXGroup;
 			children = (
-				41A94415278484E00045E8EA /* Extensions */,
 				41A94412278484340045E8EA /* Managers */,
 				41A94411278484180045E8EA /* Models */,
 				41A94410278483B60045E8EA /* Viewmodels */,
@@ -149,17 +166,17 @@
 		41A9440F278483AC0045E8EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				41D2F66727B406780077E721 /* LoginView.swift */,
-				41D2F66B27B40BE90077E721 /* FirConnectView.swift */,
+				41CF7DDB27BA7E11003D7E56 /* Login */,
+				41CF7DDA27BA7E08003D7E56 /* FirConnect */,
+				41CF7DDD27BA7E8A003D7E56 /* 'Add family */,
 				41A0A0E4278DCC8A0042D428 /* StartMenuView.swift */,
-				41A7CA3C2799C686002C3709 /* AddFamilyView.swift */,
-				41A94418278485BD0045E8EA /* TodoView.swift */,
-				41A7CA362799ACDB002C3709 /* FamilyView.swift */,
-				41A9F0A727B82D7A00211865 /* MemberView.swift */,
-				41A57EEA279D696A002CCDE9 /* PlannerView.swift */,
-				41A9441F278492F90045E8EA /* AddChoreView.swift */,
-				41AD11252792F0F600595F65 /* ChoreDetailView.swift */,
-				41A3FA9F27B938E300D38900 /* SettingsVuew.swift */,
+				41CF7DE027BA97DF003D7E56 /* To do */,
+				41CF7DE127BA988A003D7E56 /* Family view */,
+				41CF7DE227BA98B9003D7E56 /* Member view */,
+				41CF7DE327BA9BE9003D7E56 /* Planner */,
+				41CF7DE427BA9C01003D7E56 /* Add chore */,
+				41CF7DE527BA9C2A003D7E56 /* Chore detail */,
+				41A385D027BBF21300EFC9FB /* Settings */,
 				41A9441E278491EE0045E8EA /* Rows */,
 			);
 			path = Views;
@@ -168,14 +185,6 @@
 		41A94410278483B60045E8EA /* Viewmodels */ = {
 			isa = PBXGroup;
 			children = (
-				41D2F66927B406ED0077E721 /* LoginViewModel.swift */,
-				41A7CA3E2799C76C002C3709 /* AddFamilyViewModel.swift */,
-				41A9441A278486280045E8EA /* TodoViewModel.swift */,
-				41A57EEC279D69E4002CCDE9 /* PlannerViewModel.swift */,
-				41A94421278493840045E8EA /* AddChoreViewModel.swift */,
-				41AD11272792F13800595F65 /* ChoreDetailViewModel.swift */,
-				41A7CA382799B33E002C3709 /* FamilyViewViewModel.swift */,
-				41A9F0A927B82F6700211865 /* MemberViewViewModel.swift */,
 			);
 			path = Viewmodels;
 			sourceTree = "<group>";
@@ -183,6 +192,7 @@
 		41A94411278484180045E8EA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				41A94415278484E00045E8EA /* Extensions */,
 				41A94413278484690045E8EA /* BaseModel.swift */,
 			);
 			path = Models;
@@ -211,11 +221,93 @@
 			isa = PBXGroup;
 			children = (
 				41A94423278496CA0045E8EA /* ChoreRow.swift */,
+				41A385CC27BBE54C00EFC9FB /* CompleteChoreRow.swift */,
 				41AD11292792FC9C00595F65 /* MemberRow.swift */,
 				41A0FE29279C6DFB0090C9F3 /* TopListRow.swift */,
 				41A1272C27A2CD0A00CBFDE7 /* WeekDaysRow.swift */,
 			);
 			path = Rows;
+			sourceTree = "<group>";
+		};
+		41CF7DDA27BA7E08003D7E56 /* FirConnect */ = {
+			isa = PBXGroup;
+			children = (
+				41D2F66B27B40BE90077E721 /* FirConnectView.swift */,
+				41CF7DDE27BA7EC3003D7E56 /* FirConnectViewModel.swift */,
+			);
+			path = FirConnect;
+			sourceTree = "<group>";
+		};
+		41CF7DDB27BA7E11003D7E56 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				41D2F66727B406780077E721 /* LoginView.swift */,
+				41D2F66927B406ED0077E721 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		41CF7DDD27BA7E8A003D7E56 /* 'Add family */ = {
+			isa = PBXGroup;
+			children = (
+				41A7CA3C2799C686002C3709 /* AddFamilyView.swift */,
+				41A7CA3E2799C76C002C3709 /* AddFamilyViewModel.swift */,
+			);
+			path = "'Add family";
+			sourceTree = "<group>";
+		};
+		41CF7DE027BA97DF003D7E56 /* To do */ = {
+			isa = PBXGroup;
+			children = (
+				41A94418278485BD0045E8EA /* TodoView.swift */,
+				41A9441A278486280045E8EA /* TodoViewModel.swift */,
+			);
+			path = "To do";
+			sourceTree = "<group>";
+		};
+		41CF7DE127BA988A003D7E56 /* Family view */ = {
+			isa = PBXGroup;
+			children = (
+				41A7CA362799ACDB002C3709 /* FamilyView.swift */,
+				41A7CA382799B33E002C3709 /* FamilyViewViewModel.swift */,
+			);
+			path = "Family view";
+			sourceTree = "<group>";
+		};
+		41CF7DE227BA98B9003D7E56 /* Member view */ = {
+			isa = PBXGroup;
+			children = (
+				41A9F0A727B82D7A00211865 /* MemberView.swift */,
+				41A9F0A927B82F6700211865 /* MemberViewViewModel.swift */,
+			);
+			path = "Member view";
+			sourceTree = "<group>";
+		};
+		41CF7DE327BA9BE9003D7E56 /* Planner */ = {
+			isa = PBXGroup;
+			children = (
+				41A57EEA279D696A002CCDE9 /* PlannerView.swift */,
+				41A57EEC279D69E4002CCDE9 /* PlannerViewModel.swift */,
+			);
+			path = Planner;
+			sourceTree = "<group>";
+		};
+		41CF7DE427BA9C01003D7E56 /* Add chore */ = {
+			isa = PBXGroup;
+			children = (
+				41A9441F278492F90045E8EA /* AddChoreView.swift */,
+				41A94421278493840045E8EA /* AddChoreViewModel.swift */,
+			);
+			path = "Add chore";
+			sourceTree = "<group>";
+		};
+		41CF7DE527BA9C2A003D7E56 /* Chore detail */ = {
+			isa = PBXGroup;
+			children = (
+				41AD11252792F0F600595F65 /* ChoreDetailView.swift */,
+				41AD11272792F13800595F65 /* ChoreDetailViewModel.swift */,
+			);
+			path = "Chore detail";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,15 +393,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41A385CF27BBF0E400EFC9FB /* SettingsView.swift in Sources */,
 				41D2F66227B3E8BB0077E721 /* FirebaseManager.swift in Sources */,
 				41A9441B278486280045E8EA /* TodoViewModel.swift in Sources */,
+				41A65D6327BE8EC4007CE615 /* ManageFamilyView.swift in Sources */,
 				41A7CA3B2799C399002C3709 /* Memeber+Extensions.swift in Sources */,
 				41A65E952782042E004091EC /* GOC_Model.xcdatamodeld in Sources */,
 				41A94420278492F90045E8EA /* AddChoreView.swift in Sources */,
-				41A3FAA027B938E300D38900 /* SettingsVuew.swift in Sources */,
 				41A94417278485030045E8EA /* Chore+Extensions.swift in Sources */,
 				41A57EED279D69E4002CCDE9 /* PlannerViewModel.swift in Sources */,
 				41AD11262792F0F600595F65 /* ChoreDetailView.swift in Sources */,
+				41A385CD27BBE54C00EFC9FB /* CompleteChoreRow.swift in Sources */,
 				41A7CA392799B33E002C3709 /* FamilyViewViewModel.swift in Sources */,
 				41A1272D27A2CD0A00CBFDE7 /* WeekDaysRow.swift in Sources */,
 				41A0FE26279C58050090C9F3 /* Family+Extemsions.swift in Sources */,
@@ -328,11 +422,13 @@
 				41D2F66A27B406ED0077E721 /* LoginViewModel.swift in Sources */,
 				41A0A0E5278DCC8A0042D428 /* StartMenuView.swift in Sources */,
 				41D2F66827B406780077E721 /* LoginView.swift in Sources */,
+				41CF7DDF27BA7EC3003D7E56 /* FirConnectViewModel.swift in Sources */,
 				41A65E9727820457004091EC /* CoreDataManager.swift in Sources */,
 				41A65E86278203EE004091EC /* GamOfChoresApp.swift in Sources */,
 				41A94414278484690045E8EA /* BaseModel.swift in Sources */,
 				41A0FE2A279C6DFB0090C9F3 /* TopListRow.swift in Sources */,
 				41A94422278493840045E8EA /* AddChoreViewModel.swift in Sources */,
+				41A761A727C119A900D501DF /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

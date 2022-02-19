@@ -9,16 +9,17 @@ import SwiftUI
 
 struct MemberView: View {
     
-    @ObservedObject var vm = MemberViewViewModel()
+    @StateObject var vm = MemberViewViewModel()
     
     @StateObject var selectedMember = Member()
     
     var body: some View {
-        VStack {
-            VStack {
+        VStack(spacing: 10) {
+            VStack(spacing: 15) {
                 Text(selectedMember.name ?? "No name")
+                    .underline()
                     .font(.system(size: 35, weight: .semibold, design: .default))
-                
+                Text("\(selectedMember.choreCount) chores completed")
                 HStack(spacing: 4) {
                     Text("\(selectedMember.points ?? 0) p")
                         .font(.system(size: 18, weight: .semibold, design: .default))
@@ -33,7 +34,7 @@ struct MemberView: View {
 
             List {
                 ForEach(vm.completedChores) { chore in
-                    
+                    CompleteChoreRow(chore: chore)
                 }
             }.listStyle(.plain)
         }.onAppear {

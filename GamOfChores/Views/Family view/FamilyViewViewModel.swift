@@ -15,6 +15,9 @@ class FamilyViewViewModel: ObservableObject {
     @Published var familyMembers = [Member]()
     @Published var leader = Member()
     
+    init(){
+        getFamily()
+    }
     func getFamily(){
         print("____Fetching family________")
         familyMembers = CoreDataManager.shared.getFamilyMembers()

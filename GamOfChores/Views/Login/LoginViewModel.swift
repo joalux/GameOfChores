@@ -21,6 +21,7 @@ class LoginViewModel: ObservableObject {
     func getFamily(){
         print("Checking for family!!!")
         hasFamily = CoreDataManager.shared.fetchFamily()
+        
         print(hasFamily)
     }
     

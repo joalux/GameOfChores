@@ -20,7 +20,7 @@ class CoreDataManager: ObservableObject {
 
     var chores = [Chore]()
     var familyMembers = [Member]()
-    //var family = Family()
+    var families = [Family]()
     
     init() {
         container = NSPersistentContainer(name: "GOC_Model")
@@ -76,11 +76,26 @@ class CoreDataManager: ObservableObject {
             print("NO FAM")
             return Family()
         }
-       
-        
     }
     
-    func fetchChores() -> [Chore]{
+    func getFamilies() -> [Family]{
+        do {
+            try familyFetcher.performFetch()
+            guard let coreFams = familyFetcher.fetchedObjects else {
+                print("Returning empty!!!")
+                return [Family]()
+            }
+            print("HAS FETCHED Families!!!!")
+            print(coreFams.count)
+            families = coreFams
+            
+        } catch {
+            print(error)
+        }
+        return families
+    }
+    
+    func getChores() -> [Chore]{
         do {
             try choreFetcher.performFetch()
             guard let coreChores = choreFetcher.fetchedObjects else {
@@ -95,6 +110,15 @@ class CoreDataManager: ObservableObject {
             print(error)
         }
         return chores
+    }
+    
+    func removeChore(chore: Chore){
+        do{
+            try chore.delete()
+        } catch {
+            print("ERROR DELETEING")
+            print(error.localizedDescription)
+        }
     }
     
     func getFamilyMembers() -> [Member]{
@@ -120,6 +144,39 @@ class CoreDataManager: ObservableObject {
             print(error)
         }
         return familyMembers
+    }
+    
+    func deleteFamily(){
+        for fam in getFamilies() {
+            print("Removing family")
+            do{
+                try fam.delete()
+            } catch {
+                print("ERROR DELETEING")
+                print(error.localizedDescription)
+            }
+        }
+        
+        for chore in getChores() {
+            print("Removing chores")
+            do{
+                try chore.delete()
+            } catch {
+                print("ERROR DELETEING")
+                print(error.localizedDescription)
+            }
+        }
+        
+        for member in getFamilyMembers() {
+            print("Removing members")
+            do{
+                try member.delete()
+            } catch {
+                print("ERROR DELETEING")
+                print(error.localizedDescription)
+            }
+        }
+        save()
     }
     
     func save() {

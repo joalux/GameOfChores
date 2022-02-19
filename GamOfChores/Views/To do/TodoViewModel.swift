@@ -18,7 +18,7 @@ class TodoViewModel: NSObject, ObservableObject {
     @Published var dayTodo = ""
     
      func fetchChores(){
-        chores = CoreDataManager.shared.fetchChores()
+        chores = CoreDataManager.shared.getChores()
          print("Has chores= \(chores.count)")
          for chore in chores {
              print(chore.type)

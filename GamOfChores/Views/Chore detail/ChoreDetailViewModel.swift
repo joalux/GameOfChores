@@ -15,8 +15,6 @@ class ChoreDetailViewModel: ObservableObject {
     
     @Published var familyMembers = [Member]()
     
-    
-    
     var timer = Timer()
     
     enum timerhMode {
@@ -132,9 +130,9 @@ class ChoreDetailViewModel: ObservableObject {
             print("Adding points to: \(member.name)")
             member.points += selectedChore.value
             member.time += Double(timeSpent)
+            member.choreCount += 1
             
-            
-            selectedChore.doneBy! += "\(member.name!), "
+            selectedChore.doneBy! += "\(member.name!),"
             
             do {
                 try member.save()

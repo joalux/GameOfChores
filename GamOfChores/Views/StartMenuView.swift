@@ -22,13 +22,15 @@ struct StartMenuView: View {
         
         NavigationView {
             
-            VStack {
+            VStack(spacing: 0) {
                 
                 NavigationLink(destination: TodoView(), isActive: $goChores) { EmptyView() }
                 
                NavigationLink(destination: FamilyView(), isActive: $goFamily) { EmptyView() }
 
                 NavigationLink(destination: PlannerView(), isActive: $goPlanner) { EmptyView() }
+                
+                NavigationLink(destination: SettingsView(), isActive: $goSettings) { EmptyView() }
 
         
                 Button(action: {
@@ -84,10 +86,6 @@ struct StartMenuView: View {
                 }).padding(.bottom)
             }
         }.navigationBarHidden(true)
-            .onAppear {
-                coreManager.getFamily()
-            }
-           
     }
 }
 

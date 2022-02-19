@@ -9,12 +9,14 @@ import SwiftUI
 
 
 struct FamilyView: View {
-    @ObservedObject var vm = FamilyViewViewModel()
+    @StateObject var vm = FamilyViewViewModel()
     
     var body: some View {
       
-        VStack {
-            VStack {
+        VStack(spacing: 10) {
+            leaderView(leader: vm.familyMembers.first ?? Member())
+            /*
+            VStack(spacing: 10) {
                 Text(vm.familyMembers.first?.name ?? "No name")
                     .font(.system(size: 35, weight: .semibold, design: .default))
                 
@@ -26,7 +28,7 @@ struct FamilyView: View {
                         .font(.system(size: 18, weight: .semibold, design: .default))
 
                 }.padding(.trailing)
-            }
+            }*/
             
             Divider().background(Color.blue)
 
@@ -36,29 +38,25 @@ struct FamilyView: View {
                 }
             }.listStyle(.plain)
         }.navigationBarTitle("My family", displayMode: .automatic)
-        .onAppear(perform: vm.getFamily)
     }
 }
 
 struct leaderView: View {
     let leader: Member
-    
-    var leaderName = ""
-    
+        
     var body: some View {
-        HStack {
-            Text("No name")
-                .font(.title)
-                .fontWeight(.bold)
-            VStack(spacing: 4) {
-                Text("oints) p")
+        VStack(spacing: 10) {
+            Text(leader.name ?? "No name")
+                .font(.system(size: 35, weight: .semibold, design: .default))
+            
+            HStack(spacing: 4) {
+                Text("\(leader.points ) p")
                     .font(.system(size: 18, weight: .semibold, design: .default))
                 
-                Text("time  m")
+                Text("\(leader.time , specifier: "%.0f")  m")
                     .font(.system(size: 18, weight: .semibold, design: .default))
 
             }.padding(.trailing)
-            
         }
     }
 }

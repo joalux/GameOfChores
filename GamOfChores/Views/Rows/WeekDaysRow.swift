@@ -11,6 +11,9 @@ struct WeekDaysRow: View {
     
     @Binding var dayIndex: Int
     
+    @State private var selection = [0, 1, 2, 3, 4, 5, 6]
+
+    
     var body: some View {
         
         VStack(alignment: .center) {
@@ -18,7 +21,9 @@ struct WeekDaysRow: View {
             
             HStack(alignment: .center){
                 Button(action: { dayIndex = 0
-                        print("Monday") }) {
+                        print("Monday")
+                        selection = [0]
+                }) {
                     Text("Mo").font(.system(size: 15.0, weight: .bold))
                 }.buttonStyle(GrowingButton())
                
@@ -62,8 +67,8 @@ struct GrowingButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(9)
-            .background(configuration.isPressed ? Color.blue : Color.white)
-            .foregroundColor(configuration.isPressed ? Color.white : Color.blue)
+            .background( Color.blue)
+            .foregroundColor(Color.white)
             .cornerRadius(10)
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
             .animation(.easeOut(duration: 0.2), value: configuration.isPressed)

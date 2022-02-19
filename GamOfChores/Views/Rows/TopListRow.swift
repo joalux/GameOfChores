@@ -13,30 +13,30 @@ struct TopListRow: View {
     
     var body: some View {
         NavigationLink(destination: MemberView(selectedMember: member)) {
-        
-        HStack {
             
-            Image(systemName: "person")
-                .font(.system(size: 36.0, weight: .bold))
-           
-            Text(member.name ?? "no name")
-                .font(.title)
-            
-            Spacer()
-            
-           
+            HStack {
+                
+                Image(systemName: "person")
+                    .font(.system(size: 36.0, weight: .bold))
+                
+                Text(member.name ?? "no name")
+                    .font(.title)
+                
+                Spacer()
+                
+                
                 VStack(spacing: 4) {
                     Text("\(member.points) p")
                         .font(.system(size: 18, weight: .semibold, design: .default))
                     
                     Text("\(member.time, specifier: "%.0f") m")
                         .font(.system(size: 18, weight: .semibold, design: .default))
-
+                    
                 }.padding(.trailing)
             }
             
         }.padding(.leading)
-        .padding(.top)
+            .padding(.top)
     }
 }
 
