@@ -143,7 +143,6 @@
 			children = (
 				41A94412278484340045E8EA /* Managers */,
 				41A94411278484180045E8EA /* Models */,
-				41A94410278483B60045E8EA /* Viewmodels */,
 				41A9440F278483AC0045E8EA /* Views */,
 				41A65E85278203EE004091EC /* GamOfChoresApp.swift */,
 				41A65E87278203EE004091EC /* ContentView.swift */,
@@ -180,13 +179,6 @@
 				41A9441E278491EE0045E8EA /* Rows */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		41A94410278483B60045E8EA /* Viewmodels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Viewmodels;
 			sourceTree = "<group>";
 		};
 		41A94411278484180045E8EA /* Models */ = {

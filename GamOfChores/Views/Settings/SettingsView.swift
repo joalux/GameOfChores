@@ -16,6 +16,8 @@ struct SettingsView: View {
     
     @State var showSignOutAlert = false
     
+    @State var goManageFam = false
+    
     @State var doSignOut = false
     
     var body: some View {
@@ -26,9 +28,14 @@ struct SettingsView: View {
             }
             .hidden()
             
+            NavigationLink(destination: ManageFamilyView(), isActive: self.$goManageFam) {
+                EmptyView()
+            }
+            .hidden()
+            
             Button(action: {
                 print("Manage family")
-                showingFamSheet.toggle()
+                goManageFam = true
             }, label: {
                 Text("Manage family")
                     .padding()
@@ -107,7 +114,7 @@ struct SettingsView: View {
             }).padding(.bottom)
             
         }.padding(.bottom, 20)
-            .navigationBarTitle("")
+        
             .alert(isPresented: $showSignOutAlert, content: {
                 
                 Alert(title: Text("Sign out?"), message: Text("Do you want to sign out? If you are not connected, you will lose your family data saved on you device."),primaryButton: .default(Text("no")) {

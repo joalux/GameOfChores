@@ -12,67 +12,55 @@ struct ManageFamilyView: View {
     @State var showManageFamily = false
     @State var showManageMembers = false
     @State var showManageChores = false
-
+    
     @StateObject var vm = SettingsViewModel()
     
     var body: some View {
-        NavigationView {
+        
+        VStack(spacing: 0) {
+            NavigationLink(destination: FirConnectView(), isActive: self.$vm.doConnect) {
+                EmptyView()
+            }.hidden()
             
-            VStack(spacing: 0) {
-                
-                Button(action: {
-                    showManageFamily = true
-                }, label: {
-                   Text("Reset")
-                       .padding()
-                       .frame(width: 220.0, height: 55.0)
-                       .background(Color.blue)
-                       .foregroundColor(.white)
-                       .font(.headline)
-                       .cornerRadius(10)
-               }).padding(.bottom)
-                .alert(isPresented:$vm.showConnectAlert) {
+            Button(action: {
+                vm.showResetAlert = true
+            }, label: {
+                Text("Reset")
+                    .padding()
+                    .frame(width: 220.0, height: 55.0)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .cornerRadius(10)
+            }).padding(.bottom)
+                .alert(isPresented:$vm.showResetAlert) {
                     Alert(
-                        title: Text("Do you want to connect?"),
-                        message: Text("You can connect to an existing family or create a new for your family to connct to."),
-                        primaryButton: .default(Text("Yes"), action: {
+                        title: Text("Reset?"),
+                        message: Text("Do you want to reset? All points and time will be set to zero and all chores will be removed."),
+                        primaryButton: .destructive(Text("Yes"), action: {
                             print("Connecting!!!")
-                            vm.connectFamily()
+                            vm.resetFamily()
                             
                         }),
                         secondaryButton: .default(Text("No"), action: {
-                            print("no connect!!")                            
+                            print("no reset!!")
                         })
                     )
                 }
-                   
-               Button(action: {
-                    
-               }, label: {
-                    Text("Connect")
-                       .padding()
-                       .frame(width: 220.0, height: 55.0)
-                       .background(Color.blue)
-                       .foregroundColor(.white)
-                       .font(.headline)
-                       .cornerRadius(10)
-               }).padding(.bottom)
-               
-
-                   
-                Button(action: {
-
-                }, label: {
-                    Text("Close")
-                        .padding()
-                        .frame(width: 190.0, height: 45.0)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .font(.subheadline)
-                        .cornerRadius(10)
-                }).padding(.bottom)
-            }
-        }.navigationBarHidden(true)
+            
+            
+            Button(action: {
+                vm.doConnect = true
+            }, label: {
+                Text("Connect")
+                    .padding()
+                    .frame(width: 220.0, height: 55.0)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .cornerRadius(10)
+            }).padding(.bottom)
+        }
     }
 }
 

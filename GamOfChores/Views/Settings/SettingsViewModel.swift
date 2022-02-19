@@ -16,13 +16,14 @@ class SettingsViewModel: ObservableObject {
     @Published var showConnectAlert = false
     @Published var showResetAlert = false
 
+    @Published var doConnect = false
     
     func connectFamily(){
         print("Connecting family")
     }
     
     func resetFamily() {
-        
+        print("Resetting family")
     }
     
 }

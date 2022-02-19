@@ -68,7 +68,7 @@ struct LoginView: View {
                 )
             }
             .onAppear {
-                // vm.getFamily()
+                 vm.getFamily()
             }
             
         }.navigationBarHidden(true)
