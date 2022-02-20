@@ -14,20 +14,28 @@ class FireBaseManager: ObservableObject {
     
     private var firStore = Firestore.firestore()
     
+    @Published var firSuccess = false
+    @Published var firError = false
+
+    
     var firChores = [Chore]()
     var firMembers = [Member]()
     var firFamily = Family()
     
-    func signUp(email: String, pass1: String, pass2: String) {
-      
-             Auth.auth().createUser(withEmail: email, password: pass1) { authResult, error in
-             
-                 guard let user = authResult?.user, error == nil else {
-                   print("Error signing up!")
-                     return
-                 }
-                 print("\(user.email!) created")
-               }
+   
+    
+    func signUp(email: String, pass1: String, pass2: String){
+        
+        Auth.auth().createUser(withEmail: email, password: pass1) { authResult, error in
+            guard let newUser = authResult?.user, error == nil else {
+                print(error?.localizedDescription)
+                self.firError = true
+                return
+            }
+            print("\(newUser.email!) created")
+            self.firSuccess = true
+            
+        }
     }
     
     func signIn(email: String, pass: String) {

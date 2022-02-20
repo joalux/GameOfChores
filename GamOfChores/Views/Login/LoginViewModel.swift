@@ -24,28 +24,13 @@ class LoginViewModel: ObservableObject {
         
         print(hasFamily)
     }
-    
-    func addNewFamilly(){
-     
-        do {
-            let newFamily = Family(context: CoreDataManager.shared.container.viewContext)
-            newFamily.id = UUID()
-           
-            try newFamily.save()
-        } catch {
-            print("________ERROR_________")
-            print(error.localizedDescription)
-        }
-        getFamily()
-        
-    }
   
     func addFamily(connect: Bool){
         print("Adding new family!!")
         var newFamily = Family(context: CoreDataManager.shared.container.viewContext)
 
         newFamily.id = UUID()
-        newFamily.isConneted = connect
+        newFamily.isConnected = connect
         do {
             try newFamily.save()
 
