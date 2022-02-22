@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import SwiftUI
 
 class FireBaseManager: ObservableObject {
     
@@ -21,21 +22,34 @@ class FireBaseManager: ObservableObject {
     var firChores = [Chore]()
     var firMembers = [Member]()
     var firFamily = Family()
-    
-   
-    
-    func signUp(email: String, pass1: String, pass2: String){
-        
-        Auth.auth().createUser(withEmail: email, password: pass1) { authResult, error in
-            guard let newUser = authResult?.user, error == nil else {
-                print(error?.localizedDescription)
-                self.firError = true
-                return
-            }
-            print("\(newUser.email!) created")
-            self.firSuccess = true
+
+    @MainActor
+    func signUp(email: String, pass1: String, pass2: String) async -> Bool{
+        do {
+            let authResults = try await Auth.auth().createUser(withEmail: email, password: pass1)
             
+            let newUser = authResults.user
+            print("New user signed in  \(newUser.email ?? "")")
+            firSuccess = true
+            
+            return firSuccess
+            /*
+            { authResult, error in
+                guard let newUser = authResult?.user, error == nil else {
+                    print(error?.localizedDescription)
+                    self.firError = true
+                    return
+                }
+                print("\(newUser.email!) created")
+                self.firSuccess = true
+                
+            }*/
+            
+        }catch {
+            print("Error \(error)")
+            return firSuccess
         }
+        
     }
     
     func signIn(email: String, pass: String) {

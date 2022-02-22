@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @StateObject var vm = SettingsViewModel()
+    
     @State var showingFamSheet = false
     @State var showingDataSheet = false
     @State var showingConnectSheet = false
@@ -121,6 +124,7 @@ struct SettingsView: View {
                     print("No...")
                 },secondaryButton: .destructive(Text("yes")) {
                     print("Deleting...")
+                    vm.signOut()
                     doSignOut = true
                 }
                 )

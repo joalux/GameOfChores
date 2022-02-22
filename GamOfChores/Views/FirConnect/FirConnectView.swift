@@ -45,10 +45,18 @@ struct FirConnectView: View {
             }
             
             if vm.family.isConnected {
-                Text("Connected)")
+                Text("Connected")
             }
             else {
                 Text("not Connected")
+
+            }
+            
+            if vm.firSuccess {
+                Text("Sucess")
+            }
+            else {
+                Text("no success")
 
             }
             
@@ -57,6 +65,8 @@ struct FirConnectView: View {
                     .frame(width: 100, height: 100, alignment: .center)
                     .scaleEffect(2)
             }
+            
+            if vm.firLoading == false {
             
             if vm.family.isConnected {
                 
@@ -74,7 +84,16 @@ struct FirConnectView: View {
                         .foregroundColor(.white)
                         .font(.subheadline)
                         .cornerRadius(10)
+                }).alert(isPresented: $vm.firSuccess) { Alert(title: Text("Success!"), message: Text("You are now connected!"), dismissButton: .default(Text("Close")){
+                    print("__Closing___")
+                    vm.firLoading = false
+                    vm.doConnect = true
+                    
+                    self.presentationMode.wrappedValue.dismiss()
+                    
                 })
+            }
+                
                 Button(action: {
                     print("Action")
                     vm.showDisconnectDevAlert = true
@@ -150,7 +169,7 @@ struct FirConnectView: View {
                
             }
         
-        if vm.firLoading == false {
+      
             if vm.family.isConnected == false {
                 
                     HStack {
@@ -185,14 +204,19 @@ struct FirConnectView: View {
                                 .foregroundColor(.white)
                                 .font(.subheadline)
                                 .cornerRadius(10)
-                        })
+                        }).alert("Error: passwords does not match.", isPresented: $vm.showInvalidPassAlert) {
+                            Button("Clpse", role: .cancel) { }
+                        }
                            
                     }
                 
                     Button(action: {
                         print("Action")
-                        
-                        vm.signUp()
+                        //vm.firSuccess = true
+                        //vm.test()
+                        Task {
+                            await vm.signUp()
+                        }
                         
                     }, label: {
                         Text("Connect")
@@ -202,14 +226,8 @@ struct FirConnectView: View {
                             .foregroundColor(.white)
                             .font(.subheadline)
                             .cornerRadius(10)
-                    }) .alert(isPresented: $vm.firSuccess) { Alert(title: Text("Success!"), message: Text("You are now connected!"), dismissButton: .default(Text("Close")){
-                        print("__Closing___")
-                        vm.firLoading = false
-                        vm.doConnect = true
-                        
                     })
                  
-                }
             }
         }
     }

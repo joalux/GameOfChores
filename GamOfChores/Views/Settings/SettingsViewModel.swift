@@ -18,6 +18,10 @@ class SettingsViewModel: ObservableObject {
 
     @Published var doConnect = false
     
+    func signOut(){
+        CoreDataManager.shared.deleteFamily()
+    }
+    
     func connectFamily(){
         print("Connecting family")
     }
