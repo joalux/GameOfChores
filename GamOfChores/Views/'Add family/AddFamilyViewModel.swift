@@ -31,6 +31,10 @@ class AddNewFamilyViewModel: ObservableObject {
         }
     }
     
+    func getFamMembers(){
+        
+    }
+    
     
 
 }

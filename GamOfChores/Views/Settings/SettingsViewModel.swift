@@ -17,6 +17,8 @@ class SettingsViewModel: ObservableObject {
     @Published var showResetAlert = false
 
     @Published var doConnect = false
+    @Published var manageFamily = false
+
     
     func signOut(){
         CoreDataManager.shared.deleteFamily()

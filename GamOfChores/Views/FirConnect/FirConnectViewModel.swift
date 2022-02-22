@@ -83,7 +83,8 @@ class FirConnectViewModel: ObservableObject {
             
         }catch {
             print("Error \(error)")
-            return firSuccess
+            firError = true
+            return firError
         }
         
     }

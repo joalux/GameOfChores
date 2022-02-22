@@ -22,10 +22,14 @@ struct ManageFamilyView: View {
                 EmptyView()
             }.hidden()
             
+            NavigationLink(destination: AddFamilyView(), isActive: self.$vm.manageFamily) {
+                EmptyView()
+            }.hidden()
+            
             Button(action: {
                 vm.showResetAlert = true
             }, label: {
-                Text("Reset")
+                Text("Reset family")
                     .padding()
                     .frame(width: 220.0, height: 55.0)
                     .background(Color.blue)
@@ -50,9 +54,9 @@ struct ManageFamilyView: View {
             
             
             Button(action: {
-                vm.doConnect = true
+                vm.manageFamily = true
             }, label: {
-                Text("Connect")
+                Text("Manage members")
                     .padding()
                     .frame(width: 220.0, height: 55.0)
                     .background(Color.blue)
