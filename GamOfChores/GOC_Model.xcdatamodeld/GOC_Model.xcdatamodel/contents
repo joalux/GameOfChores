@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Chore" representedClassName="Chore" syncable="YES" codeGenerationType="class">
         <attribute name="dayTodo" optional="YES" attributeType="String"/>
-        <attribute name="doneBy" optional="YES" attributeType="String"/>
+        <attribute name="doneBy" attributeType="String"/>
         <attribute name="firID" optional="YES" attributeType="String"/>
         <attribute name="hasTimeLimit" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>

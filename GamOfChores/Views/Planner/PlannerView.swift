@@ -22,6 +22,8 @@ struct PlannerView: View {
         VStack {
             TabView(selection: $currentDayIndex) {
                 dayView(weekDay: vm.weekDaysFull[currentDayIndex],chores: vm.chores, index: $currentDayIndex)
+                .tag(0)
+                dayView(weekDay: vm.weekDaysFull[currentDayIndex], chores: vm.chores, index: $currentDayIndex)
                 .tag(1)
                 dayView(weekDay: vm.weekDaysFull[currentDayIndex], chores: vm.chores, index: $currentDayIndex)
                 .tag(2)
@@ -33,14 +35,13 @@ struct PlannerView: View {
                 .tag(5)
                 dayView(weekDay: vm.weekDaysFull[currentDayIndex], chores: vm.chores, index: $currentDayIndex)
                 .tag(6)
-                dayView(weekDay: vm.weekDaysFull[currentDayIndex], chores: vm.chores, index: $currentDayIndex)
-                .tag(7)
                 
-            }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             
             WeekDaysRow(dayIndex: $currentDayIndex)
         }
         .onAppear {
+            print("______PLANNER APPEAR_______")
             vm.fetchChores()
            vm.getDayOfWeek()
         }
@@ -56,25 +57,36 @@ struct dayView: View {
     @Binding var index: Int
     
     @State var goAddView = false
+    @State var showComplete = false
     
     @ObservedObject private var vm = TodoViewModel()
     
     var body: some View {
         VStack {
-           // NavigationLink(destination: AddChoreView(weekDay: weekDay), isActive: $goAddView) { EmptyView() }
+            NavigationLink(destination: AddChoreView(weekDay: weekDay), isActive: $goAddView) { EmptyView() }
             
-            Text("\(weekDay) index: \(index)")
+            Text("\(weekDay)")
                 .font(.system(size: 35, weight: .bold, design: .default))
             Divider().background(Color.blue)
 
             List {
-                ForEach(vm.chores, id: \.id) { chore in
-                    if chore.dayTodo == weekDay {
-                        ChoreRow(chore: chore)
+                Section(header: Text("To do")) {
+                    ForEach(chores, id: \.id) { chore in
+                        if chore.dayTodo == weekDay && chore.isCompleted == false{
+                            ChoreRow(chore: chore)
+                        }
+                    }.onDelete(perform: deleteChore)
+                }
+                Section(header: Text("Completed chore")) {
+                    ForEach(chores, id: \.id) { chore in
+                       if chore.dayTodo == weekDay && chore.isCompleted == true{
+                            ChoreRow(chore: chore).disabled(chore.isCompleted)
+                        }
                     }
-                    
-                }.onDelete(perform: deleteChore)
+                }
+              
             }.listStyle(.plain)
+                .padding(.top, -10)
             
             Divider().background(Color.blue)
             
@@ -94,19 +106,19 @@ struct dayView: View {
                     .font(.headline)
                     .cornerRadius(10)
                 }
-        }.padding(.bottom, 45)
-            .sheet(isPresented: $goAddView, onDismiss: {
-                print("Dismissing!!")
-                vm.fetchChores()
+        }.padding(.bottom, 5)
+            /*.sheet(isPresented: $goAddView, onDismiss: {
+                print("Dismissing!_______________!")
+                //vm.fetchChores()
             }) {
                 AddChoreView(weekDay: weekDay)
-            }
+            }*/
             .onAppear {
                // vm.dayTodo = weekDay
                 
                // vm.chores = chores
                 
-                vm.fetchChores()
+                //vm.fetchChores()
             }
         .toolbar {
             EditButton()

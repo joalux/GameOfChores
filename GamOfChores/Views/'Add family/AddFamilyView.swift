@@ -14,6 +14,7 @@ struct AddFamilyView: View {
     @State var memberName = ""
     
     @State var doSignUp = false
+    @State var fromSettings = false
     
     @FocusState private var showingKeyboard: Bool
 
@@ -26,15 +27,30 @@ struct AddFamilyView: View {
                 .resizable()
                 .frame(width: 200, height: 200)
                 .scaledToFill()
-            Text("Add family members")
-                .font(.title)
+            if fromSettings {
+                Text("Manage family members")
+                    .font(.title)
+            } else {
+                Text("Add family members")
+                    .font(.title)
+            }
+            
             Divider().background(Color.blue)
 
             List {
-                ForEach(vm.memberNames, id: \.self){ name in
-                    MemberRow(newMemberName: name, addMode: true)
-                    
+                Section("Member names") {
+                    ForEach(vm.memberNames, id: \.self){ name in
+                        MemberRow(newMemberName: name, addMode: true)
+                        
+                    }
                 }
+                Section("Members") {
+                    ForEach(vm.members, id: \.self){ member in
+                        MemberRow(member: member, addMode: true)
+                        
+                    }
+                }
+               
             }.listStyle(.plain)
             
             Divider().background(Color.blue)
@@ -80,6 +96,10 @@ struct AddFamilyView: View {
                         .font(.subheadline)
                         .cornerRadius(10)
                 }).padding()
+            }.onAppear {
+                if fromSettings {
+                    vm.getFamMembers()
+                }
             }
         }
     }

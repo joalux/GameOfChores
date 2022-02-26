@@ -66,7 +66,10 @@ struct ChoreRow: View {
             }.frame(height: 60)
         }.onAppear {
             formatter.dateFormat = "HH:mm E, d MMM"
-            self.dateCompleString = formatter.string(from: chore.timeCompleted ?? Date())
+            print("Time completed====== \(chore.timeCompleted)")
+            if chore.timeCompleted != nil {
+                self.dateCompleString = formatter.string(from: chore.timeCompleted!)
+            }
         }
     }
 }

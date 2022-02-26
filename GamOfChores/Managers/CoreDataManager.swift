@@ -146,6 +146,20 @@ class CoreDataManager: ObservableObject {
         return familyMembers
     }
     
+    func resetFamily(){
+        
+        for member in getFamilyMembers() {
+            member.choreCount = 0
+            member.points = 0
+            member.time = 0
+        }
+        for chore in getChores() {
+            
+            chore.doneBy = ""
+        }
+        save()
+    }
+    
     func deleteFamily(){
         for fam in getFamilies() {
             print("Removing family")

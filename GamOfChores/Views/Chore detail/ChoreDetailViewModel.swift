@@ -124,6 +124,7 @@ class ChoreDetailViewModel: ObservableObject {
         timer.invalidate()
         selectedChore.isCompleted = true
         selectedChore.timeSpent = Double(timeSpent)
+        selectedChore.timeCompleted = Date()
         
         for member in selectedMembers {
             print("MEMBER: \(member.name), \(member.isSelected)")

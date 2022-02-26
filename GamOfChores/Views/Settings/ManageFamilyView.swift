@@ -22,7 +22,7 @@ struct ManageFamilyView: View {
                 EmptyView()
             }.hidden()
             
-            NavigationLink(destination: AddFamilyView(), isActive: self.$vm.manageFamily) {
+            NavigationLink(destination: AddFamilyView(fromSettings: true), isActive: self.$vm.manageFamily) {
                 EmptyView()
             }.hidden()
             

@@ -30,6 +30,10 @@ class SettingsViewModel: ObservableObject {
     
     func resetFamily() {
         print("Resetting family")
+        
+        CoreDataManager.shared.resetFamily()
+        
+      
     }
     
 }

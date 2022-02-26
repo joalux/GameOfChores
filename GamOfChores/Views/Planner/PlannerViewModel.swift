@@ -30,6 +30,7 @@ class PlannerViewModel: ObservableObject {
     
     func fetchChores(){
         chores = CoreDataManager.shared.getChores()
+        print(chores.count)
        
     }
     

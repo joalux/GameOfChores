@@ -80,7 +80,7 @@ struct TodoView: View {
                         Section(header: Text("Completed")) {
                             ForEach(vm.chores, id: \.id) { chore in
                                 if chore.isCompleted == true{
-                                    CompleteChoreRow(chore: chore)
+                                    CompleteChoreRow(chore: chore).disabled(true)
                                 }
                             }.onDelete(perform: deleteChore)
                         }
