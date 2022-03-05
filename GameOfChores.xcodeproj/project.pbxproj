@@ -23,6 +23,7 @@
 		41A65E952782042E004091EC /* GOC_Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41A65E932782042E004091EC /* GOC_Model.xcdatamodeld */; };
 		41A65E9727820457004091EC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A65E9627820457004091EC /* CoreDataManager.swift */; };
 		41A761A727C119A900D501DF /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A761A627C119A900D501DF /* SettingsViewModel.swift */; };
+		41A7A44827D3A9C4006ED72A /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A7A44727D3A9C4006ED72A /* KeyboardManager.swift */; };
 		41A7CA372799ACDB002C3709 /* FamilyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A7CA362799ACDB002C3709 /* FamilyView.swift */; };
 		41A7CA392799B33E002C3709 /* FamilyViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A7CA382799B33E002C3709 /* FamilyViewViewModel.swift */; };
 		41A7CA3B2799C399002C3709 /* Memeber+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A7CA3A2799C399002C3709 /* Memeber+Extensions.swift */; };
@@ -71,6 +72,7 @@
 		41A65E942782042E004091EC /* GOC_Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOC_Model.xcdatamodel; sourceTree = "<group>"; };
 		41A65E9627820457004091EC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		41A761A627C119A900D501DF /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		41A7A44727D3A9C4006ED72A /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		41A7CA362799ACDB002C3709 /* FamilyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyView.swift; sourceTree = "<group>"; };
 		41A7CA382799B33E002C3709 /* FamilyViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyViewViewModel.swift; sourceTree = "<group>"; };
 		41A7CA3A2799C399002C3709 /* Memeber+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Memeber+Extensions.swift"; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			children = (
 				41A65E9627820457004091EC /* CoreDataManager.swift */,
 				41D2F66127B3E8BB0077E721 /* FirebaseManager.swift */,
+				41A7A44727D3A9C4006ED72A /* KeyboardManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				41A94419278485BD0045E8EA /* TodoView.swift in Sources */,
 				41A7CA3F2799C76C002C3709 /* AddFamilyViewModel.swift in Sources */,
 				41A94424278496CA0045E8EA /* ChoreRow.swift in Sources */,
+				41A7A44827D3A9C4006ED72A /* KeyboardManager.swift in Sources */,
 				41A57EEB279D696A002CCDE9 /* PlannerView.swift in Sources */,
 				41A65E88278203EE004091EC /* ContentView.swift in Sources */,
 				41A9F0A827B82D7A00211865 /* MemberView.swift in Sources */,

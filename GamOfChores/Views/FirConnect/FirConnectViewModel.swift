@@ -13,7 +13,7 @@ import FirebaseFirestore
 
 class FirConnectViewModel: ObservableObject {
         
-    @Published var family = Family()
+    @Published var family = Family(context: CoreDataManager.shared.container.viewContext)
     
     @StateObject var firManager = FireBaseManager()
     
@@ -35,15 +35,17 @@ class FirConnectViewModel: ObservableObject {
     @Published var doConnect = false
     @Published var doRegister = false
     
+    @Published var inSettings = false
+    
     @Published var showAlert = false
     @Published var showInvalidPassAlert = false
-
 
     @Published var showConnectAlert = false
     @Published var showDisconnectDevAlert = false
     @Published var showDisconnectFamAlert = false
     
     init(){
+        print("INITTING FIRMODEL!!!!!!!!")
         family = CoreDataManager.shared.getFamily()
         print(family.isConnected)
     }
@@ -53,34 +55,30 @@ class FirConnectViewModel: ObservableObject {
     }
     
     @MainActor
-    func signUp() async -> Bool{
+    func connect(create: Bool) async -> Bool{
         do {
             firLoading = true
             
-            let authResults = try await Auth.auth().createUser(withEmail: famMail, password: famPass)
+            if create {
+                let authResults = try await Auth.auth().createUser(withEmail: famMail, password: famPass)
+                let newUser = authResults.user
+                print("New user is created  \(newUser.email ?? "")")
+            }
+            else {
+                let authResults = try await Auth.auth().signIn(withEmail: famMail, password: famPass)
+                let activeUser = authResults.user
+                print("USER IS SIGNED in  \(activeUser.email ?? "")")
+
+            }
             
-            let newUser = authResults.user
-            print("New user signed in  \(newUser.email ?? "")")
+           
             firSuccess = true
             isConnected = true
             
             family.isConnected = true
             
-            firLoading = false
-            
             return firSuccess
-            /*
-            { authResult, error in
-                guard let newUser = authResult?.user, error == nil else {
-                    print(error?.localizedDescription)
-                    self.firError = true
-                    return
-                }
-                print("\(newUser.email!) created")
-                self.firSuccess = true
-                
-            }*/
-            
+           
         }catch {
             print("Error \(error)")
             firError = true

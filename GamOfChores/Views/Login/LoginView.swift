@@ -56,7 +56,7 @@ struct LoginView: View {
                     primaryButton: .default(Text("Yes"), action: {
                         print("Connecting!!!")
                         vm.addFamily(connect: true)
-                        vm.doConnect = true
+                        //vm.doConnect = true
                         
                     }),
                     secondaryButton: .default(Text("No"), action: {

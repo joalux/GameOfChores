@@ -29,14 +29,17 @@ class LoginViewModel: ObservableObject {
         print("Adding new family!!")
         var newFamily = Family(context: CoreDataManager.shared.container.viewContext)
         newFamily.id = UUID()
-
+        newFamily.isConnected = false
+        
         do {
             try newFamily.save()
 
         } catch {
             print("Error saving")
         }
-     
+        print("Added new family!!!")
+        print(newFamily.isConnected)
+        doConnect = connect
     }
     
     

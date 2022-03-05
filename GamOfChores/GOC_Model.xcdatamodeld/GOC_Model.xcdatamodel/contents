@@ -16,7 +16,7 @@
     </entity>
     <entity name="Family" representedClassName="Family" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="isConnected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isConnected" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="mail" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Member" representedClassName="Member" syncable="YES" codeGenerationType="class">

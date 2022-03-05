@@ -20,6 +20,7 @@ struct SettingsView: View {
     @State var showSignOutAlert = false
     
     @State var goManageFam = false
+    @State var goFirView = false
     
     @State var doSignOut = false
     
@@ -36,6 +37,11 @@ struct SettingsView: View {
             }
             .hidden()
             
+            NavigationLink(destination: FirConnectView(inSettings: true), isActive: self.$goFirView) {
+                EmptyView()
+            }
+            .hidden()
+            
             Button(action: {
                 print("Manage family")
                 goManageFam = true
@@ -48,9 +54,6 @@ struct SettingsView: View {
                     .font(.headline)
                     .cornerRadius(10)
             }).padding(.bottom)
-                .sheet(isPresented: $showingFamSheet) {
-                    ManageFamilyView()
-                }
             
             Button(action: {
                 showingDataSheet.toggle()
@@ -70,7 +73,7 @@ struct SettingsView: View {
             Button(action: {
                 
                 print("Connect")
-                showingConnectSheet.toggle()
+                goFirView = true
                 
             }, label: {
                 Text("Connect")
@@ -81,10 +84,6 @@ struct SettingsView: View {
                     .font(.headline)
                     .cornerRadius(10)
             }).padding(.bottom)
-            
-                .sheet(isPresented: self.$showingConnectSheet){
-                    FirConnectView()
-                }
             
             Button(action: {
                 print("About")

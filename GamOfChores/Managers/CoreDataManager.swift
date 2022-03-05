@@ -68,13 +68,24 @@ class CoreDataManager: ObservableObject {
     
     func getFamily() -> Family{
         let coreFamily = familyFetcher.fetchedObjects?.first
-        print(coreFamily)
+        print("coreFamily= \(coreFamily)")
+        
+        if coreFamily == nil {
+            print("No core family!!!")
+        }
+        else {
+            print("HAS core family!!!")
+        }
+        
         if let coreFamily = coreFamily {
             return coreFamily
         }
         else {
             print("NO FAM")
-            return Family()
+            
+            let newFamilý = Family(context: CoreDataManager.shared.container.viewContext)
+            newFamilý.isConnected = false
+            return newFamilý
         }
     }
     

@@ -20,9 +20,7 @@ struct StartMenuView: View {
     
     var body: some View {
         
-        NavigationView {
-            
-            VStack(spacing: 0) {
+            VStack {
                 
                 NavigationLink(destination: TodoView(), isActive: $goChores) { EmptyView() }
                 
@@ -85,7 +83,8 @@ struct StartMenuView: View {
                         .cornerRadius(10)
                 }).padding(.bottom)
             }
-        }.navigationBarHidden(true)
+            .padding(.top)
+        .navigationBarHidden(true)
     }
 }
 
