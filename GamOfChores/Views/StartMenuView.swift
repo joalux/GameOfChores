@@ -12,6 +12,8 @@ struct StartMenuView: View {
     @Environment(\.managedObjectContext) var viewContext
     
     @StateObject var coreManager = CoreDataManager()
+    
+    @State var isNavigationBarHidden = true
         
     @State var goChores = false
     @State var goFamily = false
@@ -84,7 +86,10 @@ struct StartMenuView: View {
                 }).padding(.bottom)
             }
             .padding(.top)
-        .navigationBarHidden(true)
+            .navigationBarHidden(self.isNavigationBarHidden)
+            .onAppear {
+                self.isNavigationBarHidden = true
+            }
     }
 }
 

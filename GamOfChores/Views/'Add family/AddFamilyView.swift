@@ -9,11 +9,15 @@ import SwiftUI
 
 struct AddFamilyView: View {
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @StateObject private var vm = AddNewFamilyViewModel()
     
     @State var memberName = ""
     
     @State var doSignUp = false
+    @State var goSettings = false
+    
     @State var fromSettings = false
     
     @FocusState private var showingKeyboard: Bool
@@ -23,6 +27,10 @@ struct AddFamilyView: View {
             NavigationLink(destination: StartMenuView(), isActive: self.$doSignUp) {
                EmptyView()
              }.hidden()
+            NavigationLink(destination: ManageFamilyView(), isActive: self.$goSettings) {
+               EmptyView()
+             }.hidden()
+            
             Image("familyLogo")
                 .resizable()
                 .frame(width: 200, height: 200)
@@ -38,14 +46,8 @@ struct AddFamilyView: View {
             Divider().background(Color.blue)
 
             List {
-                Section("Member names") {
-                    ForEach(vm.memberNames, id: \.self){ name in
-                        MemberRow(newMemberName: name, addMode: true)
-                        
-                    }
-                }
                 Section("Members") {
-                    ForEach(vm.members, id: \.self){ member in
+                    ForEach(vm.famMembers, id: \.self){ member in
                         MemberRow(member: member, addMode: true)
                         
                     }
@@ -67,7 +69,7 @@ struct AddFamilyView: View {
                
                 Button(action: {
                     print("Action")
-                    vm.memberNames.append(memberName)
+                    vm.addFamMember(name: memberName)
                     memberName = ""
                     showingKeyboard = false
                     
@@ -82,10 +84,16 @@ struct AddFamilyView: View {
                 }).padding()
                 
                 Button(action: {
-                    print("signup complete")
                     vm.addFamMembers()
-                    doSignUp = true
-                   
+                    if fromSettings {
+                        print("fam members added")
+
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                    else {
+                        print("signup complete")
+                        doSignUp = true
+                    }
                     
                 }, label: {
                     Text("Done")

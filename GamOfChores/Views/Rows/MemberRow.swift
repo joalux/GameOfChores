@@ -25,13 +25,20 @@ struct MemberRow: View {
             }
             Image(systemName: "person")
                 .font(.system(size: 36.0, weight: .bold))
+           
+            Text(member.name ?? "no name")
+                .font(.title)
+
+            /*
             if addMode {
                 Text(newMemberName)
                     .font(.title)
             } else {
                 Text(member.name ?? "no name")
                     .font(.title)
-            }
+            }*/
+            
+            
             Spacer()
             
         }.padding(.leading)

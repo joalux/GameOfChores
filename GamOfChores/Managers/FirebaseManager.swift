@@ -13,7 +13,7 @@ class FireBaseManager: ObservableObject {
     
     static let shared = FireBaseManager()
     
-    private var firStore = Firestore.firestore()
+    private var db = Firestore.firestore()
     
     @Published var firSuccess = false
     @Published var firError = false
@@ -23,6 +23,7 @@ class FireBaseManager: ObservableObject {
     var firMembers = [Member]()
     var firFamily = Family()
 
+    /*
     @MainActor
     func signUp(email: String, pass1: String, pass2: String) async -> Bool{
         do {
@@ -30,23 +31,14 @@ class FireBaseManager: ObservableObject {
             
             let newUser = authResults.user
             print("New user signed in  \(newUser.email ?? "")")
+            addFamily(firFam: firFamily)
             firSuccess = true
             
             return firSuccess
-            /*
-            { authResult, error in
-                guard let newUser = authResult?.user, error == nil else {
-                    print(error?.localizedDescription)
-                    self.firError = true
-                    return
-                }
-                print("\(newUser.email!) created")
-                self.firSuccess = true
-                
-            }*/
             
         }catch {
             print("Error \(error)")
+            firSuccess = false
             return firSuccess
         }
         
@@ -61,6 +53,28 @@ class FireBaseManager: ObservableObject {
                    print("signup success!!")
                }
            }
+    } */
+    
+    func addFamily(firFam: Family){
+        print("ADDING FAM DOC!!!!")
+        
+        let famMembers = CoreDataManager.shared.getFamilyMembers()
+                
+        db.collection("Families").document(firFam.firID!).setData([
+            "Sinup date": Date(),
+            "Mail": firFam.mail
+        ])
+        
+        for member in famMembers {
+            print("Adding membo")
+            db.collection("Families").document(firFam.firID!).collection("Family members").document(member.id?.uuidString ?? "No id").setData([
+                "Name": member.name,
+                "Points": member.points,
+                "Time": member.time,
+                "ChoreCounr": member.choreCount
+            ])
+            
+        }
     }
     
 }

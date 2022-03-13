@@ -15,6 +15,7 @@
         <attribute name="value" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Family" representedClassName="Family" syncable="YES" codeGenerationType="class">
+        <attribute name="firID" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isConnected" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="mail" optional="YES" attributeType="String"/>
@@ -29,7 +30,7 @@
     </entity>
     <elements>
         <element name="Chore" positionX="-63" positionY="-18" width="128" height="209"/>
-        <element name="Family" positionX="-63" positionY="63" width="128" height="74"/>
+        <element name="Family" positionX="-63" positionY="63" width="128" height="89"/>
         <element name="Member" positionX="-63" positionY="54" width="128" height="119"/>
     </elements>
 </model>

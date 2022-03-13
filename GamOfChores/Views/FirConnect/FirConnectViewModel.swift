@@ -11,11 +11,11 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-class FirConnectViewModel: ObservableObject {
+@MainActor class FirConnectViewModel: ObservableObject {
         
     @Published var family = Family(context: CoreDataManager.shared.container.viewContext)
     
-    @StateObject var firManager = FireBaseManager()
+   // @StateObject var firManager = FireBaseManager()
     
     @Published var famMail = ""
     @Published var famPass = ""
@@ -54,7 +54,7 @@ class FirConnectViewModel: ObservableObject {
         firSuccess = true
     }
     
-    @MainActor
+    
     func connect(create: Bool) async -> Bool{
         do {
             firLoading = true
@@ -63,11 +63,14 @@ class FirConnectViewModel: ObservableObject {
                 let authResults = try await Auth.auth().createUser(withEmail: famMail, password: famPass)
                 let newUser = authResults.user
                 print("New user is created  \(newUser.email ?? "")")
+                family.firID = newUser.uid
             }
             else {
                 let authResults = try await Auth.auth().signIn(withEmail: famMail, password: famPass)
                 let activeUser = authResults.user
                 print("USER IS SIGNED in  \(activeUser.email ?? "")")
+                family.firID = activeUser.uid
+                
 
             }
             
@@ -75,46 +78,30 @@ class FirConnectViewModel: ObservableObject {
             firSuccess = true
             isConnected = true
             
+            family.mail = famMail
             family.isConnected = true
+            
+            FireBaseManager.shared.addFamily(firFam: family)
+            
+            do {
+                try family.save()
+                print("Save success!")
+            }
+            catch {
+                print("Error saving")
+            }
             
             return firSuccess
            
         }catch {
             print("Error \(error)")
-            firError = true
+            
+            resultString = error.localizedDescription
+            
+             firError = true
             return firError
         }
         
-    }
-    
-    func signUp2() async{
-        
-        
-        
-        
-        
-        print("Creating new user: \(famMail), \(famPass), \(famPass2),")
-        isConnected = await firManager.signUp(email: famMail, pass1: famPass, pass2: famPass2)
-        /*
-        let newTask = Task { () -> Bool in
-            let success = await FireBaseManager.shared.signUp(email: famMail, pass1: famPass, pass2: famPass2)
-
-            return success
-        }
-        
-        async {
-              await FireBaseManager.shared.signUp(email: famMail, pass1: famPass, pass2: famPass2)
-           
-            print("user is signed in as ")
-        }*/
-    }
- 
-    func connectFamily() {
-        print("Connecting family")
-               
-        showConnectAlert = true
-        family.isConnected = true
-        CoreDataManager.shared.save()
     }
     
     func disconnectFamily() {

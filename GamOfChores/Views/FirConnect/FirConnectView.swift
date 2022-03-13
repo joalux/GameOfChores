@@ -37,8 +37,6 @@ struct FirConnectView: View {
                 }.hidden()
                 
                 
-             
-                
                 Image("theCloud")
                     .resizable()
                     .padding(.leading, 15)
@@ -181,7 +179,7 @@ struct FirConnectView: View {
                         }.padding(.bottom)
                         .background(Color.white)
                     }
-                //____________
+
                     if vm.family.isConnected == false {
                         
                         HStack {

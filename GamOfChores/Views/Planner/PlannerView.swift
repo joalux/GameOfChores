@@ -13,13 +13,15 @@ import CoreData
 struct PlannerView: View {
     
     @StateObject private var vm = PlannerViewModel()
-    
+        
     @State var index = 6
     @State var currentDayIndex = 0
         
     var body: some View {
         
         VStack {
+
+            
             TabView(selection: $currentDayIndex) {
                 dayView(weekDay: vm.weekDaysFull[currentDayIndex],chores: vm.chores, index: $currentDayIndex)
                 .tag(0)
@@ -36,14 +38,21 @@ struct PlannerView: View {
                 dayView(weekDay: vm.weekDaysFull[currentDayIndex], chores: vm.chores, index: $currentDayIndex)
                 .tag(6)
                 
-            }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            .navigationBarTitle("Planner")
             
             WeekDaysRow(dayIndex: $currentDayIndex)
+
+            
         }
+        
         .onAppear {
             print("______PLANNER APPEAR_______")
             vm.fetchChores()
            vm.getDayOfWeek()
+            
+
         }
     }
 }
@@ -57,12 +66,12 @@ struct dayView: View {
     @Binding var index: Int
     
     @State var goAddView = false
-    @State var showComplete = false
+    @State var showCompleted = false
     
     @ObservedObject private var vm = TodoViewModel()
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             NavigationLink(destination: AddChoreView(weekDay: weekDay), isActive: $goAddView) { EmptyView() }
             
             Text("\(weekDay)")
@@ -77,35 +86,48 @@ struct dayView: View {
                         }
                     }.onDelete(perform: deleteChore)
                 }
-                Section(header: Text("Completed chore")) {
-                    ForEach(chores, id: \.id) { chore in
-                       if chore.dayTodo == weekDay && chore.isCompleted == true{
-                            ChoreRow(chore: chore).disabled(chore.isCompleted)
+                if showCompleted {
+                    Section(header: Text("Completed chores")) {
+                        ForEach(chores, id: \.id) { chore in
+                           if chore.dayTodo == weekDay && chore.isCompleted == true{
+                                ChoreRow(chore: chore).disabled(chore.isCompleted)
+                            }
                         }
                     }
                 }
               
+              
             }.listStyle(.plain)
-                .padding(.top, -10)
             
             Divider().background(Color.blue)
             
             Text("<- Swipe to change day ->")
             
-            Button(action: {
-                print("Adding chore")
-                print(weekDay)
-                goAddView = true
-                
-                }) {
-                    Text("Add chore")
-                    .padding()
-                    .frame(width: 180.0, height: 45.0)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .cornerRadius(10)
+            HStack {
+                Button(action: {
+                        self.goAddView = true
+                        }) {
+                            Text("Add chore")
+                            .padding()
+                            .frame(width: 180.0, height: 45.0)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .cornerRadius(10)
+                    }
+                    .padding(.leading, 70)
+                VStack(alignment: .center, spacing: 1) {
+                    Text("show completed").font(.footnote)
+                        .padding(.trailing,3)
+                    Toggle("", isOn: $showCompleted.animation(.spring()))
+                        .padding(.trailing,40)
+                        .padding(.bottom, 10)
+                        
                 }
+            }
+            
+            
+    
         }.padding(.bottom, 5)
             /*.sheet(isPresented: $goAddView, onDismiss: {
                 print("Dismissing!_______________!")
@@ -120,9 +142,6 @@ struct dayView: View {
                 
                 //vm.fetchChores()
             }
-        .toolbar {
-            EditButton()
-        }
     }
     
     func deleteChore(at offsets: IndexSet) {

@@ -13,7 +13,7 @@ class AddNewFamilyViewModel: ObservableObject {
         
     @Published var memberName = ""
     @Published var memberNames = [String]()
-    @Published var members = [Member]()
+    @Published var famMembers = [Member]()
     
     func addFamMember(name: String){
         do {
@@ -24,10 +24,14 @@ class AddNewFamilyViewModel: ObservableObject {
             newMember.time = 0
             print("Added new member name= \(newMember.name)")
             try newMember.save()
+            
+            famMembers.append(newMember)
+
         } catch {
             print("________ERROR_________")
             print(error.localizedDescription)
         }
+        
     }
     
     func addFamMembers(){
@@ -48,8 +52,8 @@ class AddNewFamilyViewModel: ObservableObject {
     }
     
     func getFamMembers(){
-        members = CoreDataManager.shared.getFamilyMembers()
-        for member in members {
+        famMembers = CoreDataManager.shared.getFamilyMembers()
+        for member in famMembers {
             print(member.name)
         }
     }
