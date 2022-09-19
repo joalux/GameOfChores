@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 import SwiftUI
+import FirebaseFirestore
 
 class FamilyViewViewModel: ObservableObject {
     
@@ -16,32 +17,74 @@ class FamilyViewViewModel: ObservableObject {
     @Published var leader = Member()
     
     @Published var noFamily = false
+    @Published var hasFamily = false
     
-    init(){
-        getFamily()
-    }
-    func getFamily(){
+    private var db = Firestore.firestore()
+    
+    func fetchFamily(){
         print("____Fetching family________")
-        familyMembers = CoreDataManager.shared.getFamilyMembers()
         family = CoreDataManager.shared.getFamily()
+        print("IS CONNECTED=  \(family.isConnected)")
         
-        if familyMembers.count == 0 {
-            print("NO FAM")
-            noFamily = true
+        if family.isConnected {
+            print("Fetching firfam!!!")
+            familyMembers.removeAll()
+            print(family.mail!)
+            print(family.firID)
+            
+            var firFam = [Member]()
+            
+            let docRef = db.collection("Families").document(family.firID!)
+
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                } else {
+                    print("Document does not exist")
+                }
+            }
+            
+            db.collection("Families").document(family.firID!).collection("Family members").getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        
+                        let data = document.data()
+                        
+                       let firName = data["Name"] as? String
+                        let firPoints = data["Points"] as? Int
+                        let firCount = data["ChoreCount"] as? Int
+                        let firTime = data["Time"] as? Double
+                        
+                        firFam.append( FireBaseHelper.shared.setFirMember(famFirId: self.family.firID!, memberID: document.documentID, firName: firName ?? "No name", firPoints: firPoints ?? 0, firTime: firTime ?? 0, firCount: firCount ?? 0))
+                        
+                        print("Appended member: \(firFam.count)")
+                    }
+                    self.familyMembers = firFam
+                    self.setLeader()
+                }
+            }
         }
         else {
-            print("HAS FAM")
-            noFamily = false
+            familyMembers = CoreDataManager.shared.getFamilyMembers()
+            print(familyMembers.count)
+            setFamily()
+            hasFamily = true
+            self.setLeader()
         }
-        
+    }
+    
+    
+    func setFamily(){
+        print("___Setting family")
         for member in familyMembers {
-            print("_____")
-            print(member.name ?? "No name")
+            print(member.name)
             print(member.points)
+            print(member.choreCount)
         }
-        
-        
-        setLeader()
     }
     
     func setLeader() {
@@ -52,6 +95,8 @@ class FamilyViewViewModel: ObservableObject {
         } else {
             print("No leader")
         }
+        self.hasFamily = true
+
        
     }
     

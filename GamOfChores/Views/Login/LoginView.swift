@@ -38,9 +38,10 @@ struct LoginView: View {
                 Button(action: {
                     
                     vm.showConnectAlert = true
+                    //vm.addFamily(connect: true)
                     
                 }, label: {
-                    Text("Begin")
+                    Text(LocalizedStringKey("Begin"))
                         .padding()
                         .frame(width: 200.0, height: 45.0)
                         .background(Color.blue)
@@ -51,18 +52,16 @@ struct LoginView: View {
                 
             }.alert(isPresented:$vm.showConnectAlert) {
                 Alert(
-                    title: Text("Do you want to connect?"),
-                    message: Text("You can connect to an existing family or create a new for your family to connct to."),
-                    primaryButton: .default(Text("Yes"), action: {
+                    title: Text(LocalizedStringKey("WantToConnect")),
+                    message: Text(LocalizedStringKey("WantToConnectMessage")),
+                    primaryButton: .default(Text(LocalizedStringKey("Yes")), action: {
                         print("Connecting!!!")
                         vm.addFamily(connect: true)
-                        //vm.doConnect = true
                         
                     }),
-                    secondaryButton: .default(Text("No"), action: {
+                    secondaryButton: .default(Text(LocalizedStringKey("No")), action: {
                         print("no connect!!")
                         vm.addFamily(connect: false)
-                        vm.doRegister = true
                         
                     })
                 )

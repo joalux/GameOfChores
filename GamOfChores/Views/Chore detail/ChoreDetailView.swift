@@ -20,15 +20,17 @@ struct multiMemberSelectionRow: View {
     var body: some View {
         HStack() {
             Spacer()
+            if isSelected {
+                Image(systemName: "checkmark")
+                    .foregroundColor(.blue)
+            }
+            
             Text(self.member.name ?? "no name")
                 .font(.title)
                 .fontWeight(.bold)
                 
             
-            if isSelected {
-                Image(systemName: "checkmark")
-                    .foregroundColor(.blue)
-            }
+           
             Spacer()
         }
 
@@ -45,6 +47,8 @@ struct multiMemberSelectionRow: View {
 struct ChoreDetailView: View {
     
     @StateObject var vm = ChoreDetailViewModel()
+    
+    @ObservedObject var firHelper = FireBaseHelper()
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -63,28 +67,28 @@ struct ChoreDetailView: View {
             if selectedChore.isCustom {
                 Image("choreAlert")
                     .resizable().padding()
-                    .frame(width: 200, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: 140, height: 140, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .padding(.bottom)
             }
             else {
                 Image(selectedChore.type ?? "")
                     .resizable().padding()
-                    .frame(width: 200, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: 140, height: 140, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .padding(.bottom)
             }
             if vm.hasStarted == false {
                 Text("\(selectedChore.timeLimit, specifier: "%.0f") m \(vm.seconds) s")
-                    .font(.system(size: 35, weight: .medium, design: .default))
+                    .font(.system(size: 25, weight: .medium, design: .default))
             }
             else {
                 
                 if selectedChore.hasTimeLimit {
                     Text(" \(vm.minutes) m \(vm.seconds) s")
-                        .font(.system(size: 35, weight: .medium, design: .default))
+                        .font(.system(size: 25, weight: .medium, design: .default))
                 }
                 else {
                     Text(" \(vm.minutes) m \(vm.seconds) s")
-                        .font(.system(size: 35, weight: .medium, design: .default))
+                        .font(.system(size: 25, weight: .medium, design: .default))
 
                 }
             }
@@ -98,7 +102,6 @@ struct ChoreDetailView: View {
             .frame(width: 250)
             .listStyle(.plain)
             .padding(.horizontal)
-         
           
             Divider().background(Color.blue)
 
@@ -112,10 +115,15 @@ struct ChoreDetailView: View {
                         .font(.system(size: 20, weight: .medium, design: .default))
                         .padding(.horizontal, 20)
                         .padding(.vertical, 8)
-                        .background(Color.blue)
+                        .background(RoundedRectangle(cornerRadius: 5)
+                        .fill(selectedMembers.isEmpty ? Color(UIColor.lightGray) : Color.blue))
                         .foregroundColor(.white)
                         .font(.title)
                         .cornerRadius(15)
+                }.disabled(selectedMembers.isEmpty)
+                .onDisappear {
+                    print("_____DISAPPEAR!!!")
+                    vm.restartTimer()
                 }
                 
                 Button(action: {
@@ -134,7 +142,6 @@ struct ChoreDetailView: View {
                 .alert(isPresented: $vm.hasEnded, content: {
                     Alert(title: Text("Time is up!"), message: Text("You will not get any extra points for this chore."), dismissButton: .default(Text("Ok")){
                        
-                        vm.completeChore(selectedMembers: selectedMembers)
                         self.presentationMode.wrappedValue.dismiss()
 
                     })
@@ -142,7 +149,6 @@ struct ChoreDetailView: View {
                 .alert(isPresented: $showComplete, content: {
                     Alert(title: Text("Chore is done!"), message: Text("You will get \(selectedChore.value) points + \(vm.timeSpent) extra points and \(vm.timeSpent) minutes for this chore."), dismissButton: .default(Text("Ok")){
                         
-                       // vm.completeChore(selectedMembers: selectedMembers)
                         self.presentationMode.wrappedValue.dismiss()
                        
                     })
@@ -155,7 +161,6 @@ struct ChoreDetailView: View {
                     vm.pauseTimer()
                     for selectedMember in selectedMembers {
                         print(selectedMember.name)
-                       
                     }
                     
                     vm.completeChore(selectedMembers: selectedMembers)
@@ -167,16 +172,19 @@ struct ChoreDetailView: View {
                         .font(.system(size: 20, weight: .medium, design: .default))
                         .padding()
                         .padding(.horizontal)
-                        .background(Color.blue)
+                        .background(RoundedRectangle(cornerRadius: 5)
+                            .fill(selectedMembers.isEmpty ? Color(UIColor.lightGray) : Color.blue)
+                        )
                         .foregroundColor(.white)
                         .font(.title)
                         .cornerRadius(15)
                 })
+                .disabled(selectedMembers.isEmpty)
             
         }.onAppear {
             print("APPEAR!!!")
             vm.selectedChore = selectedChore
-            vm.getFamily()
+                      
         }
     }
 }

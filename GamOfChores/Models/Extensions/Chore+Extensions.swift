@@ -10,6 +10,7 @@ import CoreData
 
 extension Chore: BaseModel {
     
+    
     static var all: NSFetchRequest<Chore> {
         let request = Chore.fetchRequest()
         request.sortDescriptors = []

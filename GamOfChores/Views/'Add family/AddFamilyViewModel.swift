@@ -9,55 +9,68 @@ import Foundation
 import CoreData
 import SwiftUI
 
-class AddNewFamilyViewModel: ObservableObject {
+@MainActor
+class AddFamilyViewModel: ObservableObject {
         
     @Published var memberName = ""
     @Published var memberNames = [String]()
     @Published var famMembers = [Member]()
     
-    func addFamMember(name: String){
-        do {
-            var newMember = Member(context: CoreDataManager.shared.container.viewContext)
-                newMember.id = UUID()
-            newMember.name = name
-            newMember.points = 0
-            newMember.time = 0
-            print("Added new member name= \(newMember.name)")
-            try newMember.save()
-            
-            famMembers.append(newMember)
-
-        } catch {
-            print("________ERROR_________")
-            print(error.localizedDescription)
-        }
+    @Published var showConnectAlert = false
+    @Published var showNoNameAlert = false
         
+    @Published var coreFamily = CoreDataManager.shared.getFamily()
+    
+    init() {
+        print("___ADD FAM VM____")
+        print("CORE FAM= \(coreFamily.familyID)")
+        print("Connected = \(coreFamily.isConnected)")
+        print("ID = \(coreFamily.firID ?? "No id")")
+     getFamMembers()
     }
     
-    func addFamMembers(){
-        for name in memberNames {
-            do {
-                var newMember = Member(context: CoreDataManager.shared.container.viewContext)
-                    newMember.id = UUID()
-                newMember.name = name
-                newMember.points = 0
-                newMember.time = 0
-                print("Added new member name= \(newMember.name)")
-                try newMember.save()
-            } catch {
-                print("________ERROR_________")
-                print(error.localizedDescription)
-            }
+    func addFamMember(name: String, firID: String){
+        print("____Adding new member")
+        print("CoreFAM!!")
+        print(coreFamily.isConnected)
+        let newID = UUID()
+        var newMember = Member(context: CoreDataManager.shared.container.viewContext)
+        newMember.memberID = newID
+        newMember.name = name
+        newMember.points = 0
+        newMember.choreCount = 0
+        newMember.time = 0
+        
+        print("___NEW MEM ID!!")
+        print(newMember.memberID)
+        
+        CoreDataManager.shared.save()
+        famMembers.append(newMember)
+    }
+ 
+    
+    func removeMember(at offsets: IndexSet){
+        print("_____REMOVING MEMBER!!!!")
+       
+        for index in offsets {
+            let member = famMembers[index]
+           
+            CoreDataManager.shared.removeFamMember(member: member)
+           
+            famMembers.remove(atOffsets: offsets)
         }
     }
     
-    func getFamMembers(){
+    func getFamMembers() {
+        
+        /*if coreFamily.isConnected {
+            //Accessing StateObject's object without being installed on a View. This will create a new instance each time.
+            famMembers = firHelper.firMembers
+            firHelper.getFirMembers(firID: coreFamily.firID ?? "No id")
+            
+        }*/
         famMembers = CoreDataManager.shared.getFamilyMembers()
-        for member in famMembers {
-            print(member.name)
-        }
+                
+       
     }
-    
-    
-
 }

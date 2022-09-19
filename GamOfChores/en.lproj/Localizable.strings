@@ -1,0 +1,72 @@
+/* 
+  Localizable.strings
+  GameOfChores
+
+  Created by joakim lundberg on 2022-07-22.
+  
+*/
+
+//Login strings
+"Begin" = "Begin";
+"WantToConnect" = "Do you want to connect?";
+"WantToConnectMessage" = "You can connect to an existing family or create a new for your family to connct to.";
+"Yes" = "Yes";
+"No" = "No";
+
+//Connect strings
+"BadPass" = "Your password must be 6 characters long or more.";
+"Close" = "Close";
+"isConnected" = "Connected!";
+"Connected" = "You are now connected!";
+"DisconnectDevice" = "Do you want to disconnect your device from your family?";
+"DisconnectFam" = "Do you want to disconnect your family?";
+"FamilyMail" = "Family mail";
+"FamPass" = "Password";
+"FamPassRepeat" = "Repeat password";
+"ConnectFam" = "Vill du ansluta dig till din familj?";
+
+//Add family
+"AddFam" = "Add family members";
+"ManageFam" = "Manage family members";
+"FamMember" = "Family member";
+"AddMember" = "Add";
+"Done" = "Done";
+
+//Start menu
+"MyFamily" = "My family";
+"Planner" = "Planner";
+"Settings" = "Settings";
+
+//My family
+"NoFamily" = "No family";
+"NoFamilyMembers" = "No family members";
+"AddFamily" = "Add family";
+
+//To do
+"ToDo" = "To do";
+"PullToRefresh" = "Pull to refresh";
+"SwipeToDelete" = "Swipe to delete";
+"AddChore" = "Add chore";
+"ShowComplete" = "Show complete";
+
+//Template maker
+"AddTemplate" = "Add new template";
+
+//Weekdays
+"Mon" = "Monday";
+"Tue" = "Tuesday";
+"Wed" = "Wednesday";
+"Thu" = "Thursday";
+"Fri" = "Friday";
+"Sat" = "Saturday";
+"Sun" = "Sunday";
+
+//Settings
+"ManageFamily" = "Manage family";
+"ManageData" = "Manage data";
+"About" = "About";
+"SignOut" = "Sign out";
+"WantToSignOut" = "Do you want to sign out? If you are not connected, you will lose your family data saved on you device.";
+"Yes" = "yes";
+"No" = "no";
+

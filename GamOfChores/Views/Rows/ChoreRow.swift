@@ -13,11 +13,12 @@ struct ChoreRow: View {
     let formatter = DateFormatter()
     @State var dateCompleString = ""
     
+    @State var goDetail: Bool = false
+    
     var body: some View {
       
-        NavigationLink(destination: ChoreDetailView(selectedChore: chore)) {
+        NavigationLink(destination: ChoreDetailView(selectedChore: chore), isActive: $goDetail) {
             
-        
         HStack {
             if chore.isCustom {
                 Image("choreAlert")
@@ -37,6 +38,10 @@ struct ChoreRow: View {
             }
            
             Spacer()
+            
+            if let dateToDo = chore.dateToDo {
+                Text("Day = \(dateToDo.get(.day))")
+            }
             
             if chore.isCompleted {
                 Text("\(dateCompleString)")
@@ -64,9 +69,14 @@ struct ChoreRow: View {
                     }
                 }
             }.frame(height: 60)
-        }.onAppear {
+        }.onTapGesture {
+            print("__TAP TAP ROW!!")
+                print("___GOING DETAIL!!!")
+                goDetail = true
+            
+        }
+        .onAppear {
             formatter.dateFormat = "HH:mm E, d MMM"
-            print("Time completed====== \(chore.timeCompleted)")
             if chore.timeCompleted != nil {
                 self.dateCompleString = formatter.string(from: chore.timeCompleted!)
             }

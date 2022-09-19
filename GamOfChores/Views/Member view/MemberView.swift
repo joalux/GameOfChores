@@ -8,44 +8,43 @@
 import SwiftUI
 
 struct MemberView: View {
+        
+    var selectedMember: Member
     
-    @StateObject var vm = MemberViewViewModel()
-    
-    @StateObject var selectedMember = Member()
+    @ObservedObject var vm = MemberViewViewModel()
     
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 0) {
             VStack(spacing: 15) {
                 Text(selectedMember.name ?? "No name")
                     .underline()
                     .font(.system(size: 35, weight: .semibold, design: .default))
-                Text("\(selectedMember.choreCount) chores completed")
+                
                 HStack(spacing: 4) {
-                    Text("\(selectedMember.points ?? 0) p")
+                    Text("\(selectedMember.points) p")
                         .font(.system(size: 18, weight: .semibold, design: .default))
                     
-                    Text("\(selectedMember.time ?? 0, specifier: "%.0f")  m")
+                    Text("\(selectedMember.time, specifier: "%.0f") m")
                         .font(.system(size: 18, weight: .semibold, design: .default))
 
                 }.padding(.trailing)
-            }
+
+            }.padding(.bottom)
+            .navigationBarTitle("", displayMode: .inline)
+
             
             Divider().background(Color.blue)
 
             List {
-                ForEach(vm.completedChores) { chore in
+                ForEach(vm.memberChores) { chore in
                     CompleteChoreRow(chore: chore)
                 }
             }.listStyle(.plain)
         }.onAppear {
+            print("______--MEMBER VIEW: \(selectedMember.name)_____")
             vm.selectedMember = selectedMember
             vm.getCompleted()
         }
     }
 }
 
-struct MemberView_Previews: PreviewProvider {
-    static var previews: some View {
-        MemberView()
-    }
-}

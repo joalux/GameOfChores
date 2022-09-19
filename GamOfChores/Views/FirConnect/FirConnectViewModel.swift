@@ -11,22 +11,29 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-@MainActor class FirConnectViewModel: ObservableObject {
+@MainActor
+class FirConnectViewModel: ObservableObject {
         
-    @Published var family = Family(context: CoreDataManager.shared.container.viewContext)
+    //@Published var family = Family(context: CoreDataManager.shared.container.viewContext)
     
-   // @StateObject var firManager = FireBaseManager()
+    @State var coreFamily = CoreDataManager.shared.getFamily()
     
+    @Published var famMembers = [Member]()
+    
+    private var db = Firestore.firestore()
+        
     @Published var famMail = ""
     @Published var famPass = ""
     @Published var famPass2 = ""
     
+    @Published var firID = ""
+        
     @Published var resultString = ""
     
     @Published var isConnected = false
 
     @Published var createFam = false
-    @Published var connectFam = false
+    @Published var connectFam = true
     
     @Published var firLoading = false
     @Published var firSuccess = false
@@ -37,71 +44,147 @@ import FirebaseFirestore
     
     @Published var inSettings = false
     
-    @Published var showAlert = false
     @Published var showInvalidPassAlert = false
+    @Published var showShortPassAlert = false
+
 
     @Published var showConnectAlert = false
+    @Published var showJoinAlert = false
+
     @Published var showDisconnectDevAlert = false
     @Published var showDisconnectFamAlert = false
-    
+        
     init(){
         print("INITTING FIRMODEL!!!!!!!!")
-        family = CoreDataManager.shared.getFamily()
-        print(family.isConnected)
+        famMembers = CoreDataManager.shared.getFamilyMembers()
+        
+        print("IS CONNECTED = \(coreFamily.isConnected)")
     }
     
-    func test(){
-        firSuccess = true
-    }
-    
-    
-    func connect(create: Bool) async -> Bool{
-        do {
-            firLoading = true
+    func connect(create: Bool, members: [Member] = [Member](), chores: [Chore] = [Chore]()) {
+        firLoading = true
+        print("SIGNING UP!!!!!!")
+        if create {
             
-            if create {
-                let authResults = try await Auth.auth().createUser(withEmail: famMail, password: famPass)
-                let newUser = authResults.user
-                print("New user is created  \(newUser.email ?? "")")
-                family.firID = newUser.uid
-            }
-            else {
-                let authResults = try await Auth.auth().signIn(withEmail: famMail, password: famPass)
-                let activeUser = authResults.user
-                print("USER IS SIGNED in  \(activeUser.email ?? "")")
-                family.firID = activeUser.uid
+            Auth.auth().createUser(withEmail: famMail, password: famPass){ authResults, error in
+                guard error == nil else {
+                    self.firLoading = false
+                    self.resultString = error!.localizedDescription
+                    print("_AUTH _ \(authResults)___ERROR : \(error)")
+                    return
+                }
                 
+                switch authResults {
+                case .none:
+                    print("_____Could not create account!")
+                    self.firError = true
+                case .some(_):
+                    print("User created")
+                    if let user = Auth.auth().currentUser {
+                        print("___CONNECTING FAM, USERID = \(user.uid)")
+                      
+                        
+                        self.coreFamily.isConnected = true
+                        self.coreFamily.firID = user.uid
+                        self.coreFamily.mail = user.email
+                        
+                        CoreDataManager.shared.connectFamily(firID: user.uid, mail: self.famMail, addNew: true)
+                        
+                        for member in members {
+                            if let name = member.name {
+                               print("Adding firmember!!!!")
+                                FireBaseHelper.shared.addNewFirMember(firID: user.uid, memberID: UUID().uuidString, firName: name)
+                                
+                            }
+                            
+                        }
+                        
+                        for chore in chores {
+                            if chore.isCompleted {
+                                print("Adding completed chore")
+                                FireBaseHelper.shared.completeChore(firID: user.uid, firChore: chore)
 
+                            }
+                            else {
+                                FireBaseHelper.shared.addChore(firID: user.uid, firChore: chore)
+
+                            }
+                        }
+                        
+                        
+                    }
+                    self.firSuccess = true
+                }
             }
-            
-           
-            firSuccess = true
-            isConnected = true
-            
-            family.mail = famMail
-            family.isConnected = true
-            
-            FireBaseManager.shared.addFamily(firFam: family)
-            
-            do {
-                try family.save()
-                print("Save success!")
+        }
+        else {
+            print("JOINGING FAMILY")
+            Auth.auth().signIn(withEmail: famMail, password: famPass) { authResult, error in
+                guard error == nil else {
+                    self.firLoading = false
+                    print("_AUTH _ \(authResult)___ERROR : \(error)")
+                    self.resultString = error!.localizedDescription
+                    return
+                }
+                switch authResult {
+                case .none:
+                    print("__Could not sign in")
+                    self.resultString = "Sign in failed"
+                    self.firError = true
+                case .some(_):
+                    print("___SIGN IN SUCCESS!!")
+                    
+                    print("___CONNECTING CORE FAM \(authResult?.user.uid)")
+                    if let userID = authResult?.user.uid {
+                        CoreDataManager.shared.connectFamily(firID: userID, mail: self.famMail, addNew: false)
+                    }
+
+                    self.firSuccess = true
+                }
             }
-            catch {
-                print("Error saving")
+        }
+    }
+    
+    func getFamilyMembers(firID: String){
+
+        print("GETTING FIRFAMILY!!!!")
+        print(firID)
+        
+        db.collection("Families").document(firID).collection("Family members").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    let data = document.data()
+                    print("Setting ")
+                    
+                    let userID = UUID()
+                    var firName = data["Name"] as? String ?? ""
+                    var firPoints = Int64(data["Points"] as? Int ?? 0)
+                    var firTime = data["Time"] as? Double ?? 0
+                    var fitCount = Int64(data["ChoreCount"] as? Int ?? 0)
+                    
+                    self.famMembers.append(CoreDataManager.shared.setMember(id: userID, firID: document.documentID, name: firName, points: Int(firPoints), time: firTime, choreCount: fitCount))
+                    
+                }
             }
-            
-            return firSuccess
-           
-        }catch {
-            print("Error \(error)")
-            
-            resultString = error.localizedDescription
-            
-             firError = true
-            return firError
         }
         
+        db.collection("Families").document(firID).getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
+    func disconnectDevice() {
+        coreFamily.isConnected = false
+        CoreDataManager.shared.save()
+
     }
     
     func disconnectFamily() {
@@ -116,10 +199,12 @@ import FirebaseFirestore
           } else {
             // Account deleted.
               print("Family has disconnected!")
+              
           }
         }
-        
-        family.isConnected = false
+        FireBaseHelper.shared.removeFamily(firID: coreFamily.firID ?? "No id")
+    
+        coreFamily.isConnected = false
         CoreDataManager.shared.save()
     }
 }

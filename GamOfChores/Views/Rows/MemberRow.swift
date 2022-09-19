@@ -15,30 +15,23 @@ struct MemberRow: View {
     @State var isSelected = false
     
     
+    
     var body: some View {
         
         HStack {
-            
-            if isSelected {
-                Image(systemName: "checkmark")
-                    .foregroundColor(.blue)
+            if addMode == false {
+                if isSelected {
+                    Image(systemName: "checkmark")
+                        .foregroundColor(.blue)
+                }
             }
+           
             Image(systemName: "person")
                 .font(.system(size: 36.0, weight: .bold))
            
             Text(member.name ?? "no name")
                 .font(.title)
 
-            /*
-            if addMode {
-                Text(newMemberName)
-                    .font(.title)
-            } else {
-                Text(member.name ?? "no name")
-                    .font(.title)
-            }*/
-            
-            
             Spacer()
             
         }.padding(.leading)

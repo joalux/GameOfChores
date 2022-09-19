@@ -20,6 +20,7 @@ struct SettingsView: View {
     @State var showSignOutAlert = false
     
     @State var goManageFam = false
+    @State var goManageData = false
     @State var goFirView = false
     
     @State var doSignOut = false
@@ -37,6 +38,11 @@ struct SettingsView: View {
             }
             .hidden()
             
+            NavigationLink(destination: ManageDataView(), isActive: self.$goManageData) {
+                EmptyView()
+            }
+            .hidden()
+            
             NavigationLink(destination: FirConnectView(inSettings: true), isActive: self.$goFirView) {
                 EmptyView()
             }
@@ -46,7 +52,7 @@ struct SettingsView: View {
                 print("Manage family")
                 goManageFam = true
             }, label: {
-                Text("Manage family")
+                Text(LocalizedStringKey("ManageFamily"))
                     .padding()
                     .frame(width: 220.0, height: 55.0)
                     .background(Color.blue)
@@ -56,9 +62,10 @@ struct SettingsView: View {
             }).padding(.bottom)
             
             Button(action: {
-                showingDataSheet.toggle()
+                print("Manage data!!")
+                goManageData = true
             }, label: {
-                Text("Manage data")
+                Text(LocalizedStringKey("ManageData"))
                     .padding()
                     .frame(width: 220.0, height: 55.0)
                     .background(Color.blue)
@@ -86,10 +93,10 @@ struct SettingsView: View {
             }).padding(.bottom)
             
             Button(action: {
-                print("About")
+                print(LocalizedStringKey("About"))
                 showingAbout.toggle()
             }, label: {
-                Text("About")
+                Text(LocalizedStringKey("About"))
                     .padding()
                     .frame(width: 220.0, height: 55.0)
                     .background(Color.blue)
@@ -98,7 +105,7 @@ struct SettingsView: View {
                     .cornerRadius(10)
             }).padding(.bottom)
                 .sheet(isPresented: $showingAbout){
-                    
+                    AboutView()
                 }
             
             Button(action: {
@@ -106,7 +113,7 @@ struct SettingsView: View {
                 showSignOutAlert = true
                 // SignOut()
             }, label: {
-                Text("Sign out")
+                Text(LocalizedStringKey("SignOut"))
                     .padding()
                     .frame(width: 190.0, height: 45.0)
                     .background(Color.blue)
@@ -119,9 +126,9 @@ struct SettingsView: View {
         
             .alert(isPresented: $showSignOutAlert, content: {
                 
-                Alert(title: Text("Sign out?"), message: Text("Do you want to sign out? If you are not connected, you will lose your family data saved on you device."),primaryButton: .default(Text("no")) {
+                Alert(title: Text(LocalizedStringKey("SignOut?")), message: Text(LocalizedStringKey("WantToSignOut")),primaryButton: .default(Text(LocalizedStringKey("No"))) {
                     print("No...")
-                },secondaryButton: .destructive(Text("yes")) {
+                },secondaryButton: .destructive(Text(LocalizedStringKey("Yes"))) {
                     print("Deleting...")
                     vm.signOut()
                     doSignOut = true

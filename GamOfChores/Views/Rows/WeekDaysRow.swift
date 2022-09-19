@@ -10,9 +10,7 @@ import SwiftUI
 struct WeekDaysRow: View {
     
     @Binding var dayIndex: Int
-    
-    @State private var selection = [0, 1, 2, 3, 4, 5, 6]
-
+    @Binding var selectedDay: String
     
     var body: some View {
         
@@ -21,43 +19,58 @@ struct WeekDaysRow: View {
             
             HStack(alignment: .center){
                 Button(action: { dayIndex = 0
-                        print("Monday")
-                        selection = [0]
+                    
+                    print("Monday")
+                    selectedDay = "Monday"
                 }) {
                     Text("Mo").font(.system(size: 15.0, weight: .bold))
                 }.buttonStyle(GrowingButton())
                
                 Button(action: { dayIndex = 1
-                        print("Tuesday") }) {
-                    Text(" Tu ").font(.system(size: 15.0, weight: .bold))
+                    
+                    print("Tuesday")
+                    selectedDay = "Tuesday"
+
+                }) {
+                    Text("Tu").font(.system(size: 15.0, weight: .bold))
                 }.buttonStyle(GrowingButton())
             
                 Button(action: { dayIndex = 2
-                        print("Wednesday") }) {
-                    Text(" We ").font(.system(size: 15.0, weight: .bold))
+                    print("Wednesday")
+                    selectedDay = "Wednesday"
+                }) {
+                    Text("We").font(.system(size: 15.0, weight: .bold))
                 }.buttonStyle(GrowingButton())
                
                 Button(action: { dayIndex = 3
-                        print("Thursday") }) {
-                    Text(" Th ").font(.system(size: 15.0, weight: .bold))
+                    print("Thursday")
+                    selectedDay = "Thursday"
+                }) {
+                    Text("Th").font(.system(size: 15.0, weight: .bold))
                 }.buttonStyle(GrowingButton())
                
                 Button(action: { dayIndex = 4
-                        print("Friday") }) {
-                    Text(" Fr ").font(.system(size: 15.0, weight: .bold))
+                    print("Friday")
+                    selectedDay = "Friday"
+
+                }) {
+                    Text("Fr").font(.system(size: 15.0, weight: .bold))
                 }.buttonStyle(GrowingButton())
             
                 Button(action: { dayIndex = 5
-                        print("Saturday") }) {
-                    Text(" Sa ").font(.system(size: 15.0, weight: .bold))
+                    print("Saturday")
+                    selectedDay = "Saturday"
+                }) {
+                    Text("Sa").font(.system(size: 15.0, weight: .bold))
                 }.buttonStyle(GrowingButton())
            
                 Button(action: { dayIndex = 6
-                        print("Sunday") }) {
-                    Text(" Su ").font(.system(size: 15.0, weight: .bold))
+                    print("Sunday")
+                    selectedDay = "Sunday"
+                }) {
+                    Text("Su").font(.system(size: 15.0, weight: .bold))
                         }.buttonStyle(GrowingButton())
             }
-            .padding(.bottom)
         }
     }
 }

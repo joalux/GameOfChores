@@ -11,64 +11,62 @@ import CoreData
 struct AddChoreView: View {
         
     @Environment(\.presentationMode) var presentatioMode
-   // @Environment(\.managedObjectContext) var viewContext
+    @StateObject private var keyboardManager = KeyboardManager()
     
-    @StateObject private var vm = AddChoreViewModel()
-        
+    @StateObject private var addChoreVM = AddChoreViewModel()
+    @StateObject private var templateVM = TempleteMakerViewModel()
+
     @State var customChore = false
     @State var hasTimeLimit = false
+    @State var hasDeadLine = false
     
-   var weekDay: String? = ""
+    @State var templateMode: Bool = false
+    //var newTempChore: Binding<Chore>?
     
-    /*
-    init(vm: AddChoreViewModel){
-        self.vm = vm
-    }*/
-    //Accessing State's value outside of being installed on a View. This will result in a constant Binding of the initial value and will not update.
+    @Binding var newTempChore: Chore    
+    @Binding var fromAddView: Bool
     
+    var weekDay: String? = ""
+    var dateToDo: Date? = Date()
+        
     var body: some View {
         
         VStack {
-            Text(vm.dayToDo)
-                .font(.system(size: 35, weight: .semibold, design: .default))
+            if templateMode {
+                Text(addChoreVM.selectedDay)
+                    .font(.system(size: 35, weight: .semibold, design: .default))
+
+            }
+            else {
+                Text(addChoreVM.dayToDo)
+                    .font(.system(size: 35, weight: .semibold, design: .default))
+            }
             if !customChore {
                     VStack {
-                        TabView(selection: $vm.selectedType) {
-                            ForEach(0..<vm.types.count) { num in
-                                Image(vm.types[num])
-                                    .resizable()
-                                    .scaledToFit()
-                                    .tag(num)
-                                    .padding(.bottom, 20)
-                            }
-                        }.tabViewStyle(PageTabViewStyle())
-                            .frame(width: UIScreen.main.bounds.width, height: 150, alignment: .center)
-                        Text("<- swipe to select chore ->")
-                            .foregroundColor(.gray)
-                            .padding(.bottom)
+                        
+                        Image(addChoreVM.type)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100, alignment: .center)
+                            .padding(.bottom, 20)
                     }
             }
             else if customChore {
                 Image("choreAlert")
-                /*
-                TextField("Chore", text: $vm.customType)
-                    .padding(.leading, 90)
-                    .padding(.trailing, 90)
-                Text("Enter new chore type")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                    .padding(.top)
-                    .padding(.bottom)*/
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100, alignment: .center)
+                    .padding(.bottom, 20)
 
             }
             if customChore {
               
                 HStack {
-                    Text("\(vm.customType) \(vm.selectedPoints, specifier: "%.0f")p")
+                    Text("\(addChoreVM.customType) \(addChoreVM.selectedPoints, specifier: "%.0f")p")
                         .font(.system(size: 25, weight: .medium, design: .default))
                     
                     if hasTimeLimit {
-                        Text(vm.choreTimeLimitString(timeLimit: vm.timeLimit))
+                        Text("\(addChoreVM.timeLimit, specifier: "%.0f") m")
                             .font(.system(size: 25, weight: .medium, design: .default))
                     }
                 }
@@ -76,10 +74,10 @@ struct AddChoreView: View {
             }
             else {
                 HStack {
-                    Text("\(vm.types[vm.selectedType]) \(vm.selectedPoints, specifier: "%.0f") p")
+                    Text("\(addChoreVM.type) \(addChoreVM.selectedPoints, specifier: "%.0f") p")
                             .font(.system(size: 25, weight: .medium, design: .default))
                     if hasTimeLimit {
-                        Text("\(vm.timeLimit, specifier: "%.0f") m")
+                        Text("\(addChoreVM.timeLimit, specifier: "%.0f") m")
                             .font(.system(size: 25, weight: .medium, design: .default))
                     }
                     
@@ -89,78 +87,189 @@ struct AddChoreView: View {
             Divider().background(Color.blue)
 
             if customChore {
-                TextField("Chore", text: $vm.customType)
+                
+                TextField("Chore", text: $addChoreVM.customType)
+                    .keyboardType(.alphabet)
+                    .disableAutocorrection(true)
+                    .textFieldStyle(.roundedBorder)
                     .padding(.top)
-                    .padding(.leading, 90)
-                    .padding(.trailing, 90)
+                    .padding(.leading, 80)
+                    .padding(.trailing, 80)
                 Text("Enter new chore type")
                     .font(.subheadline)
                     .foregroundColor(.gray)
+                    .disableAutocorrection(true)
                     
                     .padding(.bottom)
-            }
-            
-            VStack(spacing: -20) {
+            } else {
+                Text("Tap to select chore")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .padding(.top)
                 
-               
-                Toggle("New chore", isOn: $customChore.animation(.spring()))
-                        .padding()
-                    .padding(.horizontal, 100)
-                Toggle("Timelimit", isOn: $hasTimeLimit.animation(.spring()))
-                        .padding()
-                    .padding(.horizontal, 100)
+                Picker("Tap to select chore", selection: $addChoreVM.type) {
+                    ForEach(addChoreVM.types, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(.menu)
                 
-            }
-            
-            Stepper("Points", onIncrement: {
-                vm.selectedPoints += 10
-                   print("Adding to points")
-                }, onDecrement: {
-                    vm.selectedPoints -= 10
-                    print("Subtracting from points")
-            }).frame(width: 200, height: 50, alignment: .center)
-            
-            if hasTimeLimit {
-                Stepper("Time limit", onIncrement: {
-                    vm.timeLimit += 5
-                       print("Adding time")
+                if templateMode {
+                    Text("Tap to select day")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .padding(.top)
                     
-                    }, onDecrement: {
-                        vm.timeLimit -= 5
-                        print("Subtracting time")
-                }).frame(width: 200, height: 50, alignment: .center)
+                    Picker("Tap to select day", selection: $addChoreVM.selectedDay) {
+                        ForEach(templateVM.weekDaysFull, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
             }
             
+            VStack() {
+            
+                VStack(spacing: -10) {
+                    Stepper("Points", onIncrement: {
+                        addChoreVM.selectedPoints += 10
+                        },
+                        onDecrement: {
+                            if addChoreVM.selectedPoints > 0 {
+                                addChoreVM.selectedPoints -= 10
+                            }
+                    }).frame(width: 200, height: 50, alignment: .center)
+                
+                    Stepper("Time limit", onIncrement: {
+                            addChoreVM.timeLimit += 5
+                            }, onDecrement: {
+                                if addChoreVM.timeLimit > 0 {
+                                    addChoreVM.timeLimit -= 5
+                                }
+                        }).frame(width: 200, height: 50, alignment: .center)
+                            .disabled(hasTimeLimit == false)
+                    
+                }
+                
+                if hasDeadLine && templateMode == false {
+                    DatePicker("Select date:", selection: $addChoreVM.dateToDo, in: Date()...)
+                        .onChange(of: addChoreVM.dateToDo, perform: { newDate in
+                            print("new date: \(newDate)")
+                            addChoreVM.setDate(newDate: newDate)
+                        })
+                    
+                        .padding()
+                        .padding(.horizontal)
+                        
+                }
+                else if templateMode == false {
+                    DatePicker("Select date:", selection: $addChoreVM.dateToDo, in: Date()..., displayedComponents: .date)
+                        .onChange(of: addChoreVM.dateToDo, perform: { newDate in
+                            print("new date: \(newDate)")
+                            addChoreVM.setDate(newDate: newDate)
+                        })
+                        .padding()
+                        .padding(.horizontal, 60)
+                }
+            
+                Divider().background(Color.blue)
+
+                HStack {
+                    Button(action: {
+                        print("Custom chore!!")
+                        withAnimation {
+                            customChore.toggle()
+                        }
+                    }) {
+                        Text("New chore")
+                            .frame(width: 110.0, height: 40.0)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .font(.subheadline)
+                            .cornerRadius(10)
+                    }
+                
+                    Button(action: {
+                        print("TimeLimit!!")
+                        withAnimation {
+                            hasTimeLimit.toggle()
+
+                        }
+                    }) {
+                        Text("Time limit")
+                            .frame(width: 110.0, height: 40.0)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .font(.subheadline)
+                            .cornerRadius(10)
+                    }
+                 
+                    if templateMode == false {
+                        Button(action: {
+                            print("DEADLINE!!")
+                            withAnimation {
+                                hasDeadLine.toggle()
+
+                            }
+                        }) {
+                            Text("Deadline")
+                                .frame(width: 110.0, height: 40.0)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .font(.subheadline)
+                                .cornerRadius(10)
+                        }
+                    }
+                }
+            }
+        
             Divider().background(Color.blue)
          
             Button(action: {
-                print("Adding new chore!")
-                vm.addNewChore(isCustom: customChore, hasTimeLimit: hasTimeLimit)
+                print("____Adding new chore!")
                 
-                presentatioMode.wrappedValue.dismiss()
+                if customChore && addChoreVM.customType.isEmpty == false {
+                    addChoreVM.addNewChore(isCustom: customChore, templateMode: templateMode)
+                                       
+                    presentatioMode.wrappedValue.dismiss()
 
+                } else if customChore == false {
+                    addChoreVM.addNewChore(isCustom: customChore, templateMode: templateMode)
+                    
+                    presentatioMode.wrappedValue.dismiss()
+
+                }
             }) {
                 Text("Add chore")
                     .padding()
                     .frame(width: 180.0, height: 45.0)
-                    .background(Color.blue)
+                    .background(addChoreVM.selectedPoints > 0 ? Color.blue : Color.gray)
                     .foregroundColor(.white)
                     .font(.subheadline)
                     .cornerRadius(10)
+            }.disabled(addChoreVM.customChore && addChoreVM.customType.isEmpty || addChoreVM.selectedPoints == 0)
+               // .padding(.top, 5)
+            
+        }
+        .padding(.bottom, keyboardManager.keyboardHeight + 100)
+        .onAppear {
+             print("Weekday: \(weekDay)")
+            if templateMode {
+                if let weekDay = weekDay {
+                    addChoreVM.dayToDo = weekDay
+
                 }
-        }.onAppear {
-            print("Weekday: \(weekDay)")
-            vm.setDay(activeDay: weekDay!)
+            }
+            else {
+                if let dateToDo = dateToDo {
+                    addChoreVM.setDate(newDate: dateToDo)
+                }
+            }
+            
+            print(addChoreVM.activeFamily)
         }
     }
       
     }
 
-
-struct AddChoreView_Previews: PreviewProvider {
-    static var previews: some View {
-        let context = CoreDataManager.shared.container.viewContext
-        
-        AddChoreView(weekDay: "Monday")
-    }
-}

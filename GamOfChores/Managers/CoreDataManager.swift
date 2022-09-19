@@ -11,6 +11,7 @@ import CoreData
 class CoreDataManager: ObservableObject {
     
     let container: NSPersistentContainer
+    
     static let shared = CoreDataManager()
     
     private let choreFetcher: NSFetchedResultsController<Chore>
@@ -28,9 +29,6 @@ class CoreDataManager: ObservableObject {
             if let err = err {
                 fatalError("Coredata err \(err.localizedDescription)")
             }
-            else {
-                print("Coredata success!!")
-            }
         }
         
         choreFetcher = NSFetchedResultsController(fetchRequest: Chore.all, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -41,17 +39,21 @@ class CoreDataManager: ObservableObject {
 
     }
     
+    func addCoreFamily(){
+        let newFamily = Family(context: container.viewContext)
+        newFamily.familyID = UUID()
+        
+        save()
+    }
+    
     func fetchFamily() -> Bool{
         var hasFamily = false
         do {
             try familyFetcher.performFetch()
             guard let coreFamilies = familyFetcher.fetchedObjects else {
-                print("NO Family!!!")
                 return hasFamily
              
             }
-            print("HAS FETCHED families!!!!")
-            print(coreFamilies.count)
             if coreFamilies.count == 0 {
                 hasFamily = false
             }
@@ -62,28 +64,23 @@ class CoreDataManager: ObservableObject {
         } catch {
             print(error)
         }
+        
         return hasFamily
     }
    
     
     func getFamily() -> Family{
-        let coreFamily = familyFetcher.fetchedObjects?.first
-        print("coreFamily= \(coreFamily)")
         
-        if coreFamily == nil {
-            print("No core family!!!")
-        }
-        else {
-            print("HAS core family!!!")
-        }
+       // fetchFamily()
+        
+        let coreFamily = familyFetcher.fetchedObjects?.first
         
         if let coreFamily = coreFamily {
             return coreFamily
         }
         else {
-            print("NO FAM")
-            
-            let newFamilý = Family(context: CoreDataManager.shared.container.viewContext)
+            let newFamilý = Family(context: container.viewContext)
+            newFamilý.familyID = UUID()
             newFamilý.isConnected = false
             return newFamilý
         }
@@ -93,11 +90,8 @@ class CoreDataManager: ObservableObject {
         do {
             try familyFetcher.performFetch()
             guard let coreFams = familyFetcher.fetchedObjects else {
-                print("Returning empty!!!")
                 return [Family]()
             }
-            print("HAS FETCHED Families!!!!")
-            print(coreFams.count)
             families = coreFams
             
         } catch {
@@ -106,15 +100,32 @@ class CoreDataManager: ObservableObject {
         return families
     }
     
+    func connectFamily(firID: String, mail: String, addNew: Bool){
+        var coreFam = getFamily()
+                
+        var coreMebers = getFamilyMembers()
+        coreFam.firID = firID
+        coreFam.mail = mail
+        coreFam.isConnected = true
+      
+        if addNew {
+            FireBaseHelper.shared.addFamily(firID: coreFam.firID ?? "No id", mail: coreFam.mail ?? "No mail", famMembers: coreMebers)
+        }
+        
+        save()
+    }
+    
+    func disconectFamily() {
+        var coreFam = getFamily()
+        coreFam.isConnected = false
+    }
+    
     func getChores() -> [Chore]{
         do {
             try choreFetcher.performFetch()
             guard let coreChores = choreFetcher.fetchedObjects else {
-                print("Returning empty!!!")
                 return [Chore]()
             }
-            print("HAS FETCHED CHORES!!!!")
-            print(coreChores.count)
             chores = coreChores
             
         } catch {
@@ -122,32 +133,57 @@ class CoreDataManager: ObservableObject {
         }
         return chores
     }
-    
+   
     func removeChore(chore: Chore){
-        do{
-            try chore.delete()
-        } catch {
-            print("ERROR DELETEING")
-            print(error.localizedDescription)
+       container.viewContext.delete(chore)
+      
+        save()
+    }
+    
+    func removeAllChores(deleteTodo: Bool) {
+        var allChores = getChores()
+        
+        if deleteTodo {
+            for chore in allChores {
+                if chore.isCompleted == false {
+                    removeChore(chore: chore)
+                }
+            }
+        } else {
+            for chore in allChores {
+                if chore.isCompleted == true {
+                    removeChore(chore: chore)
+                }
+            }
         }
+       
+    }
+    
+    func setMember(id: UUID, firID: String, name: String, points: Int, time: Double, choreCount: Int64) -> Member {
+        var newMember = Member(context: container.viewContext)
+        newMember.memberID = id
+        newMember.firID = firID
+        newMember.name = name
+        newMember.points = Int64(points)
+        newMember.time = time
+        newMember.choreCount = choreCount
+        
+        save()
+        
+        return newMember
     }
     
     func getFamilyMembers() -> [Member]{
         do {
             try memberFetcher.performFetch()
-            guard let coreMembers = memberFetcher.fetchedObjects else {
-                print("Returning empty!!!")
-               
+            guard let coreMembers = memberFetcher.fetchedObjects else {               
                 return [Member]()
             }
-            print("HAS FETCHED membos!!!!")
-            print(coreMembers.count)
             familyMembers = coreMembers
             
             for member in familyMembers {
-                print(member.id)
-                if member.id == nil {
-                    member.id = UUID()
+                if member.memberID == nil {
+                    member.memberID = UUID()
                 }
             }
             
@@ -157,8 +193,14 @@ class CoreDataManager: ObservableObject {
         return familyMembers
     }
     
-    func resetFamily(){
+    func removeFamMember(member: Member) {
+       container.viewContext.delete(member)
+      
+        save()
         
+    }
+    
+    func resetFamily(){
         for member in getFamilyMembers() {
             member.choreCount = 0
             member.points = 0
@@ -173,7 +215,6 @@ class CoreDataManager: ObservableObject {
     
     func deleteFamily(){
         for fam in getFamilies() {
-            print("Removing family")
             do{
                 try fam.delete()
             } catch {
@@ -183,7 +224,6 @@ class CoreDataManager: ObservableObject {
         }
         
         for chore in getChores() {
-            print("Removing chores")
             do{
                 try chore.delete()
             } catch {
@@ -193,7 +233,6 @@ class CoreDataManager: ObservableObject {
         }
         
         for member in getFamilyMembers() {
-            print("Removing members")
             do{
                 try member.delete()
             } catch {
@@ -207,19 +246,14 @@ class CoreDataManager: ObservableObject {
     func save() {
  
         print("Saving changes!!")
+        
         do {
             try container.viewContext.save()
             print("Save success!!")
+            
         } catch {
             print("An error occurred while saving: \(error)")
         }
     
     }
-    
-    
-    
-    
-    
-    
-    
 }

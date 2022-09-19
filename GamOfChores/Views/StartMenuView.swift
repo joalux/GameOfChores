@@ -22,68 +22,55 @@ struct StartMenuView: View {
     
     var body: some View {
         
-            VStack {
+        VStack(spacing: 15) {
                 
                 NavigationLink(destination: TodoView(), isActive: $goChores) { EmptyView() }
                 
-               NavigationLink(destination: FamilyView(), isActive: $goFamily) { EmptyView() }
+                NavigationLink(destination: FamilyView(), isActive: $goFamily) { EmptyView() }
 
                 NavigationLink(destination: PlannerView(), isActive: $goPlanner) { EmptyView() }
                 
                 NavigationLink(destination: SettingsView(), isActive: $goSettings) { EmptyView() }
 
-        
-                Button(action: {
+                Button {
                     goChores = true
-                }, label: {
-                   Text("Chores")
-                       .padding()
-                       .frame(width: 220.0, height: 55.0)
-                       .background(Color.blue)
-                       .foregroundColor(.white)
-                       .font(.headline)
-                       .cornerRadius(10)
-               }).padding(.bottom)
-                   
-               Button(action: {
-                   goFamily = true
-                    
-               }, label: {
-                    Text("My family")
-                       .padding()
-                       .frame(width: 220.0, height: 55.0)
-                       .background(Color.blue)
-                       .foregroundColor(.white)
-                       .font(.headline)
-                       .cornerRadius(10)
-               }).padding(.bottom)
-               
-
-                
-               Button(action: {
-                   goPlanner = true
-                  
-               }, label: {
-                   Text("Planner")
-                       .padding()
-                       .frame(width: 220.0, height: 55.0)
-                       .background(Color.blue)
-                       .foregroundColor(.white)
-                       .font(.headline)
-                       .cornerRadius(10)
-               }).padding(.bottom)
-                   
-                Button(action: {
-                    goSettings = true
-                }, label: {
-                    Text("Settings")
-                        .padding()
-                        .frame(width: 190.0, height: 45.0)
-                        .background(Color.blue)
+                } label: {
+                    Text("Chores")
+                        .frame(width: 220.0, height: 55.0, alignment: .center)
                         .foregroundColor(.white)
-                        .font(.subheadline)
+                        .background(Color.blue)
                         .cornerRadius(10)
-                }).padding(.bottom)
+                }
+                
+                Button {
+                    goFamily = true
+                } label: {
+                    Text(LocalizedStringKey("MyFamily"))
+                        .frame(width: 220.0, height: 55.0, alignment: .center)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+                
+                Button {
+                    goPlanner = true
+                } label: {
+                    Text(LocalizedStringKey("Planner"))
+                        .frame(width: 220.0, height: 55.0, alignment: .center)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+                
+                Button {
+                    goSettings = true
+                } label: {
+                    Text(LocalizedStringKey("Settings"))
+                        .frame(width: 190.0, height: 45.0, alignment: .center)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
             }
             .padding(.top)
             .navigationBarHidden(self.isNavigationBarHidden)

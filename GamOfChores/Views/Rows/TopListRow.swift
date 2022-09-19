@@ -24,13 +24,12 @@ struct TopListRow: View {
                 
                 Spacer()
                 
-                
-                VStack(spacing: 4) {
+                HStack(spacing: 6) {
                     Text("\(member.points) p")
-                        .font(.system(size: 18, weight: .semibold, design: .default))
+                        .font(.system(size: 20, weight: .semibold, design: .default))
                     
                     Text("\(member.time, specifier: "%.0f") m")
-                        .font(.system(size: 18, weight: .semibold, design: .default))
+                        .font(.system(size: 20, weight: .semibold, design: .default))
                     
                 }.padding(.trailing)
             }

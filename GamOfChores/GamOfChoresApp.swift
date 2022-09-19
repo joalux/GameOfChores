@@ -23,9 +23,6 @@ struct GamOfChoresApp: App {
             LoginView()
                .environment(\.managedObjectContext, context)
 
-            
-           // TodoView(vm: TodoViewModel(context: context))
-             //   .environment(\.managedObjectContext, context)
         }
     }
 }

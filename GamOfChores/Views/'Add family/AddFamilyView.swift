@@ -11,11 +11,13 @@ struct AddFamilyView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @StateObject private var vm = AddNewFamilyViewModel()
+    @StateObject private var vm = AddFamilyViewModel()
+    @ObservedObject var firHelper = FireBaseHelper()
     
     @State var memberName = ""
     
     @State var doSignUp = false
+    @State var doConnect = false
     @State var goSettings = false
     
     @State var fromSettings = false
@@ -23,54 +25,79 @@ struct AddFamilyView: View {
     @FocusState private var showingKeyboard: Bool
 
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 0) {
             NavigationLink(destination: StartMenuView(), isActive: self.$doSignUp) {
                EmptyView()
              }.hidden()
             NavigationLink(destination: ManageFamilyView(), isActive: self.$goSettings) {
                EmptyView()
              }.hidden()
+        
             
             Image("familyLogo")
                 .resizable()
-                .frame(width: 200, height: 200)
+                .frame(width: 110, height: 110)
                 .scaledToFill()
             if fromSettings {
                 Text("Manage family members")
-                    .font(.title)
+                    .font(.title3)
+                    .padding()
             } else {
                 Text("Add family members")
-                    .font(.title)
+                    .font(.title3)
+                    .padding()
             }
-            
             Divider().background(Color.blue)
 
             List {
-                Section("Members") {
+                if vm.coreFamily.isConnected {
+                    ForEach(firHelper.firMembers, id: \.self){ member in
+                        MemberRow(member: member, addMode: true)
+                    }.onDelete(perform: firHelper.removeMemAtOffsets)
+                }
+                else {
                     ForEach(vm.famMembers, id: \.self){ member in
                         MemberRow(member: member, addMode: true)
-                        
-                    }
+                    }.onDelete(perform: removeFamMember)
+
                 }
-               
+            
             }.listStyle(.plain)
             
             Divider().background(Color.blue)
-            
+
             TextField("Family member", text: $memberName)
+                .autocapitalization(.none)
+                .padding(.top)
                 .padding(.leading, 40.0)
                 .padding(.trailing, 40.0)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
                 .focused($showingKeyboard)
+                .keyboardType(.alphabet)
                 .disableAutocorrection(true)
+            
             
             HStack {
                
                 Button(action: {
-                    print("Action")
-                    vm.addFamMember(name: memberName)
-                    memberName = ""
+                    if memberName.isEmpty {
+                        vm.showNoNameAlert = true
+                    } else {
+                        if vm.coreFamily.isConnected {
+                            print("Adding firmember!!!")
+                            if let firID = vm.coreFamily.firID {
+                                firHelper.addNewFirMember(firID: firID, memberID: UUID().uuidString, firName: memberName)
+                            }
+                            else {
+                                print("NO ID!!!")
+                            }
+                        }
+                        else {
+                            
+                            vm.addFamMember(name: memberName, firID: "")
+                        }
+                        memberName = ""
+                    }
                     showingKeyboard = false
                     
                 }, label: {
@@ -81,13 +108,20 @@ struct AddFamilyView: View {
                         .foregroundColor(.white)
                         .font(.subheadline)
                         .cornerRadius(10)
-                }).padding()
-                
+                }).padding(.leading)
+                  .alert(isPresented:$vm.showNoNameAlert) {
+                    Alert(
+                        title: Text("Error!"),
+                        message: Text("You have to have a name for your new family member!"),
+                        dismissButton: .default(Text("Close"), action: {
+                            print("Closing!!!")
+                            
+                        })
+                    )
+                }
                 Button(action: {
-                    vm.addFamMembers()
                     if fromSettings {
                         print("fam members added")
-
                         self.presentationMode.wrappedValue.dismiss()
                     }
                     else {
@@ -103,12 +137,29 @@ struct AddFamilyView: View {
                         .foregroundColor(.white)
                         .font(.subheadline)
                         .cornerRadius(10)
-                }).padding()
-            }.onAppear {
-                if fromSettings {
-                    vm.getFamMembers()
+                }).padding(.trailing)
+               
+            }
+            .padding(.top)
+            .onAppear {
+                if vm.coreFamily.isConnected {
+                    firHelper.getFirMembers(firID: vm.coreFamily.firID ?? "")
                 }
             }
+            .toolbar {
+                EditButton()
+            }
+        }
+    }
+    
+    func removeFamMember(at offsets: IndexSet) {
+        if vm.coreFamily.isConnected {
+            
+            firHelper.firMembers
+            firHelper.removeMemAtOffsets(at: offsets)
+        }
+        else {
+            vm.removeMember(at: offsets)
         }
     }
 }

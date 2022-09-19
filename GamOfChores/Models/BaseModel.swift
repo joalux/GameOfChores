@@ -27,6 +27,7 @@ extension BaseModel where Self: NSManagedObject{
     }
     
     func delete() throws {
+        print("Deleting")
         Self.context.delete(self)
         try save()
     }

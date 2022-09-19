@@ -15,23 +15,19 @@ struct FamilyView: View {
     @State var goFam = false
     
     var body: some View {
-        VStack(spacing: 10) {
+        
+        VStack() {
+            Divider()
             NavigationLink(destination: AddFamilyView(), isActive: $goFam) {
                 EmptyView()
             }.hidden()
-            
-            leaderView(leader: vm.familyMembers.first ?? Member())
-            
-            Divider().background(Color.blue)
-                .alert("No family", isPresented: $noFam) {
-                    Button("Add family") {
-                        print("Adding family")
-                        goFam = true
-                    }
-                }
-
+            if vm.hasFamily {
+                leaderView(leader: vm.leader)
+            }
+                  
+            Divider().background(.blue)
             List {
-                if vm.noFamily {
+                if vm.noFamily || vm.familyMembers.isEmpty{
                     Text("No family memebers")
                 }
                 else {
@@ -40,15 +36,29 @@ struct FamilyView: View {
                     }
                 }
             }.listStyle(.plain)
-            
+                .refreshable {
+                    vm.fetchFamily()
+                }
+           
+            .alert("No family", isPresented: $noFam) {
+                Button("Add family") {
+                    print("Adding family")
+                    goFam = true
+                }
+            }
+            Spacer()
         }
+        .navigationBarTitle(LocalizedStringKey("MyFamily"))
         .onAppear(perform: {
+            print("APPEAR!!!!")
+            vm.fetchFamily()
             if vm.noFamily {
                 print("NO FAMILY")
                 noFam = true
             }
+            print("FAMCOUNT = \(vm.familyMembers.count)")
+         
         })
-        .navigationBarTitle("My family", displayMode: .automatic)
     }
 }
 
@@ -56,10 +66,7 @@ struct leaderView: View {
     let leader: Member
         
     var body: some View {
-        VStack(spacing: 10) {
-            if leader.name == nil {
-                Text("NO LEADER NAME!!!")
-            }
+        VStack() {
             Text(leader.name ?? "No name")
                 .font(.system(size: 35, weight: .semibold, design: .default))
             
@@ -67,18 +74,18 @@ struct leaderView: View {
                 Text("\(leader.points ) p")
                     .font(.system(size: 18, weight: .semibold, design: .default))
                 
-                Text("\(leader.time , specifier: "%.0f")  m")
+                Text("\(leader.time , specifier: "%.0f") m")
                     .font(.system(size: 18, weight: .semibold, design: .default))
 
             }.padding(.trailing)
         }
+        .onAppear {
+            print("_____LEADER VIEW_______")
+            if leader.name == nil {
+                leader.name = "No name"
+            }
+        }
+            
     }
 }
 
-struct FamilyView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            FamilyView()
-        }
-    }
-}

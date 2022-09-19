@@ -41,17 +41,24 @@
 		41AD11262792F0F600595F65 /* ChoreDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD11252792F0F600595F65 /* ChoreDetailView.swift */; };
 		41AD11282792F13800595F65 /* ChoreDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD11272792F13800595F65 /* ChoreDetailViewModel.swift */; };
 		41AD112A2792FC9C00595F65 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD11292792FC9C00595F65 /* MemberRow.swift */; };
+		41B78C132889622100F408A0 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B78C122889622100F408A0 /* DatePickerView.swift */; };
+		41B78C16288AF64200F408A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41B78C18288AF64200F408A0 /* Localizable.strings */; };
+		41B8D26A28143FA8002780FC /* ManageDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B8D26928143FA8002780FC /* ManageDataView.swift */; };
+		41B8D26C281446CD002780FC /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B8D26B281446CD002780FC /* AboutView.swift */; };
+		41BB8C6428BE0D4500ABCE41 /* TemplateChoreRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB8C6328BE0D4500ABCE41 /* TemplateChoreRow.swift */; };
 		41CF7DD527BA6AED003D7E56 /* ShortcutFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 41CF7DD427BA6AED003D7E56 /* ShortcutFoundation */; };
 		41CF7DD827BA6CDC003D7E56 /* ShortcutSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 41CF7DD727BA6CDC003D7E56 /* ShortcutSwiftUI */; };
 		41CF7DDF27BA7EC3003D7E56 /* FirConnectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CF7DDE27BA7EC3003D7E56 /* FirConnectViewModel.swift */; };
 		41D2F65C27B3BBE10077E721 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 41D2F65B27B3BBE10077E721 /* FirebaseAuth */; };
 		41D2F65E27B3BBE10077E721 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 41D2F65D27B3BBE10077E721 /* FirebaseFirestore */; };
 		41D2F66027B3BBE10077E721 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 41D2F65F27B3BBE10077E721 /* FirebaseMessaging */; };
-		41D2F66227B3E8BB0077E721 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2F66127B3E8BB0077E721 /* FirebaseManager.swift */; };
+		41D2F66227B3E8BB0077E721 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2F66127B3E8BB0077E721 /* FirebaseHelper.swift */; };
 		41D2F66627B3F0E30077E721 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41D2F66527B3F0E30077E721 /* GoogleService-Info.plist */; };
 		41D2F66827B406780077E721 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2F66727B406780077E721 /* LoginView.swift */; };
 		41D2F66A27B406ED0077E721 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2F66927B406ED0077E721 /* LoginViewModel.swift */; };
 		41D2F66C27B40BE90077E721 /* FirConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D2F66B27B40BE90077E721 /* FirConnectView.swift */; };
+		41FA8A7428B8DDC300EB1534 /* TemplateMakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FA8A7328B8DDC300EB1534 /* TemplateMakerView.swift */; };
+		41FA8A7728BCB47000EB1534 /* TempleteMakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FA8A7628BCB47000EB1534 /* TempleteMakerViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +71,7 @@
 		41A57EEA279D696A002CCDE9 /* PlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerView.swift; sourceTree = "<group>"; };
 		41A57EEC279D69E4002CCDE9 /* PlannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewModel.swift; sourceTree = "<group>"; };
 		41A65D6227BE8EC4007CE615 /* ManageFamilyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageFamilyView.swift; sourceTree = "<group>"; };
-		41A65E82278203EE004091EC /* GameOfChores.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameOfChores.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		41A65E82278203EE004091EC /* Game Of Chores.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game Of Chores.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41A65E85278203EE004091EC /* GamOfChoresApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamOfChoresApp.swift; sourceTree = "<group>"; };
 		41A65E87278203EE004091EC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		41A65E89278203EF004091EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,12 +97,21 @@
 		41AD11252792F0F600595F65 /* ChoreDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoreDetailView.swift; sourceTree = "<group>"; };
 		41AD11272792F13800595F65 /* ChoreDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoreDetailViewModel.swift; sourceTree = "<group>"; };
 		41AD11292792FC9C00595F65 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
+		41B78C122889622100F408A0 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		41B78C17288AF64200F408A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		41B8B4D2288C0AD00077F554 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		41B8D26928143FA8002780FC /* ManageDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageDataView.swift; sourceTree = "<group>"; };
+		41B8D26B281446CD002780FC /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		41BB8C6328BE0D4500ABCE41 /* TemplateChoreRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateChoreRow.swift; sourceTree = "<group>"; };
 		41CF7DDE27BA7EC3003D7E56 /* FirConnectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirConnectViewModel.swift; sourceTree = "<group>"; };
-		41D2F66127B3E8BB0077E721 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		41D127FC2843926100B0988C /* GameOfChores.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GameOfChores.entitlements; sourceTree = "<group>"; };
+		41D2F66127B3E8BB0077E721 /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		41D2F66527B3F0E30077E721 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		41D2F66727B406780077E721 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		41D2F66927B406ED0077E721 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		41D2F66B27B40BE90077E721 /* FirConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirConnectView.swift; sourceTree = "<group>"; };
+		41FA8A7328B8DDC300EB1534 /* TemplateMakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateMakerView.swift; sourceTree = "<group>"; };
+		41FA8A7628BCB47000EB1534 /* TempleteMakerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempleteMakerViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +135,8 @@
 			children = (
 				41A385CE27BBF0E400EFC9FB /* SettingsView.swift */,
 				41A65D6227BE8EC4007CE615 /* ManageFamilyView.swift */,
+				41B8D26928143FA8002780FC /* ManageDataView.swift */,
+				41B8D26B281446CD002780FC /* AboutView.swift */,
 				41A761A627C119A900D501DF /* SettingsViewModel.swift */,
 			);
 			path = Settings;
@@ -127,6 +145,7 @@
 		41A65E79278203EE004091EC = {
 			isa = PBXGroup;
 			children = (
+				41D127FC2843926100B0988C /* GameOfChores.entitlements */,
 				41A65E84278203EE004091EC /* GamOfChores */,
 				41A65E83278203EE004091EC /* Products */,
 			);
@@ -135,7 +154,7 @@
 		41A65E83278203EE004091EC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				41A65E82278203EE004091EC /* GameOfChores.app */,
+				41A65E82278203EE004091EC /* Game Of Chores.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +171,7 @@
 				41A65E932782042E004091EC /* GOC_Model.xcdatamodeld */,
 				41A65E89278203EF004091EC /* Assets.xcassets */,
 				41A65E8B278203EF004091EC /* Preview Content */,
+				41B78C18288AF64200F408A0 /* Localizable.strings */,
 			);
 			path = GamOfChores;
 			sourceTree = "<group>";
@@ -175,6 +195,7 @@
 				41CF7DE127BA988A003D7E56 /* Family view */,
 				41CF7DE227BA98B9003D7E56 /* Member view */,
 				41CF7DE327BA9BE9003D7E56 /* Planner */,
+				41FA8A7528BCB41A00EB1534 /* TemplateMaker */,
 				41CF7DE427BA9C01003D7E56 /* Add chore */,
 				41CF7DE527BA9C2A003D7E56 /* Chore detail */,
 				41A385D027BBF21300EFC9FB /* Settings */,
@@ -196,7 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				41A65E9627820457004091EC /* CoreDataManager.swift */,
-				41D2F66127B3E8BB0077E721 /* FirebaseManager.swift */,
+				41D2F66127B3E8BB0077E721 /* FirebaseHelper.swift */,
 				41A7A44727D3A9C4006ED72A /* KeyboardManager.swift */,
 			);
 			path = Managers;
@@ -220,6 +241,7 @@
 				41AD11292792FC9C00595F65 /* MemberRow.swift */,
 				41A0FE29279C6DFB0090C9F3 /* TopListRow.swift */,
 				41A1272C27A2CD0A00CBFDE7 /* WeekDaysRow.swift */,
+				41BB8C6328BE0D4500ABCE41 /* TemplateChoreRow.swift */,
 			);
 			path = Rows;
 			sourceTree = "<group>";
@@ -283,6 +305,7 @@
 			children = (
 				41A57EEA279D696A002CCDE9 /* PlannerView.swift */,
 				41A57EEC279D69E4002CCDE9 /* PlannerViewModel.swift */,
+				41B78C122889622100F408A0 /* DatePickerView.swift */,
 			);
 			path = Planner;
 			sourceTree = "<group>";
@@ -303,6 +326,15 @@
 				41AD11272792F13800595F65 /* ChoreDetailViewModel.swift */,
 			);
 			path = "Chore detail";
+			sourceTree = "<group>";
+		};
+		41FA8A7528BCB41A00EB1534 /* TemplateMaker */ = {
+			isa = PBXGroup;
+			children = (
+				41FA8A7328B8DDC300EB1534 /* TemplateMakerView.swift */,
+				41FA8A7628BCB47000EB1534 /* TempleteMakerViewModel.swift */,
+			);
+			path = TemplateMaker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,7 +361,7 @@
 				41CF7DD727BA6CDC003D7E56 /* ShortcutSwiftUI */,
 			);
 			productName = GamOfChores;
-			productReference = 41A65E82278203EE004091EC /* GameOfChores.app */;
+			productReference = 41A65E82278203EE004091EC /* Game Of Chores.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -354,6 +386,7 @@
 			knownRegions = (
 				en,
 				Base,
+				sv,
 			);
 			mainGroup = 41A65E79278203EE004091EC;
 			packageReferences = (
@@ -376,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41A65E8D278203EF004091EC /* Preview Assets.xcassets in Resources */,
+				41B78C16288AF64200F408A0 /* Localizable.strings in Resources */,
 				41A65E8A278203EF004091EC /* Assets.xcassets in Resources */,
 				41D2F66627B3F0E30077E721 /* GoogleService-Info.plist in Resources */,
 			);
@@ -389,12 +423,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				41A385CF27BBF0E400EFC9FB /* SettingsView.swift in Sources */,
-				41D2F66227B3E8BB0077E721 /* FirebaseManager.swift in Sources */,
+				41FA8A7728BCB47000EB1534 /* TempleteMakerViewModel.swift in Sources */,
+				41D2F66227B3E8BB0077E721 /* FirebaseHelper.swift in Sources */,
 				41A9441B278486280045E8EA /* TodoViewModel.swift in Sources */,
 				41A65D6327BE8EC4007CE615 /* ManageFamilyView.swift in Sources */,
+				41B8D26C281446CD002780FC /* AboutView.swift in Sources */,
 				41A7CA3B2799C399002C3709 /* Memeber+Extensions.swift in Sources */,
+				41B78C132889622100F408A0 /* DatePickerView.swift in Sources */,
 				41A65E952782042E004091EC /* GOC_Model.xcdatamodeld in Sources */,
 				41A94420278492F90045E8EA /* AddChoreView.swift in Sources */,
+				41B8D26A28143FA8002780FC /* ManageDataView.swift in Sources */,
 				41A94417278485030045E8EA /* Chore+Extensions.swift in Sources */,
 				41A57EED279D69E4002CCDE9 /* PlannerViewModel.swift in Sources */,
 				41AD11262792F0F600595F65 /* ChoreDetailView.swift in Sources */,
@@ -412,8 +450,10 @@
 				41A57EEB279D696A002CCDE9 /* PlannerView.swift in Sources */,
 				41A65E88278203EE004091EC /* ContentView.swift in Sources */,
 				41A9F0A827B82D7A00211865 /* MemberView.swift in Sources */,
+				41BB8C6428BE0D4500ABCE41 /* TemplateChoreRow.swift in Sources */,
 				41A7CA372799ACDB002C3709 /* FamilyView.swift in Sources */,
 				41D2F66C27B40BE90077E721 /* FirConnectView.swift in Sources */,
+				41FA8A7428B8DDC300EB1534 /* TemplateMakerView.swift in Sources */,
 				41AD112A2792FC9C00595F65 /* MemberRow.swift in Sources */,
 				41D2F66A27B406ED0077E721 /* LoginViewModel.swift in Sources */,
 				41A0A0E5278DCC8A0042D428 /* StartMenuView.swift in Sources */,
@@ -430,11 +470,24 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		41B78C18288AF64200F408A0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				41B78C17288AF64200F408A0 /* en */,
+				41B8B4D2288C0AD00077F554 /* sv */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		41A65E8E278203EF004091EC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -496,6 +549,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -552,8 +606,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GameOfChores.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"GamOfChores/Preview Content\"";
 				DEVELOPMENT_TEAM = H3K73A2WX3;
 				ENABLE_PREVIEWS = YES;
@@ -567,12 +622,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.5.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com..GameOfChores;
-				PRODUCT_NAME = GameOfChores;
+				PRODUCT_NAME = "Game Of Chores";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -581,8 +636,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GameOfChores.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"GamOfChores/Preview Content\"";
 				DEVELOPMENT_TEAM = H3K73A2WX3;
 				ENABLE_PREVIEWS = YES;
@@ -596,12 +652,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.5.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com..GameOfChores;
-				PRODUCT_NAME = GameOfChores;
+				PRODUCT_NAME = "Game Of Chores";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

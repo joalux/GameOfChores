@@ -8,12 +8,20 @@
 import Foundation
 import CoreData
 import SwiftUI
+import FirebaseFirestore
 
+@MainActor
 class ChoreDetailViewModel: ObservableObject {
 
     @Published var selectedChore = Chore()
     
     @Published var familyMembers = [Member]()
+    
+    @Published var family = Family()
+    
+    let db = Firestore.firestore()
+    
+    @Published var isConnected = false
     
     var timer = Timer()
     
@@ -34,11 +42,55 @@ class ChoreDetailViewModel: ObservableObject {
     @State var hasTimeLimit = false
     @Published var hasEnded = false
     @Published var hasCompleted = false
-
     
-    func getFamily(){
-        familyMembers = CoreDataManager.shared.getFamilyMembers()
-
+    @Published var hasFamily = false
+    
+    init() {
+        print("_____DETAIL VM_____")
+       // getFamily()
+        fetchFam()
+    }
+    
+    func fetchFam() {
+        print("Fetching fam!!")
+        family = CoreDataManager.shared.getFamily()
+        
+        if family.isConnected {
+            print("IS Connected!!")
+            isConnected = true
+            
+        
+        
+            db.collection("Families").document(family.firID!).collection("Family members").getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("")
+                        print("____________FIRMEMBER DATA_________________")
+                        print("\(document.documentID) => \(document.data())")
+                        let data = document.data()
+                        let memberID = document.documentID
+                        let firName = data["Name"] as? String
+                        let firPoints = data["Points"] as? Int
+                        let firCount = data["ChoreCount"] as? Int
+                        let firTime = data["Time"] as? Double
+                        print("_________________________________")
+                        
+                        if let firName = firName {
+                            print("______FIRNAME = \(firName)")
+                            self.familyMembers.append( FireBaseHelper.shared.setFirMember(famFirId: self.family.firID!, memberID: memberID, firName: firName, firPoints: firPoints ?? 0, firTime: firTime ?? 0, firCount: firCount ?? 0 ))
+                        }
+                        
+                    }
+                }
+            }
+        }
+        else {
+            familyMembers = CoreDataManager.shared.getFamilyMembers()
+        }
+        
+       
     }
     
     func setTimer(reset: Bool){
@@ -110,6 +162,9 @@ class ChoreDetailViewModel: ObservableObject {
         timer.invalidate()
         isCounting = false
         hasStarted = false
+        
+        timeSpent = 0
+        
         if selectedChore.hasTimeLimit {
             minutes = Int(selectedChore.timeLimit)
         }
@@ -120,17 +175,20 @@ class ChoreDetailViewModel: ObservableObject {
     }
     
     func completeChore(selectedMembers: Set<Member>){
-        print("____COMPLETEING CHORE!!!")
+        print("____COMPLETEING CHORE!!!DONE BY: \(selectedMembers) ")
+        var saveError = false
         timer.invalidate()
         selectedChore.isCompleted = true
         selectedChore.timeSpent = Double(timeSpent)
         selectedChore.timeCompleted = Date()
         
+        print("___Selected members:")
         for member in selectedMembers {
             print("MEMBER: \(member.name), \(member.isSelected)")
-            print("Adding points to: \(member.name)")
+            print("Adding points to: \(member.name) \(member.memberID), \(member.firID)")
             member.points += selectedChore.value
             member.time += Double(timeSpent)
+            //member.completedChores?.append(selectedChore)
             member.choreCount += 1
             
             selectedChore.doneBy! += "\(member.name!),"
@@ -139,14 +197,30 @@ class ChoreDetailViewModel: ObservableObject {
                 try member.save()
             } catch  {
                 print("Error saving!!!!")
+                saveError = true
             }
-            
+            if family.isConnected {
+                print("UPDATING FIRMEMEBER!!!!!!")
+                print(member.memberID)
+                print(member.name)
+                print(member.points)
+                //print(member.completedChores?.count)
+                
+                
+                FireBaseHelper.shared.updateMember(firID: family.firID ?? "", firMember: member)
+            }
         }
         
         do {
-           try selectedChore.save()
+            try CoreDataManager.shared.save()
         } catch  {
             print("Error saving!!!!")
+            saveError = true
+            
+        }
+        if saveError == false && family.isConnected {
+            FireBaseHelper.shared.completeChore(firID: family.firID ?? "", firChore: selectedChore)
+
         }
         hasCompleted = true
 

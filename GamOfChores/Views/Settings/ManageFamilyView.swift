@@ -10,7 +10,6 @@ import SwiftUI
 struct ManageFamilyView: View {
     
     @State var showManageFamily = false
-    @State var showManageMembers = false
     @State var showManageChores = false
     
     @StateObject var vm = SettingsViewModel()
@@ -40,7 +39,7 @@ struct ManageFamilyView: View {
                 .alert(isPresented:$vm.showResetAlert) {
                     Alert(
                         title: Text("Reset?"),
-                        message: Text("Do you want to reset? All points and time will be set to zero and all chores will be removed."),
+                        message: Text("Do you want to reset? All points and time will be set to zero."),
                         primaryButton: .destructive(Text("Yes"), action: {
                             print("Connecting!!!")
                             vm.resetFamily()

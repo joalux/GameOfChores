@@ -11,13 +11,19 @@ import SwiftUI
 
 class AddChoreViewModel: ObservableObject {
     
+    @Published var activeFamily: Family
+    
     @State var id = UUID()
-    @Published var type = ""
+    @Published var type = "Dishes"
     @Published var customType = ""
     @State var isCompleted = false
     @State var customChore = false
     
+    @State var noType = false
+
+    @Published var dateToDo = Date()
     @Published var dayToDo = ""
+    @Published var selectedDay = "Monday"
     
     @Published var selectedType = 0
     @Published var selectedPoints = 0.0
@@ -33,13 +39,9 @@ class AddChoreViewModel: ObservableObject {
     @State var currentDayString = ""
     
     init(){
-       // setDay()
+        activeFamily = CoreDataManager.shared.getFamily()
     }
-    
-    func choreTimeLimitString(timeLimit: Double) -> String {
-        "\(timeLimit) m"
-    }
-    
+  
     func setDay(activeDay: String?){
         
         if let activeDay = activeDay {
@@ -56,46 +58,54 @@ class AddChoreViewModel: ObservableObject {
 
             dayToDo = dateFormatter.string(from: date)
         }
-   
     }
     
-    func addNewChore(isCustom: Bool, hasTimeLimit: Bool){
+    func setDate(newDate: Date) {
+        dateToDo = newDate
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        dateFormatter.locale = Locale(identifier: "en_us")
+        dayToDo = dateFormatter.string(from: dateToDo)
+    }
+    
+    func addNewChore(isCustom: Bool, templateMode: Bool) {
         
-        print("Adding new chore!!")
-        if hasTimeLimit {
-            print("HAS TIME LIMIT!!")
-
+        print("___Adding new chore!!")
+        print("___type = \(type)")
+        print("_____DAY = \(dayToDo)")
+        print("_____DATE = \(dateToDo)")
+        print("____TEMPLATEMODE = \(templateMode)")
+        if templateMode {
+            dayToDo = selectedDay
+        }
+        
+        var newChore = Chore(context: CoreDataManager.shared.container.viewContext)
+        
+        if isCustom {
+            type = customType
+        }
+        newChore.choreID = UUID()
+        newChore.type = type
+        newChore.dayTodo = dayToDo
+        newChore.doneBy = ""
+        newChore.dateToDo = dateToDo
+        newChore.value = Int64(selectedPoints)
+        newChore.isCustom = isCustom
+        newChore.timeLimit = timeLimit
+        newChore.isTemplate = templateMode
+        
+        if timeLimit > 0 {
+            newChore.hasTimeLimit = true
         }
         else {
-            print("HAS NOT TIMELIMIT!!")
+            newChore.hasTimeLimit = false
         }
-        do {
-            var newChore = Chore(context: CoreDataManager.shared.container.viewContext)
-            
-            if isCustom {
-                newChore.isCustom = true
-                newChore.type = customType
-            }
-            else {
-                newChore.isCustom = false
-                newChore.type = types[selectedType]
-            }
-            newChore.value = Int64(selectedPoints)
-            
-            newChore.hasTimeLimit = hasTimeLimit
-            
-            newChore.timeLimit = timeLimit
-            
-            newChore.isCompleted = false
-            print("Chore day = \(dayToDo)")
-            newChore.dayTodo = dayToDo
-            newChore.doneBy = ""
-            
-            try newChore.save()
-            
-        } catch {
-            print("________ERROR_________")
-            print(error.localizedDescription)
+        
+        CoreDataManager.shared.save()
+    
+        if activeFamily.isConnected {
+            FireBaseHelper.shared.addChore(firID: activeFamily.firID ?? "", firChore: newChore)
         }
+     
     }
 }
