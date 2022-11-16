@@ -12,11 +12,9 @@ struct TodoView2: View {
         
     @ObservedObject var vm = TodoViewModel()
     @ObservedObject var firHelper = FireBaseHelper()
-        
-    @State var showingAddSheet = false
-    @State var showAddView = false
-    
+            
     @State var goAddView = false
+    @State var showAll = false
     @State var showComplete = false
     @State var fromAddView = true
 
@@ -83,13 +81,15 @@ struct TodoView2: View {
                                 ChoreRow(chore: chore)
                             }
                         }.onDelete(perform: deleteChore)
-                    }                    
-                    Section(header: Text("All chores")) {
-                        ForEach(vm.choresTodo, id: \.id) { chore in
-                           if chore.isCompleted == false {
-                                ChoreRow(chore: chore)
-                            }
-                        }.onDelete(perform: deleteChore)
+                    }
+                    if showAll {
+                        Section(header: Text("All chores")) {
+                            ForEach(vm.choresTodo, id: \.id) { chore in
+                                if chore.isCompleted == false {
+                                    ChoreRow(chore: chore)
+                                }
+                            }.onDelete(perform: deleteChore)
+                        }
                     }
                     
                     if showComplete {
@@ -137,7 +137,19 @@ struct TodoView2: View {
                             .cornerRadius(10)
                     }
                 
-            
+                Button(action: {
+                    withAnimation {
+                        self.showAll.toggle()
+                    }
+                }) {
+                    Image(systemName: "list.bullet")
+                        .padding()
+                        .frame(width: 55.0, height: 45.0)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .font(.system(size: 30))
+                        .cornerRadius(10)
+                    }
                 Button(action: {
                     withAnimation {
                         self.showComplete.toggle()
@@ -145,10 +157,10 @@ struct TodoView2: View {
                 }) {
                     Image(systemName: "text.badge.checkmark")
                         .padding()
-                        .frame(width: 75.0, height: 45.0)
+                        .frame(width: 55.0, height: 45.0)
                         .background(Color.blue)
                         .foregroundColor(.white)
-                        .font(.headline)
+                        .font(.system(size: 30))
                         .cornerRadius(10)
                     }
             }

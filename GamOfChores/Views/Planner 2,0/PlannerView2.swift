@@ -91,17 +91,7 @@ struct MonthView: View {
                 .datePickerStyle(.graphical)
                 .onChange(of: selectedDate, perform: { newDate in
                    print(newDate)
-                   /* for chore in chores {
-                        if let choreDate = chore.dateToDo {
-                            if choreDate.get(.day) == selectedDate.get(.day) && choreDate.get(.month) == selectedDate.get(.month) {
-                                noChores = false
-                                break
-                            }
-                            else {
-                                noChores = true
-                            }
-                        }
-                    }*/
+                 
                     
                 })
                 .onAppear {
@@ -132,6 +122,7 @@ struct MonthView: View {
                                         }
                                     }
                                 }
+                                
                                 HStack {
                                     Text("Show all")
                                     Spacer()
@@ -162,9 +153,10 @@ struct MonthView: View {
                                     }
                                 }
                                 
-                            }.frame(height: showAll ? 250 : 150)
+                            }.frame(height: showAll ? 350 : 300)
                                 .listStyle(.plain)
-                        }
+                        }.frame(height: showChores ? 600 : 300)
+                        
                     }
                 }
             }
