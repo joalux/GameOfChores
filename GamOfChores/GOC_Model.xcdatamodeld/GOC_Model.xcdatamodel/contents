@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Chore" representedClassName="Chore" syncable="YES" codeGenerationType="class">
+        <attribute name="choreID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="dateToDo" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dayTodo" optional="YES" attributeType="String"/>
+        <attribute name="doneBy" attributeType="String"/>
+        <attribute name="firID" optional="YES" attributeType="String"/>
+        <attribute name="hasTimeLimit" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isCustom" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isTemplate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="timeCompleted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="timeLimit" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="timeSpent" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="type" attributeType="String"/>
+        <attribute name="value" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Family" representedClassName="Family" syncable="YES" codeGenerationType="class">
+        <attribute name="familyID" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="firID" optional="YES" attributeType="String"/>
+        <attribute name="isConnected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="mail" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Member" representedClassName="Member" syncable="YES" codeGenerationType="class">
+        <attribute name="choreCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="firID" optional="YES" attributeType="String"/>
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="memberID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="points" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="time" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+</model>
