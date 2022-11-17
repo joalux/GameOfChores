@@ -16,14 +16,16 @@ struct PlannerView2: View {
     
     var body: some View {
         VStack {
+            Text("Listheight: \(vm.listHeight)")
             ScrollView {
                 ForEach(vm2.months) { month in
-                    MonthView(month: month, selectedDate: month.firstDay, chores: $vm.chores)
+                    MonthView(month: month, selectedDate: month.firstDay, chores: $vm.chores, listHeight: $vm.listHeight)
                 }
             }
         }
         .onAppear {
             vm.fetchChores()
+            
         }
     }
 }
@@ -46,13 +48,15 @@ struct MonthView: View {
     @State var showChores = false
     @State var showAll = false
     
+    @Binding var listHeight: Double
+    
     var body: some View {
         VStack {
             NavigationLink(destination: AddChoreView(fromPlanner: fromPlanner, newTempChore: $tempChore, fromAddView: $fromAddView, dateToDo: selectedDate), isActive: $goAddView) { EmptyView() }
             VStack {
                 HStack {
                     Spacer()
-                    Text("Chores to do: \(monthChores.count)")
+                    Text("Chores: \(monthChores.count) List H: \(listHeight) ")
                         .padding(.trailing)
                         .font(Font.headline.weight(.bold))
 
@@ -103,17 +107,72 @@ struct MonthView: View {
                             }
                         }
                     }
+
                 }
+                Divider()
                 
                 if showChores {
                     Group {
-                        VStack {
-                            List {
-                                Text("To do")
-                                if noChores {
-                                    Text("No chores")
-                                        .font(.title)
+                        Text("To do")
+                        if noChores {
+                            Text("No chores")
+                                .font(.title)
+                        }
+                        List {
+                            ForEach(chores, id: \.id) { chore in
+                                if let dateTodo = chore.dateToDo {
+                                    if dateTodo.get(.month) == selectedDate.get(.month) && dateTodo.get(.day) == selectedDate.get(.day) {
+                                        ChoreRow(chore: chore)
+                                        
+                                    }
                                 }
+                            }
+                        }.listStyle(.plain)
+                        
+                        Group {
+                            
+                        
+                        HStack {
+                            Text("Show all")
+                            Spacer()
+                            if showAll {
+                                Image(systemName: "chevron.up")
+                            }
+                            else {
+                                Image(systemName: "chevron.down")
+                            }
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            print("___SHOWING ALL CHORES!!")
+                            print("___LISTHEIGHT: ", listHeight)
+                            listHeight = listHeight / 8
+                            withAnimation {
+                                showAll.toggle()
+                            }
+                        }
+                        .padding(.trailing)
+                        
+                        if showAll {
+                            List {
+                                ForEach(chores, id: \.id) { chore in
+                                    if let dateTodo = chore.dateToDo {
+                                        if dateTodo.get(.month) == selectedDate.get(.month){
+                                            ChoreRow(chore: chore)
+                                            
+                                        }
+                                    }
+                                }
+
+                            }.listStyle(.plain)
+                            .frame(height: listHeight)
+
+                        }
+                    }
+                        //.frame(height: showAll ? 350 : 300)
+                       /* VStack {
+                            List {
+                                
                                 ForEach(chores, id: \.id) { chore in
                                     if let dateTodo = chore.dateToDo {
                                         if dateTodo.get(.month) == selectedDate.get(.month) && dateTodo.get(.day) == selectedDate.get(.day) {
@@ -155,7 +214,7 @@ struct MonthView: View {
                                 
                             }.frame(height: showAll ? 350 : 300)
                                 .listStyle(.plain)
-                        }.frame(height: showChores ? 600 : 300)
+                        }.frame(height: showChores ? 600 : 300)*/
                         
                     }
                 }

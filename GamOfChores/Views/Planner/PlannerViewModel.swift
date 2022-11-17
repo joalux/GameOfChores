@@ -35,13 +35,14 @@ class PlannerViewModel: ObservableObject {
     @Published var oldDayIndex = 0
     @Published var todayIndex = 0
     @Published var dayIndex = 0
+    
+    @Published var listHeight = 0.0
 
     @Published var currentDate = Date()
     @Published var selectedDate = Date()
     @Published var selectedDay = ""
     
     @Published var dayIndeces = 0...6
-        
     
     @Published var isConnected = false
     @Published var buttonEnabled = true
@@ -95,6 +96,9 @@ class PlannerViewModel: ObservableObject {
               
             }
         }
+        print("___SETTING LISTHEIGHT")
+        listHeight = Double(chores.count * 60)
+        print("___LIST HEIGHT: ", listHeight)
     }
     
     func getFirChores() {
@@ -134,6 +138,11 @@ class PlannerViewModel: ObservableObject {
                             }
                         }
                         print("___HAS FIRCHORES = \(self.chores.count)")
+                        
+                        print("___SETTING LISTHEIGHT")
+                        self.listHeight = Double(self.chores.count * 60)
+                        print("___LIST HEIGHT: ", self.listHeight)
+
                     }
                 }
             
