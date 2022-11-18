@@ -5,6 +5,7 @@
 //  Created by joakim lundberg on 2022-01-23.
 //
 
+/*
 import SwiftUI
 import CoreData
 
@@ -196,3 +197,4 @@ struct PlannerView: View {
 
     }
 }
+*/

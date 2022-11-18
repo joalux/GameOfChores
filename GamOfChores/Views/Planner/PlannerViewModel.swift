@@ -28,15 +28,17 @@ class PlannerViewModel: ObservableObject {
     let formatter = DateFormatter()
     
     @Published var chores = [Chore]()
+    @Published var dayChores = [Chore]()
     
     @Published var family = Family()
     
     @Published var currentDayIndex = 0
     @Published var oldDayIndex = 0
-    @Published var todayIndex = 0
-    @Published var dayIndex = 0
+    //@Published var todayIndex = 0
+    //@Published var dayIndex = 0
     
     @Published var listHeight = 0.0
+    @Published var allListHeight = 0.0
 
     @Published var currentDate = Date()
     @Published var selectedDate = Date()
@@ -58,8 +60,8 @@ class PlannerViewModel: ObservableObject {
               
         setConnection()
 
-        getCurrentDayIndex()
-        getWeekIndex(date: Date())
+        //getCurrentDayIndex()
+      //  getWeekIndex(date: Date())
     }
     
     func setConnection() {
@@ -93,7 +95,6 @@ class PlannerViewModel: ObservableObject {
                     chores.append(chore)
 
                 }
-              
             }
         }
         print("___SETTING LISTHEIGHT")
@@ -145,7 +146,6 @@ class PlannerViewModel: ObservableObject {
 
                     }
                 }
-            
         }
     }
     
@@ -172,23 +172,25 @@ class PlannerViewModel: ObservableObject {
         setChoreDates(chores: templateChores)
     }
     
+    func getDayChores(selectedDay: Date) {
+        print("Getting chores on: ", selectedDay.get(.day))
+        print("Getting chores: ", chores.count)
+    }
+    
+    /*
     func selectDay(newDate: Date) {
         let weekDay = dateFormatter.string(from: newDate)
         selectedDay = weekDay.capitalizingFirstLetter()
 
-    }
+    }*/
     
+    /*
     func setDay(){
-        
-        print("___Date = \(Date().get(.day))")
-        print("___Current = \(currentDate.get(.day))")
-        print("___Selected = \(selectedDate.get(.day))")
         if selectedDate.get(.day) < Date().get(.day) {
             buttonEnabled = false
         }
     
         if currentDayIndex > oldDayIndex {
-            print("___Next day")
             currentDayIndex = 0
             let newDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate)
             if let newDate = newDate {
@@ -228,7 +230,7 @@ class PlannerViewModel: ObservableObject {
         }
         
     }
-    
+    */
     func setChoreDates(chores: [Chore]) {
         print("_____Setting chore dates \(selectedDate)!!")
         print("____CURRENT LOCALE === \(Locale.current)")
@@ -311,6 +313,19 @@ class PlannerViewModel: ObservableObject {
                 self.chores.append(chore)
             }
         }
+    }
+    
+    func setDayChores(selectedDay: Date){
+        print("Setting chores on: ", selectedDay.get(.day))
+        dayChores.removeAll()
+        for chore in chores {
+            if let choreDate = chore.dateToDo {
+                if choreDate.get(.day) == selectedDay.get(.day) && dayChores.contains(chore) == false {
+                    dayChores.append(chore)
+                }
+            }
+        }
+        print("Has chores: ", dayChores.count)
     }
     
     func getDay() -> String {

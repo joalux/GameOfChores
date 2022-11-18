@@ -14,6 +14,8 @@ import CoreData
 class PlannerViewModel2: ObservableObject {
     
     let dateFormatter = DateFormatter()
+    
+    @Published var listHeight = 0.0
         
     @Published var months = [Month(monthString: "January"), Month(monthString: "February"), Month(monthString: "March"), Month(monthString: "April"), Month(monthString: "May"), Month(monthString: "June"), Month(monthString: "July"), Month(monthString: "August"), Month(monthString: "September"), Month(monthString: "October"), Month(monthString: "November"), Month(monthString: "December")]
     
