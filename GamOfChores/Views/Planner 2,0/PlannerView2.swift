@@ -34,7 +34,6 @@ struct MonthView: View {
     @State var tempChore = Chore()
     
    // @Binding var chores: [Chore]
-    @State var dayChores = [Chore]()
     @State var monthChores = [Chore]()
     
     @State var goAddView = false
@@ -62,12 +61,13 @@ struct MonthView: View {
                     Spacer()
                     Button {
                         print("Selected date: ", selectedDate)
-                        for chore in monthChores {
+                        for chore in vm.monthChores {
                             print(chore.dateToDo)
                             if let dateToDo = chore.dateToDo {
                                 print("TIMESTAMP = ",vm.removeTimeStamp(fromDate: dateToDo))
                             }
                         }
+                        vm.getDayChores(selectedDay: selectedDate)
                         withAnimation {
                             showChores.toggle()
                         }
@@ -98,60 +98,74 @@ struct MonthView: View {
                 .onChange(of: selectedDate, perform: { newDate in
                    print("New date: ", newDate)
                     print("New day: ", vm.removeTimeStamp(fromDate: newDate).get(.day))
+                    print("SETTING DAY CHORES")
                     vm.setDayChores(selectedDay: newDate)
-    
+                    print("DAY CHORES SET: ", vm.dayChores.count)
+                                        
+                    print("_______CHORELIST_______")
+                    print("Selected: ", selectedDate.get(.day))
+                    for chore in vm.dayChores {
+                        print(chore.dateToDo)
+                        print(chore.dateToDo!.get(.day))
+                        
+                    }
+                    print("Has daychores!!", vm.dayChores.count)
+                    print("List height:", dayListHeight)
+                    
                 })
                 .onAppear {
+                    print("___PLANNER APPEAR____")
                     vm.fetchChores()
                     vm.getDayChores(selectedDay: selectedDate)
-                    allListHeight = Double(vm.dayChores.count * 65)
 
                 }
                 Divider()
+                    .background(.blue)
                 
                 if showChores {
                     Group {
-                        Text("To do: \(vm.dayChores.count)")
-                            .onAppear {
-                                for chore in vm.dayChores {
-                                    print("Day = ", chore.dateToDo!.get(.day))
+                        
+                        VStack {
+                            Text("To do: \(vm.dayChores.count), height: \(Double(vm.dayChores.count * 85))")
+                                .onAppear {
+                                    for chore in vm.dayChores {
+                                        print("Day = ", chore.dateToDo!.get(.day))
 
+                                    }
                                 }
+                            if noChores {
+                                Text("No chores")
+                                    .font(.title)
                             }
-                        if noChores {
-                            Text("No chores")
-                                .font(.title)
-                        }
-                        List {
-                            ForEach(vm.dayChores, id: \.id) { chore in
-
-                                ChoreRow(chore: chore)
+                        
+                                ForEach(vm.dayChores, id: \.id) { chore in
                                     
-                                
-                            }
-                        }.listStyle(.plain)
-                        
-                            .frame(height: dayListHeight)
-                        
+                                    ChoreRow(chore: chore)
+                                        .padding(.horizontal)
+                                    
+                                    
+                                }
+                            .padding(.bottom)
+                            .padding(.top)
                             .onAppear {
                                 print("_______CHORELIST_______")
                                 print("Selected: ", selectedDate.get(.day))
-                                for chore in monthChores {
+                                for chore in vm.dayChores {
                                     print(chore.dateToDo)
                                     print(chore.dateToDo!.get(.day))
-                                    if let choreDate = chore.dateToDo {
-                                        if choreDate.get(.day) == selectedDate.get(.day) {
-                                            dayChores.append(chore)
-                                        }
-                                    }
+                                    
                                 }
-                                print("Has daychores!!", dayChores.count)
-                                dayListHeight = Double(dayChores.count * 60)
+                                print("Has daychores!!", vm.dayChores.count)
                             }
+                        }
+                     
+                      
                         
                         Group {
                             
-                        
+                        Divider()
+                            .background(.blue)
+
                         HStack {
                             Text("Show all")
                                 .padding(.leading)
@@ -175,20 +189,22 @@ struct MonthView: View {
                         
                         if showAll {
                             List {
-                                ForEach(monthChores, id: \.id) { chore in
-                              
-                                
+                                if vm.monthChores.isEmpty {
+                                    Text("No chores!")
+                                        .padding()
+                                }
+                                ForEach(vm.monthChores, id: \.id) { chore in
                                     ChoreRow(chore: chore)
-                                            
-                                        
-                                    
                                 }
 
                             }.listStyle(.plain)
-                            .frame(height: allListHeight)
+                                //.frame(height: vm.monthChores.isEmpty ? 80 : 200)
 
                         }
                     }
+                        Divider()
+                            .background(.blue)
+
                         //.frame(height: showAll ? 350 : 300)
                        /* VStack {
                             List {

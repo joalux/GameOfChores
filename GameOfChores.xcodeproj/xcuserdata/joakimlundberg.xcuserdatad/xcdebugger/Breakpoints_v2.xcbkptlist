@@ -343,22 +343,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6BA5EB76-E7FE-4337-A16B-E5E8713DCC7F"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GamOfChores/Views/Planner/PlannerViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "getFirChores()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "A2C775FA-1085-4E6C-BA2E-7C1656391190"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -718,8 +702,8 @@
             filePath = "GamOfChores/Views/Planner/PlannerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "setDayChores(selectedDay:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -734,9 +718,25 @@
             filePath = "GamOfChores/Views/Planner/PlannerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
-            landmarkName = "setDayChores(selectedday:)"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
+            landmarkName = "setDayChores(selectedDay:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D9F58D0B-C33C-4DEE-BBB6-18F121198FCA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GamOfChores/Views/Planner/PlannerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "getCoreChores()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

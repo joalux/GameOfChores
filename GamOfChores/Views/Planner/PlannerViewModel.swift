@@ -29,6 +29,7 @@ class PlannerViewModel: ObservableObject {
     
     @Published var chores = [Chore]()
     @Published var dayChores = [Chore]()
+    @Published var monthChores = [Chore]()
     
     @Published var family = Family()
     
@@ -148,7 +149,7 @@ class PlannerViewModel: ObservableObject {
                 }
         }
     }
-    
+    /*
     func getTemplateChores() {
         print("___Loading template weekday = \(selectedDate.get(.weekday)), day = \(selectedDate.get(.day)) week = \(selectedDate.get(.weekOfYear))")
         print("____")
@@ -169,12 +170,37 @@ class PlannerViewModel: ObservableObject {
         print("____")
         print("___TemplateChores == \(templateChores.count)")
         print("")
-        setChoreDates(chores: templateChores)
-    }
+       // setChoreDates(chores: templateChores)
+    }*/
     
     func getDayChores(selectedDay: Date) {
-        print("Getting chores on: ", selectedDay.get(.day))
+        print("Getting chores on day: ", selectedDay.get(.day))
+        print("Getting chores on month: ", selectedDay.get(.month))
         print("Getting chores: ", chores.count)
+        
+        for chore in chores {
+            print("Chore date: ", chore.dateToDo)
+            print("Chore day: ", chore.dateToDo?.get(.day))
+            print("Chore month: ", chore.dateToDo?.get(.month))
+            
+            if let choreDate = chore.dateToDo {
+                if choreDate.get(.month) == selectedDay.get(.month) {
+                    print("In this month!!")
+                    if monthChores.contains(chore) == false {
+                        monthChores.append(chore)
+                    }
+                    
+                    if choreDate.get(.day) == selectedDay.get(.day) {
+                        print("On this day!!")
+                        if dayChores.contains(chore) == false {
+                            dayChores.append(chore)
+                        }
+                    }
+                }
+            }
+        }
+        
+        self.listHeight = Double(self.chores.count * 60)
     }
     
     /*
@@ -231,6 +257,7 @@ class PlannerViewModel: ObservableObject {
         
     }
     */
+    /*
     func setChoreDates(chores: [Chore]) {
         print("_____Setting chore dates \(selectedDate)!!")
         print("____CURRENT LOCALE === \(Locale.current)")
@@ -313,7 +340,7 @@ class PlannerViewModel: ObservableObject {
                 self.chores.append(chore)
             }
         }
-    }
+    }*/
     
     func setDayChores(selectedDay: Date){
         print("Setting chores on: ", selectedDay.get(.day))
@@ -333,12 +360,12 @@ class PlannerViewModel: ObservableObject {
         return selectedDay
     }
     
-    func getDayIndex(selectedDate: Date){
+    /*func getDayIndex(selectedDate: Date){
         let dayIndex = Calendar.current.component(.weekday, from: selectedDate) - 1
         currentDayIndex = dayIndex
         oldDayIndex = dayIndex
         print("______CURRENT DAY INDEX = \(currentDayIndex)")
-    }
+    }*/
     
     func getCurrentDayIndex(){
         let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1

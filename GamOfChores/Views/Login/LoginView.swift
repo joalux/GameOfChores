@@ -12,8 +12,19 @@ struct LoginView: View {
     @StateObject private var vm = LoginViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
+                NavigationLink {
+                    StartMenuView()
+                      } label: {
+                           Text("Goto Next Screen")
+                              .frame(width: 200.0, height: 45.0)
+                              .background(Color.blue)
+                              .foregroundColor(.white)
+                              .font(.subheadline)
+                              .cornerRadius(10)
+
+                      }
                 
                 NavigationLink(destination: StartMenuView(), isActive: $vm.hasFamily) {
                     EmptyView()
@@ -35,10 +46,11 @@ struct LoginView: View {
                     .frame(width: 350, height: 250)
                     .scaledToFit()
                 
+                
+                
                 Button(action: {
                     
                     vm.showConnectAlert = true
-                    //vm.addFamily(connect: true)
                     
                 }, label: {
                     Text(LocalizedStringKey("Begin"))
@@ -67,7 +79,7 @@ struct LoginView: View {
                 )
             }
             .onAppear {
-                 vm.getFamily()
+                 //vm.getFamily()
             }
             
         }.navigationBarHidden(true)
