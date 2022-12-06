@@ -8,36 +8,13 @@
 import SwiftUI
 
 struct LoginView: View {
-    
+    @State var path = NavigationPath()
+
     @StateObject private var vm = LoginViewModel()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $vm.path) {
             VStack(spacing: 0) {
-                NavigationLink {
-                    StartMenuView()
-                      } label: {
-                           Text("Goto Next Screen")
-                              .frame(width: 200.0, height: 45.0)
-                              .background(Color.blue)
-                              .foregroundColor(.white)
-                              .font(.subheadline)
-                              .cornerRadius(10)
-
-                      }
-                
-                NavigationLink(destination: StartMenuView(), isActive: $vm.hasFamily) {
-                    EmptyView()
-                }.hidden()
-                
-                NavigationLink(destination: AddFamilyView(), isActive: $vm.doRegister) {
-                    EmptyView()
-                }.hidden()
-                
-                NavigationLink(destination: FirConnectView(), isActive: self.$vm.doConnect) {
-                    EmptyView()
-                }.hidden()
-                
                 
                 Image("GOCTITLE")
                     .resizable()
@@ -46,11 +23,8 @@ struct LoginView: View {
                     .frame(width: 350, height: 250)
                     .scaledToFit()
                 
-                
-                
                 Button(action: {
-                    
-                    vm.showConnectAlert = true
+                    vm.addFamily()
                     
                 }, label: {
                     Text(LocalizedStringKey("Begin"))
@@ -62,24 +36,15 @@ struct LoginView: View {
                         .cornerRadius(10)
                 }).padding(.bottom, 70)
                 
-            }.alert(isPresented:$vm.showConnectAlert) {
-                Alert(
-                    title: Text(LocalizedStringKey("WantToConnect")),
-                    message: Text(LocalizedStringKey("WantToConnectMessage")),
-                    primaryButton: .default(Text(LocalizedStringKey("Yes")), action: {
-                        print("Connecting!!!")
-                        vm.addFamily(connect: true)
-                        
-                    }),
-                    secondaryButton: .default(Text(LocalizedStringKey("No")), action: {
-                        print("no connect!!")
-                        vm.addFamily(connect: false)
-                        
-                    })
-                )
             }
             .onAppear {
-                 //vm.getFamily()
+                vm.getFamily()
+            }
+            .navigationDestination(for: Family.self) { famValue in
+                StartMenuView()
+            }
+            .navigationDestination(for: Bool.self) { hasFamValue in
+                AddFamilyView()
             }
             
         }.navigationBarHidden(true)

@@ -26,14 +26,7 @@ struct AddFamilyView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            NavigationLink(destination: StartMenuView(), isActive: self.$doSignUp) {
-               EmptyView()
-             }.hidden()
-            NavigationLink(destination: ManageFamilyView(), isActive: self.$goSettings) {
-               EmptyView()
-             }.hidden()
-        
-            
+                    
             Image("familyLogo")
                 .resizable()
                 .frame(width: 110, height: 110)
@@ -50,18 +43,9 @@ struct AddFamilyView: View {
             Divider().background(Color.blue)
 
             List {
-                if vm.coreFamily.isConnected {
-                    ForEach(firHelper.firMembers, id: \.self){ member in
-                        MemberRow(member: member, addMode: true)
-                    }.onDelete(perform: firHelper.removeMemAtOffsets)
-                }
-                else {
-                    ForEach(vm.famMembers, id: \.self){ member in
-                        MemberRow(member: member, addMode: true)
-                    }.onDelete(perform: removeFamMember)
-
-                }
-            
+                ForEach(vm.famMembers, id: \.self){ member in
+                    MemberRow(member: member, addMode: true)
+                }.onDelete(perform: removeFamMember)
             }.listStyle(.plain)
             
             Divider().background(Color.blue)
@@ -83,19 +67,9 @@ struct AddFamilyView: View {
                     if memberName.isEmpty {
                         vm.showNoNameAlert = true
                     } else {
-                        if vm.coreFamily.isConnected {
-                            print("Adding firmember!!!")
-                            if let firID = vm.coreFamily.firID {
-                                firHelper.addNewFirMember(firID: firID, memberID: UUID().uuidString, firName: memberName)
-                            }
-                            else {
-                                print("NO ID!!!")
-                            }
-                        }
-                        else {
-                            
-                            vm.addFamMember(name: memberName, firID: "")
-                        }
+                        
+                        vm.addFamMember(name: memberName, firID: "")
+                        
                         memberName = ""
                     }
                     showingKeyboard = false
@@ -149,6 +123,9 @@ struct AddFamilyView: View {
             .toolbar {
                 EditButton()
             }
+            .navigationDestination(for: Bool.self) { hasFamValue in
+                StartMenuView()
+            }
         }
     }
     
@@ -169,3 +146,23 @@ struct AddFamilyView_Previews: PreviewProvider {
         AddFamilyView()
     }
 }
+
+/*
+ .alert(isPresented:$vm.showConnectAlert) {
+     Alert(
+         title: Text(LocalizedStringKey("WantToConnect")),
+         message: Text(LocalizedStringKey("WantToConnectMessage")),
+         primaryButton: .default(Text(LocalizedStringKey("Yes")), action: {
+             print("Connecting!!!")
+             vm.addFamily(connect: true)
+             
+         }),
+         secondaryButton: .default(Text(LocalizedStringKey("No")), action: {
+             print("no connect!!")
+             vm.addFamily(connect: false)
+             
+         })
+     )
+ }
+ 
+ */

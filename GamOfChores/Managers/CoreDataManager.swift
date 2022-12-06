@@ -70,9 +70,7 @@ class CoreDataManager: ObservableObject {
    
     
     func getFamily() -> Family{
-        
-       // fetchFamily()
-        
+                
         let coreFamily = familyFetcher.fetchedObjects?.first
         
         if let coreFamily = coreFamily {

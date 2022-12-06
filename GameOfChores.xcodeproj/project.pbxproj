@@ -56,6 +56,7 @@
 		41BB069128FFE23C00F06F18 /* PlannerViewModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB069028FFE23C00F06F18 /* PlannerViewModel2.swift */; };
 		41BB8C6428BE0D4500ABCE41 /* TemplateChoreRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BB8C6328BE0D4500ABCE41 /* TemplateChoreRow.swift */; };
 		41C7F6152912D56B00FC6912 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C7F6142912D56B00FC6912 /* Extensions.swift */; };
+		41C83886293F558D00729F86 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C83885293F558D00729F86 /* NavigationManager.swift */; };
 		41CF7DD527BA6AED003D7E56 /* ShortcutFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 41CF7DD427BA6AED003D7E56 /* ShortcutFoundation */; };
 		41CF7DD827BA6CDC003D7E56 /* ShortcutSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 41CF7DD727BA6CDC003D7E56 /* ShortcutSwiftUI */; };
 		41CF7DDF27BA7EC3003D7E56 /* FirConnectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CF7DDE27BA7EC3003D7E56 /* FirConnectViewModel.swift */; };
@@ -123,6 +124,7 @@
 		41BB069028FFE23C00F06F18 /* PlannerViewModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewModel2.swift; sourceTree = "<group>"; };
 		41BB8C6328BE0D4500ABCE41 /* TemplateChoreRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateChoreRow.swift; sourceTree = "<group>"; };
 		41C7F6142912D56B00FC6912 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		41C83885293F558D00729F86 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		41CF7DDE27BA7EC3003D7E56 /* FirConnectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirConnectViewModel.swift; sourceTree = "<group>"; };
 		41D127FC2843926100B0988C /* GameOfChores.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GameOfChores.entitlements; sourceTree = "<group>"; };
 		41D2F66127B3E8BB0077E721 /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				41A65E9627820457004091EC /* CoreDataManager.swift */,
 				41D2F66127B3E8BB0077E721 /* FirebaseHelper.swift */,
 				41A7A44727D3A9C4006ED72A /* KeyboardManager.swift */,
+				41C83885293F558D00729F86 /* NavigationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				41D2F66827B406780077E721 /* LoginView.swift in Sources */,
 				41CF7DDF27BA7EC3003D7E56 /* FirConnectViewModel.swift in Sources */,
 				41A65E9727820457004091EC /* CoreDataManager.swift in Sources */,
+				41C83886293F558D00729F86 /* NavigationManager.swift in Sources */,
 				41A65E86278203EE004091EC /* GamOfChoresApp.swift in Sources */,
 				41BB068F28FFE21600F06F18 /* PlannerView2.swift in Sources */,
 				41A94414278484690045E8EA /* BaseModel.swift in Sources */,

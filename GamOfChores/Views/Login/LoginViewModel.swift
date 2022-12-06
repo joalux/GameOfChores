@@ -16,21 +16,33 @@ class LoginViewModel: ObservableObject {
     @Published var doRegister = false
     @Published var doConnect = false
     
+    @Published var path = NavigationPath()
+    
     @Published var showConnectAlert = false
-
+    
+    @Published var activeFamily = Family()
+    
     func getFamily(){
+        print("Getting fam!!")
         hasFamily = CoreDataManager.shared.fetchFamily()
+        
+        if hasFamily {
+            activeFamily = CoreDataManager.shared.getFamily()
+            
+            print("FAM:", activeFamily.familyID)
+            path.append(activeFamily)
+        }
+        else {
+            print("NO FAM!!")
+        }
     }
   
-    func addFamily(connect: Bool){
+    func addFamily(){
         CoreDataManager.shared.addCoreFamily()
                      
-        if connect {
-            doConnect = true
-        } else {
-            doRegister = true
-        }
-        
+        doRegister = true
+        path.append(doRegister)
+
     }
     
     
