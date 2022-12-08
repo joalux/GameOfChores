@@ -11,6 +11,8 @@ struct AddFamilyView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @EnvironmentObject var navManager: NavigationManager
+
     @StateObject private var vm = AddFamilyViewModel()
     @ObservedObject var firHelper = FireBaseHelper()
     
@@ -60,7 +62,6 @@ struct AddFamilyView: View {
                 .keyboardType(.alphabet)
                 .disableAutocorrection(true)
             
-            
             HStack {
                
                 Button(action: {
@@ -100,18 +101,19 @@ struct AddFamilyView: View {
                     }
                     else {
                         print("signup complete")
-                        doSignUp = true
+                        vm.showConnectAlert = true
                     }
                     
                 }, label: {
                     Text("Done")
                         .padding()
                         .frame(width: 110.0, height: 45.0)
-                        .background(Color.blue)
+                        .background(vm.famMembers.isEmpty ? .gray : .blue)
                         .foregroundColor(.white)
                         .font(.subheadline)
                         .cornerRadius(10)
                 }).padding(.trailing)
+                    .disabled(vm.famMembers.isEmpty)
                
             }
             .padding(.top)
@@ -123,8 +125,20 @@ struct AddFamilyView: View {
             .toolbar {
                 EditButton()
             }
-            .navigationDestination(for: Bool.self) { hasFamValue in
-                StartMenuView()
+            .alert(isPresented:$vm.showConnectAlert) {
+                Alert(
+                    title: Text(LocalizedStringKey("WantToConnect")),
+                    message: Text(LocalizedStringKey("WantToConnectMessage")),
+                    primaryButton: .default(Text(LocalizedStringKey("Yes")), action: {
+                        print("Connecting!!!")
+                        navManager.goToFirConnect()
+                        
+                    }),
+                    secondaryButton: .default(Text(LocalizedStringKey("No")), action: {
+                        print("no connect!!")
+                        navManager.goToStart()
+                    })
+                )
             }
         }
     }
@@ -132,7 +146,6 @@ struct AddFamilyView: View {
     func removeFamMember(at offsets: IndexSet) {
         if vm.coreFamily.isConnected {
             
-            firHelper.firMembers
             firHelper.removeMemAtOffsets(at: offsets)
         }
         else {

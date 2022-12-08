@@ -15,9 +15,6 @@ class LoginViewModel: ObservableObject {
     @Published var doLogin = false
     @Published var doRegister = false
     @Published var doConnect = false
-    
-    @Published var path = NavigationPath()
-    
     @Published var showConnectAlert = false
     
     @Published var activeFamily = Family()
@@ -30,7 +27,6 @@ class LoginViewModel: ObservableObject {
             activeFamily = CoreDataManager.shared.getFamily()
             
             print("FAM:", activeFamily.familyID)
-            path.append(activeFamily)
         }
         else {
             print("NO FAM!!")
@@ -41,7 +37,6 @@ class LoginViewModel: ObservableObject {
         CoreDataManager.shared.addCoreFamily()
                      
         doRegister = true
-        path.append(doRegister)
 
     }
     

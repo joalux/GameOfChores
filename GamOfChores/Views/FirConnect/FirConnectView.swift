@@ -24,23 +24,6 @@ struct FirConnectView: View {
             
             VStack {
                 
-                NavigationLink(destination: StartMenuView(), isActive: $vm.doConnect) {
-                    EmptyView()
-                }.hidden()
-                
-                NavigationLink(destination: AddFamilyView(), isActive: $vm.doRegister) {
-                    EmptyView()
-                }.hidden()
-                
-                NavigationLink(destination: SettingsView(), isActive: $goSettings) {
-                    EmptyView()
-                }.hidden()
-                    .alert(isPresented: $vm.showShortPassAlert) {  Alert(title: Text("Error!"), message: Text(LocalizedStringKey("BadPass")), dismissButton:.default(Text(LocalizedStringKey("Close"))) {
-                        
-                    }
-                    )}
-                
-                
                 Image(systemName: "cloud")
                     .resizable()
                     .padding(.leading, 15)
@@ -48,6 +31,8 @@ struct FirConnectView: View {
                     .frame(width: 200, height: 130)
                     .scaledToFill()
                     .padding(.bottom)
+                    .font(Font.body.weight(.thin))
+                    .foregroundColor(.blue)
                     .alert(isPresented: $vm.firError){
                         Alert(title: Text(LocalizedStringKey("BadPass") ), message: Text("\( vm.resultString)"), dismissButton: .default(Text(LocalizedStringKey("Close"))){
                             vm.firLoading = false
@@ -84,7 +69,6 @@ struct FirConnectView: View {
                     
                     if vm.coreFamily.isConnected {
                      
-                        
                         Button(action: {
                             print("Action")
                             vm.showDisconnectDevAlert = true
@@ -233,11 +217,13 @@ struct FirConnectView: View {
                             Text("Connect")
                                 .padding()
                                 .frame(width: 180.0, height: 45.0)
-                                .background(Color.blue)
+                                .background(vm.famMail.isEmpty ? .gray : .blue)
                                 .foregroundColor(.white)
                                 .font(.subheadline)
                                 .cornerRadius(10)
-                        }) .alert(isPresented: $vm.firSuccess) {
+                        })
+                        .disabled(vm.famMail.isEmpty)
+                        .alert(isPresented: $vm.firSuccess) {
                             Alert(
                               title: Text(LocalizedStringKey("isConnected")),
                               message: Text(LocalizedStringKey("Connected")),
@@ -260,6 +246,10 @@ struct FirConnectView: View {
                 }
          
             }.padding(.bottom, keyboardManager.keyboardHeight + 140)
+            .alert(isPresented: $vm.showShortPassAlert) {  Alert(title: Text("Error!"), message: Text(LocalizedStringKey("BadPass")), dismissButton:.default(Text(LocalizedStringKey("Close"))) {
+                
+            }
+            )}
            
         }
     

@@ -11,6 +11,8 @@ import Firebase
 @main
 struct GamOfChoresApp: App {
     
+    @ObservedObject var navigationManager = NavigationManager()
+    
     init(){
         print("initting!!!")
         FirebaseApp.configure()
@@ -20,8 +22,14 @@ struct GamOfChoresApp: App {
         WindowGroup {
            let context = CoreDataManager.shared.container.viewContext
 
-            LoginView()
-               .environment(\.managedObjectContext, context)
+            NavigationStack(path: $navigationManager.path) {
+                LoginView()
+                    .navigationDestination(for: Destination.self) { destination in
+                        ViewFactory.viewForDestination(destination)
+                    }
+            }
+            
+            .environmentObject(navigationManager)
 
         }
     }

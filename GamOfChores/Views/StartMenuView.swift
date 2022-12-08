@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct StartMenuView: View {
-    
-    @Environment(\.managedObjectContext) var viewContext
-    
+        
     @StateObject var coreManager = CoreDataManager()
     
     @State var isNavigationBarHidden = true
@@ -24,13 +22,13 @@ struct StartMenuView: View {
         
         VStack(spacing: 15) {
                 
-                NavigationLink(destination: TodoView2(), isActive: $goChores) { EmptyView() }
+               /* NavigationLink(destination: TodoView2(), isActive: $goChores) { EmptyView() }
                 
                 NavigationLink(destination: FamilyView(), isActive: $goFamily) { EmptyView() }
 
                 NavigationLink(destination: PlannerView2(), isActive: $goPlanner) { EmptyView() }
                 
-                NavigationLink(destination: SettingsView(), isActive: $goSettings) { EmptyView() }
+                NavigationLink(destination: SettingsView(), isActive: $goSettings) { EmptyView() }*/
 
                 Button {
                     goChores = true
@@ -74,9 +72,6 @@ struct StartMenuView: View {
             }
             .padding(.top)
             .navigationBarHidden(self.isNavigationBarHidden)
-            .onAppear {
-                self.isNavigationBarHidden = true
-            }
     }
 }
 

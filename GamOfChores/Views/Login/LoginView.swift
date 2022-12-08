@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var path = NavigationPath()
 
+    @EnvironmentObject var navManager: NavigationManager
+    
     @StateObject private var vm = LoginViewModel()
     
     var body: some View {
-        NavigationStack(path: $vm.path) {
             VStack(spacing: 0) {
                 
                 Image("GOCTITLE")
@@ -25,6 +25,7 @@ struct LoginView: View {
                 
                 Button(action: {
                     vm.addFamily()
+                    navManager.goToAddFamily()
                     
                 }, label: {
                     Text(LocalizedStringKey("Begin"))
@@ -38,16 +39,14 @@ struct LoginView: View {
                 
             }
             .onAppear {
-                vm.getFamily()
+               // vm.getFamily()
+                if vm.hasFamily {
+                    print("HAS FAMILY!!!!")
+                    navManager.goToStart()
+                }
             }
-            .navigationDestination(for: Family.self) { famValue in
-                StartMenuView()
-            }
-            .navigationDestination(for: Bool.self) { hasFamValue in
-                AddFamilyView()
-            }
-            
-        }.navigationBarHidden(true)
+            .toolbar(.hidden)
+          
     }
 }
 

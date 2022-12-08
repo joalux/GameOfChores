@@ -45,7 +45,6 @@
 		41AD112A2792FC9C00595F65 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AD11292792FC9C00595F65 /* MemberRow.swift */; };
 		41B7616B28FD674400CABF6E /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7616A28FD674400CABF6E /* DayView.swift */; };
 		41B7616D28FD6EE500CABF6E /* DayCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B7616C28FD6EE500CABF6E /* DayCarouselView.swift */; };
-		41B773E52907E9BC0015BFE4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B773E42907E9BC0015BFE4 /* MainView.swift */; };
 		41B773E72907F0260015BFE4 /* TodoView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B773E62907F0260015BFE4 /* TodoView2.swift */; };
 		41B78C132889622100F408A0 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B78C122889622100F408A0 /* DatePickerView.swift */; };
 		41B78C16288AF64200F408A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41B78C18288AF64200F408A0 /* Localizable.strings */; };
@@ -112,7 +111,6 @@
 		41AD11292792FC9C00595F65 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
 		41B7616A28FD674400CABF6E /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		41B7616C28FD6EE500CABF6E /* DayCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCarouselView.swift; sourceTree = "<group>"; };
-		41B773E42907E9BC0015BFE4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		41B773E62907F0260015BFE4 /* TodoView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView2.swift; sourceTree = "<group>"; };
 		41B78C122889622100F408A0 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		41B78C17288AF64200F408A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -184,11 +182,10 @@
 		41A65E84278203EE004091EC /* GamOfChores */ = {
 			isa = PBXGroup;
 			children = (
+				41A65E85278203EE004091EC /* GamOfChoresApp.swift */,
 				41A94412278484340045E8EA /* Managers */,
 				41A94411278484180045E8EA /* Models */,
 				41A9440F278483AC0045E8EA /* Views */,
-				41A65E85278203EE004091EC /* GamOfChoresApp.swift */,
-				41A65E87278203EE004091EC /* ContentView.swift */,
 				41D2F66527B3F0E30077E721 /* GoogleService-Info.plist */,
 				41A65E932782042E004091EC /* GOC_Model.xcdatamodeld */,
 				41A65E89278203EF004091EC /* Assets.xcassets */,
@@ -209,10 +206,10 @@
 		41A9440F278483AC0045E8EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				41A65E87278203EE004091EC /* ContentView.swift */,
 				41CF7DDB27BA7E11003D7E56 /* Login */,
 				41CF7DDA27BA7E08003D7E56 /* FirConnect */,
 				41CF7DDD27BA7E8A003D7E56 /* 'Add family */,
-				41B773E42907E9BC0015BFE4 /* MainView.swift */,
 				41A0A0E4278DCC8A0042D428 /* StartMenuView.swift */,
 				41CF7DE027BA97DF003D7E56 /* To do */,
 				41CF7DE127BA988A003D7E56 /* Family view */,
@@ -503,7 +500,6 @@
 				41A7CA372799ACDB002C3709 /* FamilyView.swift in Sources */,
 				41D2F66C27B40BE90077E721 /* FirConnectView.swift in Sources */,
 				41FA8A7428B8DDC300EB1534 /* TemplateMakerView.swift in Sources */,
-				41B773E52907E9BC0015BFE4 /* MainView.swift in Sources */,
 				41AD112A2792FC9C00595F65 /* MemberRow.swift in Sources */,
 				41D2F66A27B406ED0077E721 /* LoginViewModel.swift in Sources */,
 				41A0A0E5278DCC8A0042D428 /* StartMenuView.swift in Sources */,

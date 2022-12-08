@@ -151,7 +151,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FE0E288C-B8C3-4B27-9DB7-95F7265FB008"
+            uuid = "7D7E7071-9A1D-4832-AEC2-64858D7BFC12"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -160,22 +160,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
             endingLineNumber = "28"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7D7E7071-9A1D-4832-AEC2-64858D7BFC12"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GamOfChores/Views/FirConnect/FirConnectView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -737,6 +721,22 @@
             startingLineNumber = "89"
             endingLineNumber = "89"
             landmarkName = "getCoreChores()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F783838-D3E5-4BAD-B9C1-6AE1B531CF73"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GamOfChores/Managers/NavigationManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "viewForDestination(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
