@@ -47,12 +47,14 @@ class FirConnectViewModel: ObservableObject {
     @Published var showInvalidPassAlert = false
     @Published var showShortPassAlert = false
 
-
     @Published var showConnectAlert = false
     @Published var showJoinAlert = false
 
     @Published var showDisconnectDevAlert = false
     @Published var showDisconnectFamAlert = false
+    
+    @Published var showingAlert = false
+
         
     init(){
         print("INITTING FIRMODEL!!!!!!!!")
@@ -61,19 +63,58 @@ class FirConnectViewModel: ObservableObject {
         print("IS CONNECTED = \(coreFamily.isConnected)")
     }
     
-    func connect(create: Bool, members: [Member] = [Member](), chores: [Chore] = [Chore]()) {
+    func connect2() {
+        showingAlert = true
+        
+    }
+    
+    func connect(members: [Member] = [Member](), chores: [Chore] = [Chore]()) {
         firLoading = true
         print("SIGNING UP!!!!!!")
-        if create {
+        if createFam {
             
             Auth.auth().createUser(withEmail: famMail, password: famPass){ authResults, error in
                 guard error == nil else {
                     self.firLoading = false
                     self.resultString = error!.localizedDescription
                     print("_AUTH _ \(authResults)___ERROR : \(error)")
+                    self.firError = true
                     return
                 }
+                print("NO ERROR")
+                print("User created")
+                if let user = Auth.auth().currentUser {
+                    print("___CONNECTING FAM, USERID = \(user.uid), \(user.email)")
+                    self.coreFamily.isConnected = true
+                    self.coreFamily.firID = user.uid
+                    self.coreFamily.mail = user.email
+                    
+                    CoreDataManager.shared.connectFamily(firID: user.uid, mail: self.famMail, addNew: true)
+
+                    for member in members {
+                        if let name = member.name {
+                           print("Adding firmember!!!!")
+                            FireBaseHelper.shared.addNewFirMember(firID: user.uid, memberID: UUID().uuidString, firName: name)
+                            
+                        }
+                    }
+                    
+                    for chore in chores {
+                        if chore.isCompleted {
+                            print("Adding completed chore")
+                            FireBaseHelper.shared.completeChore(firID: user.uid, firChore: chore)
+
+                        }
+                        else {
+                            FireBaseHelper.shared.addChore(firID: user.uid, firChore: chore)
+
+                        }
+                    }
+                    self.resultString = "You are now connected!"
+                    self.firSuccess = true
+                }
                 
+                /*
                 switch authResults {
                 case .none:
                     print("_____Could not create account!")
@@ -83,40 +124,21 @@ class FirConnectViewModel: ObservableObject {
                     if let user = Auth.auth().currentUser {
                         print("___CONNECTING FAM, USERID = \(user.uid)")
                       
-                        
                         self.coreFamily.isConnected = true
                         self.coreFamily.firID = user.uid
                         self.coreFamily.mail = user.email
                         
-                        CoreDataManager.shared.connectFamily(firID: user.uid, mail: self.famMail, addNew: true)
+                        CoreDataManager.shared.connectFamily(firID: user.uid, mail: self.famMail, addNew: true)*/
                         
-                        for member in members {
-                            if let name = member.name {
-                               print("Adding firmember!!!!")
-                                FireBaseHelper.shared.addNewFirMember(firID: user.uid, memberID: UUID().uuidString, firName: name)
-                                
-                            }
-                            
-                        }
+                       
                         
-                        for chore in chores {
-                            if chore.isCompleted {
-                                print("Adding completed chore")
-                                FireBaseHelper.shared.completeChore(firID: user.uid, firChore: chore)
-
-                            }
-                            else {
-                                FireBaseHelper.shared.addChore(firID: user.uid, firChore: chore)
-
-                            }
-                        }
+                  
                         
                         
                     }
-                    self.firSuccess = true
+                    
                 }
-            }
-        }
+            
         else {
             print("JOINGING FAMILY")
             Auth.auth().signIn(withEmail: famMail, password: famPass) { authResult, error in

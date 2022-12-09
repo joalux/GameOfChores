@@ -50,7 +50,14 @@ class FireBaseHelper: ObservableObject {
         db.collection("Families").document(firID).setData([
             "Signup date": Date(),
             "Mail": mail
-        ])
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+                self.firError = true
+            } else {
+                print("Document successfully written!")
+            }
+        }
         
         for member in famMembers {
             if let name = member.name {
@@ -59,6 +66,7 @@ class FireBaseHelper: ObservableObject {
                 }
             }
         }
+        firSuccess = true
     }
   
     func resetFamily(firID: String) {
@@ -83,6 +91,7 @@ class FireBaseHelper: ObservableObject {
         db.collection("Families").document(firID).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
+                self.firError = true
             } else {
                 print("Document successfully removed!")
             }
@@ -102,6 +111,7 @@ class FireBaseHelper: ObservableObject {
             ]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
+                    self.firError = true
                 } else {
                     print("Document successfully written!")
                     print("Document added with member ID: \(memberID)")

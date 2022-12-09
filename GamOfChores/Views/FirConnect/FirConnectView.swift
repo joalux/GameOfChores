@@ -20,8 +20,109 @@ struct FirConnectView: View {
     @State var inSettings = false
     @State var goSettings = false
     
+    @State private var showingAlert = false
+    
     var body: some View {
+        VStack {
+            Image(systemName: "cloud")
+                .resizable()
+                .padding(.leading, 15)
+                .padding(.trailing, 15)
+                .frame(width: 200, height: 130)
+                .scaledToFill()
+                .padding(.bottom)
+                .font(Font.body.weight(.thin))
+                .foregroundColor(.accentColor)
+                .alert(isPresented: $vm.firSuccess) {
+                    Alert(title: Text("Success"), message: Text(vm.resultString), dismissButton: .default(Text("Close!")))
+                }
             
+            VStack {
+                TextField(LocalizedStringKey("FamilyMail"), text: $vm.famMail)
+                    .textInputAutocapitalization(.never)
+                    .padding(.leading, 60.0)
+                    .padding(.trailing, 60.0)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .ignoresSafeArea(.keyboard, edges: .bottom)
+                
+                SecureField(LocalizedStringKey("FamPass"), text: $vm.famPass)
+                    .padding(.leading, 60.0)
+                    .padding(.trailing, 60.0)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.alphabet)
+                    .disableAutocorrection(true)
+
+                    .ignoresSafeArea(.keyboard, edges: .bottom)
+                
+                if vm.createFam == true {
+                    
+                    SecureField(LocalizedStringKey("FamPassRepeat"), text: $vm.famPass2)
+                        .padding(.leading, 60.0)
+                        .padding(.trailing, 60.0)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.alphabet)
+                        .disableAutocorrection(true)
+
+                        .ignoresSafeArea(.keyboard, edges: .bottom)
+                }
+                
+            }.padding(.bottom)
+            
+            HStack {
+                Button(action: {
+                    withAnimation {
+                        vm.createFam = false
+                    }
+                    
+                }, label: {
+                    Text("Join")
+                        .padding()
+                        .frame(width: 100.0, height: 40.0)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .font(.subheadline)
+                        .cornerRadius(10)
+                }).alert(isPresented: $vm.showJoinAlert) {  Alert(title: Text("Join family?"), message: Text(LocalizedStringKey("ConnectFam")), primaryButton:                     .default(Text("Join")) {
+                    print("joining family...")
+                    vm.connect()
+                    
+                },secondaryButton: .cancel()
+                )}
+                
+                Button(action: {
+                    print("Create")
+                    
+                    withAnimation {
+                        vm.createFam = true
+                    }
+                    
+                }, label: {
+                    Text(LocalizedStringKey("Create"))
+                        .padding()
+                        .frame(width: 100.0, height: 40.0)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .font(.subheadline)
+                        .cornerRadius(10)
+                })
+            }
+            
+            Button("Connect") {
+                
+                vm.connect()
+            }
+            .padding()
+            .frame(width: 180.0, height: 45.0)
+            .background(vm.famMail.isEmpty ? .gray : .blue)
+            .foregroundColor(.white)
+            .font(.subheadline)
+            .cornerRadius(10)
+            .alert(isPresented: $vm.firError) {
+                Alert(title: Text("Error"), message: Text(vm.resultString), dismissButton: .default(Text("Close!")))
+            }
+        }
+       
+        /*
             VStack {
                 
                 Image(systemName: "cloud")
@@ -61,7 +162,7 @@ struct FirConnectView: View {
                         }
                         
                     })
-                        }
+                }
                      
                 }
                 
@@ -189,12 +290,15 @@ struct FirConnectView: View {
                             }
                             )}
                             
-                           
-                            
                         }
                         
                         Button(action: {
-                            print("Action")
+                            vm.connect2()
+                            vm.firSuccess = true
+                            vm.firError = true
+                            vm.showDisconnectDevAlert = true
+                            print(vm.firSuccess)
+                            /*
                             if vm.createFam {
                                 if vm.famPass == vm.famPass2 {
                                     if vm.famPass.count >= 6 {
@@ -210,8 +314,7 @@ struct FirConnectView: View {
                             }
                             else {
                                 vm.connect(create: vm.createFam)
-                            }
-                            
+                            }*/
                             
                         }, label: {
                             Text("Connect")
@@ -222,7 +325,6 @@ struct FirConnectView: View {
                                 .font(.subheadline)
                                 .cornerRadius(10)
                         })
-                        .disabled(vm.famMail.isEmpty)
                         .alert(isPresented: $vm.firSuccess) {
                             Alert(
                               title: Text(LocalizedStringKey("isConnected")),
@@ -238,10 +340,6 @@ struct FirConnectView: View {
                               }
                           )
                         }
-                        
-                        
-                      
-                        
                     }
                 }
          
@@ -249,7 +347,7 @@ struct FirConnectView: View {
             .alert(isPresented: $vm.showShortPassAlert) {  Alert(title: Text("Error!"), message: Text(LocalizedStringKey("BadPass")), dismissButton:.default(Text(LocalizedStringKey("Close"))) {
                 
             }
-            )}
+            )}*/
            
         }
     

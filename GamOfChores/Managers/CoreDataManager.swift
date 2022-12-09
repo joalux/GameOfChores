@@ -172,17 +172,30 @@ class CoreDataManager: ObservableObject {
     }
     
     func getFamilyMembers() -> [Member]{
+        print("Getting members!!")
         do {
             try memberFetcher.performFetch()
             guard let coreMembers = memberFetcher.fetchedObjects else {               
                 return [Member]()
             }
-            familyMembers = coreMembers
+            
+            for coreMember in coreMembers {
+                if familyMembers.contains(coreMember) {
+                    print("FAM CONTAINS: \(coreMember.name)")
+                }
+                else {
+                    print("APPENDING MEMBER")
+                    familyMembers.append(coreMember)
+                }
+            }
+            
             
             for member in familyMembers {
                 if member.memberID == nil {
                     member.memberID = UUID()
                 }
+                print(member.id)
+                print(member.name)
             }
             
         } catch {

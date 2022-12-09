@@ -38,7 +38,7 @@ struct AddFamilyView: View {
                     .font(.title3)
                     .padding()
             } else {
-                Text("Add family members")
+                Text("Add family members; \(vm.famMembers.count)")
                     .font(.title3)
                     .padding()
             }
@@ -61,6 +61,19 @@ struct AddFamilyView: View {
                 .focused($showingKeyboard)
                 .keyboardType(.alphabet)
                 .disableAutocorrection(true)
+            
+            Button(action: {
+                vm.resetFamily()
+                
+            }, label: {
+                Text("clear")
+                    .padding()
+                    .frame(width: 150.0, height: 45.0)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .font(.subheadline)
+                    .cornerRadius(10)
+            }).padding(.leading)
             
             HStack {
                

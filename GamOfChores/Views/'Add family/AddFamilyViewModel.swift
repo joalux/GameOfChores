@@ -47,7 +47,6 @@ class AddFamilyViewModel: ObservableObject {
         CoreDataManager.shared.save()
         famMembers.append(newMember)
     }
- 
     
     func removeMember(at offsets: IndexSet){
         print("_____REMOVING MEMBER!!!!")
@@ -67,10 +66,16 @@ class AddFamilyViewModel: ObservableObject {
             //Accessing StateObject's object without being installed on a View. This will create a new instance each time.
             famMembers = firHelper.firMembers
             firHelper.getFirMembers(firID: coreFamily.firID ?? "No id")
-            
         }*/
         famMembers = CoreDataManager.shared.getFamilyMembers()
-                
-       
+        print("GOT FAM")
+    }
+    
+    func resetFamily() {
+        print("RESETTING FAM")
+        for member in famMembers {
+            CoreDataManager.shared.removeFamMember(member: member)
+        }
+        famMembers.removeAll()
     }
 }
