@@ -158,8 +158,8 @@
             filePath = "GamOfChores/Views/FirConnect/FirConnectView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "GamOfChores/Views/FirConnect/FirConnectView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -766,9 +766,9 @@
             filePath = "GamOfChores/Views/FirConnect/FirConnectViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "connect(create:members:chores:)"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "connect(members:chores:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -25,8 +25,7 @@ struct LoginView: View {
                 
                 Button(action: {
                     vm.addFamily()
-                    navManager.goToAddFamily()
-                    
+                    vm.showConnectAlert = true
                 }, label: {
                     Text(LocalizedStringKey("Begin"))
                         .padding()
@@ -36,6 +35,22 @@ struct LoginView: View {
                         .font(.subheadline)
                         .cornerRadius(10)
                 }).padding(.bottom, 70)
+                    .alert(isPresented:$vm.showConnectAlert) {
+                        Alert(
+                            title: Text(LocalizedStringKey("WantToConnect")),
+                            message: Text(LocalizedStringKey("WantToConnectMessage")),
+                            primaryButton: .default(Text(LocalizedStringKey("Yes")), action: {
+                                print("Connecting!!!")
+                                navManager.goToFirConnect()
+                                
+                            }),
+                            secondaryButton: .default(Text(LocalizedStringKey("No")), action: {
+                                print("no connect!!")
+                                navManager.goToAddFamily()
+
+                            })
+                        )
+                    }
                 
             }
             .onAppear {

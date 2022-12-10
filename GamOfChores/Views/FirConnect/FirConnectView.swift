@@ -11,6 +11,7 @@ struct FirConnectView: View {
     
     @Environment(\.presentationMode) private var presentationMode
     
+    @EnvironmentObject var navManager: NavigationManager
     @StateObject private var vm = FirConnectViewModel()
     @StateObject private var keyboardManager = KeyboardManager()
     
@@ -24,6 +25,7 @@ struct FirConnectView: View {
     
     var body: some View {
         VStack {
+            
             Image(systemName: "cloud")
                 .resizable()
                 .padding(.leading, 15)
@@ -34,8 +36,22 @@ struct FirConnectView: View {
                 .font(Font.body.weight(.thin))
                 .foregroundColor(.accentColor)
                 .alert(isPresented: $vm.firSuccess) {
-                    Alert(title: Text("Success"), message: Text(vm.resultString), dismissButton: .default(Text("Close!")))
-                }
+                    
+                   Alert(title: Text("Success!"), message: Text("You are now connected!"), dismissButton: .default(Text("Continue")){
+                       print("HAS LOGGED IN!!")
+                       if vm.createFam {
+                           navManager.goToAddFamily()
+                       }
+                       else {
+                           navManager.goToStart()
+                       }
+                       
+                   })
+               }
+            
+              
+            
+              
             
             VStack {
                 TextField(LocalizedStringKey("FamilyMail"), text: $vm.famMail)
@@ -82,7 +98,7 @@ struct FirConnectView: View {
                         .foregroundColor(.white)
                         .font(.subheadline)
                         .cornerRadius(10)
-                }).alert(isPresented: $vm.showJoinAlert) {  Alert(title: Text("Join family?"), message: Text(LocalizedStringKey("ConnectFam")), primaryButton:                     .default(Text("Join")) {
+                }).alert(isPresented: $vm.showJoinAlert) {  Alert(title: Text("Join family?"), message: Text(LocalizedStringKey("ConnectFam")), primaryButton: .default(Text("Join")) {
                     print("joining family...")
                     vm.connect()
                     
@@ -108,13 +124,13 @@ struct FirConnectView: View {
             }
             
             Button("Connect") {
-                
                 vm.connect()
             }
             .padding()
             .frame(width: 180.0, height: 45.0)
             .background(vm.famMail.isEmpty ? .gray : .blue)
             .foregroundColor(.white)
+            .disabled(vm.famMail.isEmpty)
             .font(.subheadline)
             .cornerRadius(10)
             .alert(isPresented: $vm.firError) {
@@ -349,7 +365,7 @@ struct FirConnectView: View {
             }
             )}*/
            
-        }
+    }
     
 }
 

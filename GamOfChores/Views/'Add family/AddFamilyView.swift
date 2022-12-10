@@ -173,22 +173,4 @@ struct AddFamilyView_Previews: PreviewProvider {
     }
 }
 
-/*
- .alert(isPresented:$vm.showConnectAlert) {
-     Alert(
-         title: Text(LocalizedStringKey("WantToConnect")),
-         message: Text(LocalizedStringKey("WantToConnectMessage")),
-         primaryButton: .default(Text(LocalizedStringKey("Yes")), action: {
-             print("Connecting!!!")
-             vm.addFamily(connect: true)
-             
-         }),
-         secondaryButton: .default(Text(LocalizedStringKey("No")), action: {
-             print("no connect!!")
-             vm.addFamily(connect: false)
-             
-         })
-     )
- }
- 
- */
+

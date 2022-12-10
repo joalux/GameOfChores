@@ -113,32 +113,11 @@ class FirConnectViewModel: ObservableObject {
                     self.resultString = "You are now connected!"
                     self.firSuccess = true
                 }
-                
-                /*
-                switch authResults {
-                case .none:
-                    print("_____Could not create account!")
-                    self.firError = true
-                case .some(_):
-                    print("User created")
-                    if let user = Auth.auth().currentUser {
-                        print("___CONNECTING FAM, USERID = \(user.uid)")
-                      
-                        self.coreFamily.isConnected = true
-                        self.coreFamily.firID = user.uid
-                        self.coreFamily.mail = user.email
-                        
-                        CoreDataManager.shared.connectFamily(firID: user.uid, mail: self.famMail, addNew: true)*/
-                        
-                       
-                        
-                  
-                        
-                        
-                    }
-                    
-                }
+                   
+            }
             
+        }
+    
         else {
             print("JOINGING FAMILY")
             Auth.auth().signIn(withEmail: famMail, password: famPass) { authResult, error in
@@ -146,9 +125,24 @@ class FirConnectViewModel: ObservableObject {
                     self.firLoading = false
                     print("_AUTH _ \(authResult)___ERROR : \(error)")
                     self.resultString = error!.localizedDescription
+                    self.firError = true
                     return
                 }
-                switch authResult {
+                
+                print("NO ERROR")
+                print("User signed in!!")
+                if let user = Auth.auth().currentUser {
+                    print("___CONNECTING FAM, USERID = \(user.uid), \(user.email)")
+                    self.coreFamily.isConnected = true
+                    self.coreFamily.firID = user.uid
+                    self.coreFamily.mail = user.email
+                    
+                    self.resultString = "You are now connected!"
+                    self.firSuccess = true
+
+                }
+                
+                /*switch authResult {
                 case .none:
                     print("__Could not sign in")
                     self.resultString = "Sign in failed"
@@ -162,7 +156,7 @@ class FirConnectViewModel: ObservableObject {
                     }
 
                     self.firSuccess = true
-                }
+                }*/
             }
         }
     }
