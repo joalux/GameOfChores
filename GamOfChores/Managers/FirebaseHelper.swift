@@ -15,7 +15,12 @@ class FireBaseHelper: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    @Published var firSuccess = false
+    @Published var firSuccess = false {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
     @Published var firError = false
 
     @Published var firMembers = [Member]()
@@ -37,15 +42,12 @@ class FireBaseHelper: ObservableObject {
     func joinFamily(firID: String){
         print("____JOINGIN FAMILY!!!")
         print("_____\(firID)")
-        
-        
     }
     
-    func addFamily(firID: String, mail: String, famMembers: [Member]){
+    func addFamily(firID: String, mail: String) -> Bool {
         print("______ADDING FAM DOC!!!!")
         print("_____\(firID)")
         print(mail)
-        print("Fam members \(famMembers.count)")
                 
         db.collection("Families").document(firID).setData([
             "Signup date": Date(),
@@ -54,19 +56,13 @@ class FireBaseHelper: ObservableObject {
             if let err = err {
                 print("Error writing document: \(err)")
                 self.firError = true
+                self.firSuccess = false
             } else {
                 print("Document successfully written!")
+                self.firSuccess = true
             }
         }
-        
-        for member in famMembers {
-            if let name = member.name {
-                if let memberID = member.memberID {
-                    addNewFirMember(firID: firID, memberID: memberID.uuidString, firName: name)
-                }
-            }
-        }
-        firSuccess = true
+        return firSuccess
     }
   
     func resetFamily(firID: String) {

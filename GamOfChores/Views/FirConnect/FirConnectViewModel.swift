@@ -17,7 +17,7 @@ class FirConnectViewModel: ObservableObject {
     //@Published var family = Family(context: CoreDataManager.shared.container.viewContext)
     
     @State var coreFamily = CoreDataManager.shared.getFamily()
-    
+        
     @Published var famMembers = [Member]()
     
     private var db = Firestore.firestore()
@@ -36,7 +36,12 @@ class FirConnectViewModel: ObservableObject {
     @Published var connectFam = true
     
     @Published var firLoading = false
-    @Published var firSuccess = false
+    @Published var firSuccess = false {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
     @Published var firError = false
 
     @Published var doConnect = false
@@ -58,13 +63,45 @@ class FirConnectViewModel: ObservableObject {
         
     init(){
         print("INITTING FIRMODEL!!!!!!!!")
-        famMembers = CoreDataManager.shared.getFamilyMembers()
-        
         print("IS CONNECTED = \(coreFamily.isConnected)")
     }
     
-    func connect2() {
-        showingAlert = true
+    func connectFamily() {
+        firLoading = true
+        print("CONNECTING FAMILY!!")
+        print(coreFamily.familyID)
+        print(coreFamily.isConnected)
+        if createFam {
+            Auth.auth().createUser(withEmail: famMail, password: famPass){ authResults, error in
+                guard error == nil else {
+                    self.firLoading = false
+                    self.resultString = error!.localizedDescription
+                    print("_AUTH _ \(authResults)___ERROR : \(error)")
+                    self.firError = true
+                    return
+                }
+                print("NO ERROR")
+                print("User created")
+                if let user = Auth.auth().currentUser {
+                    print("___CONNECTING FAM, USERID = \(user.uid), \(user.email)")
+                    self.coreFamily.isConnected = true
+                    self.coreFamily.firID = user.uid
+                    self.coreFamily.mail = user.email
+                    
+                    CoreDataManager.shared.connectFamily(firID: user.uid, mail: self.famMail, addNew: true)
+                    if self.firSuccess == FireBaseHelper.shared.addFamily(firID: user.uid, mail: self.famMail) {
+                        print("You are now connected!")
+                        self.firSuccess = true
+                        self.resultString = "You are now connected!"
+                        
+
+                    }
+                    
+                    
+
+                }
+            }
+        }
         
     }
     

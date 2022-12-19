@@ -18,10 +18,10 @@ class CoreDataManager: ObservableObject {
     private let memberFetcher: NSFetchedResultsController<Member>
     private let familyFetcher: NSFetchedResultsController<Family>
 
-
     var chores = [Chore]()
     var familyMembers = [Member]()
     var families = [Family]()
+    
     
     init() {
         container = NSPersistentContainer(name: "GOC_Model")
@@ -106,10 +106,6 @@ class CoreDataManager: ObservableObject {
         coreFam.mail = mail
         coreFam.isConnected = true
       
-        if addNew {
-            FireBaseHelper.shared.addFamily(firID: coreFam.firID ?? "No id", mail: coreFam.mail ?? "No mail", famMembers: coreMebers)
-        }
-        
         save()
     }
     

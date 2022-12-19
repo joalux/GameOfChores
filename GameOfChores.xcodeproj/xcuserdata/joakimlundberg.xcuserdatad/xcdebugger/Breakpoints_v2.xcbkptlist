@@ -78,10 +78,10 @@
             filePath = "GamOfChores/Managers/CoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "CoreDataManager"
-            landmarkType = "3">
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "getChores()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -158,8 +158,8 @@
             filePath = "GamOfChores/Views/FirConnect/FirConnectView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "GamOfChores/Views/FirConnect/FirConnectView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -334,8 +334,8 @@
             filePath = "GamOfChores/Managers/CoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "connectFamily(firID:mail:addNew:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -366,9 +366,9 @@
             filePath = "GamOfChores/Managers/FirebaseHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "addFamily(firID:mail:famMembers:)"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "addFamily(firID:mail:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -382,8 +382,8 @@
             filePath = "GamOfChores/Managers/FirebaseHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "getFirMembers(firID:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -398,8 +398,8 @@
             filePath = "GamOfChores/Managers/FirebaseHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "getFirChores(getCompleted:refresh:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -414,8 +414,8 @@
             filePath = "GamOfChores/Managers/FirebaseHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
             landmarkName = "getFirChores(getCompleted:refresh:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -446,8 +446,8 @@
             filePath = "GamOfChores/Managers/FirebaseHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "addNewFirMember(firID:memberID:firName:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -478,8 +478,8 @@
             filePath = "GamOfChores/Managers/FirebaseHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "updateMember(firID:firMember:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -494,8 +494,8 @@
             filePath = "GamOfChores/Managers/FirebaseHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "getFirMembers(firID:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -510,8 +510,8 @@
             filePath = "GamOfChores/Managers/FirebaseHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "getFirChores(getCompleted:refresh:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -743,22 +743,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B38ECC47-AA8F-4CE8-8C64-A294F85E1B52"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GamOfChores/Managers/FirebaseHelper.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "addFamily(firID:mail:famMembers:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "65C11C64-1BB8-4EB4-90FA-5B6C168DC7AF"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -766,8 +750,8 @@
             filePath = "GamOfChores/Views/FirConnect/FirConnectViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "connect(members:chores:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -782,9 +766,25 @@
             filePath = "GamOfChores/Views/FirConnect/FirConnectViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "connect2()"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "connectFamily()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9FF35E56-C51A-4721-A1BB-AF47D1E05216"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GamOfChores/Views/FirConnect/FirConnectViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "connectFamily()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

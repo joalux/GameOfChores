@@ -12,7 +12,7 @@ struct FirConnectView: View {
     @Environment(\.presentationMode) private var presentationMode
     
     @EnvironmentObject var navManager: NavigationManager
-    @StateObject private var vm = FirConnectViewModel()
+    @ObservedObject private var vm = FirConnectViewModel()
     @StateObject private var keyboardManager = KeyboardManager()
     
     @State var doConnect = false
@@ -25,7 +25,7 @@ struct FirConnectView: View {
     
     var body: some View {
         VStack {
-            
+        
             Image(systemName: "cloud")
                 .resizable()
                 .padding(.leading, 15)
@@ -49,11 +49,8 @@ struct FirConnectView: View {
                    })
                }
             
-              
-            
-              
-            
             VStack {
+              
                 TextField(LocalizedStringKey("FamilyMail"), text: $vm.famMail)
                     .textInputAutocapitalization(.never)
                     .padding(.leading, 60.0)
@@ -124,7 +121,7 @@ struct FirConnectView: View {
             }
             
             Button("Connect") {
-                vm.connect()
+                vm.connectFamily()
             }
             .padding()
             .frame(width: 180.0, height: 45.0)

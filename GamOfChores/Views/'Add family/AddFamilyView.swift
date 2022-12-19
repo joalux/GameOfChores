@@ -14,7 +14,6 @@ struct AddFamilyView: View {
     @EnvironmentObject var navManager: NavigationManager
 
     @StateObject private var vm = AddFamilyViewModel()
-    @ObservedObject var firHelper = FireBaseHelper()
     
     @State var memberName = ""
     
@@ -38,7 +37,7 @@ struct AddFamilyView: View {
                     .font(.title3)
                     .padding()
             } else {
-                Text("Add family members; \(vm.famMembers.count)")
+                Text("Add family members: \(vm.famMembers.count)")
                     .font(.title3)
                     .padding()
             }
@@ -114,7 +113,7 @@ struct AddFamilyView: View {
                     }
                     else {
                         print("signup complete")
-                        vm.showConnectAlert = true
+                        navManager.goToStart()
                     }
                     
                 }, label: {
@@ -132,7 +131,7 @@ struct AddFamilyView: View {
             .padding(.top)
             .onAppear {
                 if vm.coreFamily.isConnected {
-                    firHelper.getFirMembers(firID: vm.coreFamily.firID ?? "")
+                    FireBaseHelper.shared.getFirMembers(firID: vm.coreFamily.firID ?? "")
                 }
             }
             .toolbar {
@@ -159,7 +158,7 @@ struct AddFamilyView: View {
     func removeFamMember(at offsets: IndexSet) {
         if vm.coreFamily.isConnected {
             
-            firHelper.removeMemAtOffsets(at: offsets)
+            FireBaseHelper.shared.removeMemAtOffsets(at: offsets)
         }
         else {
             vm.removeMember(at: offsets)
