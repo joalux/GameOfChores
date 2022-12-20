@@ -50,7 +50,7 @@ struct AddFamilyView: View {
             }.listStyle(.plain)
             
             Divider().background(Color.blue)
-
+            
             TextField("Family member", text: $memberName)
                 .autocapitalization(.none)
                 .padding(.top)
@@ -60,19 +60,6 @@ struct AddFamilyView: View {
                 .focused($showingKeyboard)
                 .keyboardType(.alphabet)
                 .disableAutocorrection(true)
-            
-            Button(action: {
-                vm.resetFamily()
-                
-            }, label: {
-                Text("clear")
-                    .padding()
-                    .frame(width: 150.0, height: 45.0)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .font(.subheadline)
-                    .cornerRadius(10)
-            }).padding(.leading)
             
             HStack {
                

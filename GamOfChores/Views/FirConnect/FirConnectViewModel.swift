@@ -32,8 +32,9 @@ class FirConnectViewModel: ObservableObject {
     
     @Published var isConnected = false
 
-    @Published var createFam = false
-    @Published var connectFam = true
+    @Published var connectFam = false
+    @Published var joinFam = false
+
     
     @Published var firLoading = false
     @Published var firSuccess = false {
@@ -50,7 +51,8 @@ class FirConnectViewModel: ObservableObject {
     @Published var inSettings = false
     
     @Published var showInvalidPassAlert = false
-    @Published var showShortPassAlert = false
+    @Published var showMismatchPassAlert = false
+
 
     @Published var showConnectAlert = false
     @Published var showJoinAlert = false
@@ -59,22 +61,29 @@ class FirConnectViewModel: ObservableObject {
     @Published var showDisconnectFamAlert = false
     
     @Published var showingAlert = false
-
-        
-    init(){
-        print("INITTING FIRMODEL!!!!!!!!")
-        print("IS CONNECTED = \(coreFamily.isConnected)")
-    }
     
     func connectFamily() {
-        firLoading = true
         print("CONNECTING FAMILY!!")
         print(coreFamily.familyID)
         print(coreFamily.isConnected)
-        if createFam {
+   
+        if famPass != famPass2 {
+            showMismatchPassAlert = true
+        }
+        else {
             Auth.auth().createUser(withEmail: famMail, password: famPass){ authResults, error in
+                
+                print(authResults)
+                if error == nil {
+                    print("NO ERROR")
+                    
+                }
+                else {
+                    self.firError = true
+                    print("ERROR: ", error)
+                }
+                
                 guard error == nil else {
-                    self.firLoading = false
                     self.resultString = error!.localizedDescription
                     print("_AUTH _ \(authResults)___ERROR : \(error)")
                     self.firError = true
@@ -93,22 +102,42 @@ class FirConnectViewModel: ObservableObject {
                         print("You are now connected!")
                         self.firSuccess = true
                         self.resultString = "You are now connected!"
-                        
-
                     }
-                    
-                    
-
                 }
             }
         }
-        
+    }
+    
+    func joinFamily() {
+        print("JOINGING FAMILY")
+        Auth.auth().signIn(withEmail: famMail, password: famPass) { authResult, error in
+            guard error == nil else {
+                self.firLoading = false
+                print("_AUTH _ \(authResult)___ERROR : \(error)")
+                self.resultString = error!.localizedDescription
+                self.firError = true
+                return
+            }
+            
+            print("NO ERROR")
+            print("User signed in!!")
+            if let user = Auth.auth().currentUser {
+                print("___CONNECTING FAM, USERID = \(user.uid), \(user.email)")
+                self.coreFamily.isConnected = true
+                self.coreFamily.firID = user.uid
+                self.coreFamily.mail = user.email
+                
+                self.resultString = "You are now connected!"
+                self.firSuccess = true
+                
+            }
+        }
     }
     
     func connect(members: [Member] = [Member](), chores: [Chore] = [Chore]()) {
         firLoading = true
         print("SIGNING UP!!!!!!")
-        if createFam {
+        if connectFam {
             
             Auth.auth().createUser(withEmail: famMail, password: famPass){ authResults, error in
                 guard error == nil else {
