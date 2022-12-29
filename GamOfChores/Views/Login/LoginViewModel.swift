@@ -35,9 +35,7 @@ class LoginViewModel: ObservableObject {
   
     func addFamily(){
         CoreDataManager.shared.addCoreFamily()
-                     
-        doRegister = true
-
+        
     }
     
     

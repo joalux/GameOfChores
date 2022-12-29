@@ -13,7 +13,7 @@ class FireBaseHelper: ObservableObject {
     
     static let shared = FireBaseHelper()
     
-    private var db = Firestore.firestore()
+    var db = Firestore.firestore()
     
     @Published var firSuccess = false {
         willSet {
@@ -37,6 +37,8 @@ class FireBaseHelper: ObservableObject {
             objectWillChange.send()
         }
     }
+    
+    @Published var firErrorString = ""
     
     // MARK: - Family functions
     func joinFamily(firID: String){
@@ -87,17 +89,55 @@ class FireBaseHelper: ObservableObject {
         db.collection("Families").document(firID).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
+                self.firErrorString = "\(err.localizedDescription)"
                 self.firError = true
             } else {
                 print("Document successfully removed!")
             }
         }
     }
+    
+    func addFirMembers(firID: String, famMembers: [Member]) {
+        print("Adding new Firmembers: ", famMembers.count)
         
-    func addNewFirMember(firID: String, memberID: String, firName: String = ""){
+        for member in famMembers {
+            print("ADDING MEMBER:", member.memberID)
+            if let id = member.memberID?.uuidString {
+                db.collection("Families").document(firID).collection("Family members").document(id).setData([
+                    "Name": member.name!,
+                    "Points": 0,
+                    "Time": 0,
+                    "ChoreCount": 0
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                        self.firErrorString = "\(err.localizedDescription)"
+
+                        self.firError = true
+                        self.firSuccess = false
+                    } else {
+                        print("Document successfully written!")
+                        print("Document added with member ID: \(id)")
+                        self.firMembers.append(member)
+                        print("FIRCOUNT: ", self.firMembers.count)
+                        print("FAMCOUNT: ", famMembers.count)
+
+                        if self.firMembers.count == famMembers.count {
+                            print("FAMILY COMPLETE!!")
+                            self.firSuccess = true
+                        }
+                    }
+                }
+            }
+        }
+    }
+        
+    func addNewFirMember(firID: String, memberID: String, firName: String) {
         print("Adding new Firmember")
+        firSuccess = false
         if firName != "" {
             print("HAS NAME \(firName)!!")
+            
 
             db.collection("Families").document(firID).collection("Family members").document(memberID).setData([
                 "Name": firName,
@@ -107,16 +147,19 @@ class FireBaseHelper: ObservableObject {
             ]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
+                    self.firErrorString = "\(err.localizedDescription)"
+
                     self.firError = true
+                    self.firSuccess = false
                 } else {
                     print("Document successfully written!")
                     print("Document added with member ID: \(memberID)")
-
-                    self.firMembers.append(self.setFirMember(famFirId: firID, memberID: memberID, firName: firName))
+                    
                 }
             }
+            print("FIRMEMBERS ADDED!! ", self.firMembers.count)
         }
-        }
+    }
     
     func updateMember(firID: String, firMember: Member){
         print("UPDATING MEMBER!!!")
@@ -132,6 +175,8 @@ class FireBaseHelper: ObservableObject {
             ]) { err in
                 if let err = err {
                     print("Error updating document: \(err)")
+                    self.firErrorString = "\(err.localizedDescription)"
+
                 } else {
                     print("Document successfully updated")
                 }
@@ -139,12 +184,10 @@ class FireBaseHelper: ObservableObject {
         }
     }
     
-    func setFirMember(famFirId: String, memberID: String, firName: String = "", firPoints: Int = 0, firTime: Double = 0, firCount: Int = 0) -> Member{
+    func setFirMember(famFirId: String, memberID: String, firName: String = "", firPoints: Int = 0, firTime: Double = 0, firCount: Int = 0){
         
         var firMember = CoreDataManager.shared.setMember(id: UUID(uuidString: memberID) ?? UUID(), firID: famFirId, name: firName, points: firPoints, time: firTime, choreCount: Int64(firCount))
         
-        print("Returning firmember!!!!")
-        return firMember
     }
     
     func resetMember(firID: String, memberID: String) {

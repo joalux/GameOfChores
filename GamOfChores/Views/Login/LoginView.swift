@@ -24,6 +24,8 @@ struct LoginView: View {
                     .scaledToFit()
                 
                 Button(action: {
+                    CoreDataManager.shared.deleteFamily()
+
                     vm.addFamily()
                     vm.showConnectAlert = true
                 }, label: {

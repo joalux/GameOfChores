@@ -35,7 +35,6 @@ class FirConnectViewModel: ObservableObject {
     @Published var connectFam = false
     @Published var joinFam = false
 
-    
     @Published var firLoading = false
     @Published var firSuccess = false {
         willSet {
@@ -66,6 +65,21 @@ class FirConnectViewModel: ObservableObject {
         print("CONNECTING FAMILY!!")
         print(coreFamily.familyID)
         print(coreFamily.isConnected)
+        
+        var fam = CoreDataManager.shared.getFamily()
+        var fams = CoreDataManager.shared.getFamilies()
+
+        print("FAM: ", fam)
+        print("FAMS: ", fams.count)
+        
+        print(famMail)
+        
+        famMail = famMail + "@mail.com"
+        
+        print(famMail)
+        
+        famPass = "Asd123"
+        famPass2 = "Asd123"
    
         if famPass != famPass2 {
             showMismatchPassAlert = true
@@ -103,6 +117,11 @@ class FirConnectViewModel: ObservableObject {
                         self.firSuccess = true
                         self.resultString = "You are now connected!"
                     }
+                    
+                    print("IS CONNECTED:", self.coreFamily.isConnected)
+                    print(CoreDataManager.shared.getFamily().isConnected)
+                    
+                    
                 }
             }
         }
@@ -134,10 +153,12 @@ class FirConnectViewModel: ObservableObject {
         }
     }
     
-    func connect(members: [Member] = [Member](), chores: [Chore] = [Chore]()) {
+   /* func connect(members: [Member] = [Member](), chores: [Chore] = [Chore]()) {
         firLoading = true
         print("SIGNING UP!!!!!!")
         if connectFam {
+            
+            famMail = "\(famMail)@mail.com"
             
             Auth.auth().createUser(withEmail: famMail, password: famPass){ authResults, error in
                 guard error == nil else {
@@ -225,7 +246,7 @@ class FirConnectViewModel: ObservableObject {
                 }*/
             }
         }
-    }
+    }*/
     
     func getFamilyMembers(firID: String){
 

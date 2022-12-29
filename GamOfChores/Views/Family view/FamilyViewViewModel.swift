@@ -59,7 +59,7 @@ class FamilyViewViewModel: ObservableObject {
                         let firCount = data["ChoreCount"] as? Int
                         let firTime = data["Time"] as? Double
                         
-                        firFam.append( FireBaseHelper.shared.setFirMember(famFirId: self.family.firID!, memberID: document.documentID, firName: firName ?? "No name", firPoints: firPoints ?? 0, firTime: firTime ?? 0, firCount: firCount ?? 0))
+                       // firFam.append( FireBaseHelper.shared.setFirMember(famFirId: self.family.firID!, memberID: document.documentID, firName: firName ?? "No name", firPoints: firPoints ?? 0, firTime: firTime ?? 0, firCount: firCount ?? 0))
                         
                         print("Appended member: \(firFam.count)")
                     }

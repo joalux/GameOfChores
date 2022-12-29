@@ -14,6 +14,7 @@ struct AddFamilyView: View {
     @EnvironmentObject var navManager: NavigationManager
 
     @StateObject private var vm = AddFamilyViewModel()
+    @StateObject var firHelper = FireBaseHelper()
     
     @State var memberName = ""
     
@@ -44,10 +45,17 @@ struct AddFamilyView: View {
             Divider().background(Color.blue)
 
             List {
-                ForEach(vm.famMembers, id: \.self){ member in
-                    MemberRow(member: member, addMode: true)
+                ForEach(vm.memberNames, id: \.self){ name in
+                    MemberRow(newMemberName: name, addMode: true)
                 }.onDelete(perform: removeFamMember)
             }.listStyle(.plain)
+                .alert("Success!", isPresented: $firHelper.firSuccess, actions: {
+                      Button("Continue") {
+                          navManager.goToStart()
+                      }
+                    }, message: {
+                      Text("Your family has been added.")
+                    })
             
             Divider().background(Color.blue)
             
@@ -62,14 +70,12 @@ struct AddFamilyView: View {
                 .disableAutocorrection(true)
             
             HStack {
-               
                 Button(action: {
                     if memberName.isEmpty {
                         vm.showNoNameAlert = true
                     } else {
                         
-                        vm.addFamMember(name: memberName, firID: "")
-                        
+                        vm.memberNames.append(memberName)
                         memberName = ""
                     }
                     showingKeyboard = false
@@ -94,51 +100,68 @@ struct AddFamilyView: View {
                     )
                 }
                 Button(action: {
-                    if fromSettings {
-                        print("fam members added")
-                        self.presentationMode.wrappedValue.dismiss()
+                    print("ADDING FAMILY!!!")
+                    
+                    
+                    vm.addFamily()
+                    print(vm.famMembers.count)
+                    if vm.coreFamily.isConnected {
+                        firHelper.addFirMembers(firID: vm.coreFamily.firID!, famMembers: vm.famMembers)
                     }
                     else {
-                        print("signup complete")
-                        navManager.goToStart()
+                        if fromSettings {
+                            print("fam members added")
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                        else {
+                            print("signup complete")
+                            navManager.goToStart()
+                        }
                     }
-                    
+                                        
                 }, label: {
                     Text("Done")
                         .padding()
                         .frame(width: 110.0, height: 45.0)
-                        .background(vm.famMembers.isEmpty ? .gray : .blue)
+                        .background(vm.memberNames.isEmpty ? .gray : .blue)
                         .foregroundColor(.white)
                         .font(.subheadline)
                         .cornerRadius(10)
                 }).padding(.trailing)
-                    .disabled(vm.famMembers.isEmpty)
+                    .disabled(vm.memberNames.isEmpty)
+                    .alert(isPresented:$firHelper.firError) {
+                      Alert(
+                          title: Text("Error!"),
+                          message: Text(firHelper.firErrorString),
+                          dismissButton: .default(Text("Close"), action: {
+                              print("Closing!!!")
+                              
+                          })
+                      )
+                  }
                
             }
             .padding(.top)
             .onAppear {
                 if vm.coreFamily.isConnected {
-                    FireBaseHelper.shared.getFirMembers(firID: vm.coreFamily.firID ?? "")
+                    firHelper.getFirMembers(firID: vm.coreFamily.firID ?? "")
                 }
             }
             .toolbar {
                 EditButton()
             }
-            .alert(isPresented:$vm.showConnectAlert) {
+          
+            /*
+            .alert(isPresented:$firHelper.firSuccess) {
                 Alert(
-                    title: Text(LocalizedStringKey("WantToConnect")),
-                    message: Text(LocalizedStringKey("WantToConnectMessage")),
-                    primaryButton: .default(Text(LocalizedStringKey("Yes")), action: {
-                        print("Connecting!!!")
-                        navManager.goToFirConnect()
-                        
-                    }),
-                    secondaryButton: .default(Text(LocalizedStringKey("No")), action: {
-                        print("no connect!!")
-                        navManager.goToStart()
+                    title: Text("Success!"),
+                    message: Text("Your family has been added successfully"),
+                    dismissButton: Button(Text("Continue"), action: {
+                        print("")
                     })
+                   
                 )
-            }
+            }*/
         }
     }
     

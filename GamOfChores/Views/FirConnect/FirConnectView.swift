@@ -131,8 +131,7 @@ struct FirConnectView: View {
                 
                 Alert(title: Text("Success!"), message: Text(vm.resultString), dismissButton: .default(Text("Continue")){
                     print("closing!!")
-                    navManager.goToStart()
-                    
+                    navManager.goToAddFamily()
                     
                 })
             }

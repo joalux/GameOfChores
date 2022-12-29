@@ -79,7 +79,7 @@ class ChoreDetailViewModel: ObservableObject {
                         
                         if let firName = firName {
                             print("______FIRNAME = \(firName)")
-                            self.familyMembers.append( FireBaseHelper.shared.setFirMember(famFirId: self.family.firID!, memberID: memberID, firName: firName, firPoints: firPoints ?? 0, firTime: firTime ?? 0, firCount: firCount ?? 0 ))
+                           // self.familyMembers.append( FireBaseHelper.shared.setFirMember(famFirId: self.family.firID!, memberID: memberID, firName: firName, firPoints: firPoints ?? 0, firTime: firTime ?? 0, firCount: firCount ?? 0 ))
                         }
                         
                     }

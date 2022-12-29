@@ -42,6 +42,9 @@ class CoreDataManager: ObservableObject {
     func addCoreFamily(){
         let newFamily = Family(context: container.viewContext)
         newFamily.familyID = UUID()
+        newFamily.mail = ""
+        newFamily.isConnected = false
+        print("ADDING FAM: ", newFamily)
         
         save()
     }
@@ -105,6 +108,8 @@ class CoreDataManager: ObservableObject {
         coreFam.firID = firID
         coreFam.mail = mail
         coreFam.isConnected = true
+        
+        print("IS CONNECTED: \(coreFam.firID)")
       
         save()
     }
