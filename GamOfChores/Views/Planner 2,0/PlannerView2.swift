@@ -50,7 +50,6 @@ struct MonthView: View {
     
     var body: some View {
         VStack {
-            NavigationLink(destination: AddChoreView(fromPlanner: fromPlanner, newTempChore: $tempChore, fromAddView: $fromAddView, dateToDo: selectedDate), isActive: $goAddView) { EmptyView() }
             VStack {
                 HStack {
                     Spacer()

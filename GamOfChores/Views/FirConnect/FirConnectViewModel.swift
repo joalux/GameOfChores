@@ -111,11 +111,11 @@ class FirConnectViewModel: ObservableObject {
                     self.coreFamily.firID = user.uid
                     self.coreFamily.mail = user.email
                     
-                    CoreDataManager.shared.connectFamily(firID: user.uid, mail: self.famMail, addNew: true)
+                    CoreDataManager.shared.connectFamily(firID: user.uid, mail: self.famMail)
                     if self.firSuccess == FireBaseHelper.shared.addFamily(firID: user.uid, mail: self.famMail) {
                         print("You are now connected!")
-                        self.firSuccess = true
                         self.resultString = "You are now connected!"
+                        self.firSuccess = true
                     }
                     
                     print("IS CONNECTED:", self.coreFamily.isConnected)
@@ -142,9 +142,7 @@ class FirConnectViewModel: ObservableObject {
             print("User signed in!!")
             if let user = Auth.auth().currentUser {
                 print("___CONNECTING FAM, USERID = \(user.uid), \(user.email)")
-                self.coreFamily.isConnected = true
-                self.coreFamily.firID = user.uid
-                self.coreFamily.mail = user.email
+                CoreDataManager.shared.connectFamily(firID: user.uid, mail: self.famMail)
                 
                 self.resultString = "You are now connected!"
                 self.firSuccess = true

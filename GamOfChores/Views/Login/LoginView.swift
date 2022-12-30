@@ -56,7 +56,7 @@ struct LoginView: View {
                 
             }
             .onAppear {
-               // vm.getFamily()
+                vm.getFamily()
                 if vm.hasFamily {
                     print("HAS FAMILY!!!!")
                     navManager.goToStart()

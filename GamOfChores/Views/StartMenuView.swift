@@ -8,30 +8,15 @@
 import SwiftUI
 
 struct StartMenuView: View {
-        
-    @StateObject var coreManager = CoreDataManager()
     
-    @State var isNavigationBarHidden = true
+    @EnvironmentObject var navManager: NavigationManager
         
-    @State var goChores = false
-    @State var goFamily = false
-    @State var goPlanner = false
-    @State var goSettings = false
-    
     var body: some View {
         
         VStack(spacing: 15) {
                 
-               /* NavigationLink(destination: TodoView2(), isActive: $goChores) { EmptyView() }
-                
-                NavigationLink(destination: FamilyView(), isActive: $goFamily) { EmptyView() }
-
-                NavigationLink(destination: PlannerView2(), isActive: $goPlanner) { EmptyView() }
-                
-                NavigationLink(destination: SettingsView(), isActive: $goSettings) { EmptyView() }*/
-
                 Button {
-                    goChores = true
+                    navManager.goToToDo()
                 } label: {
                     Text("Chores")
                         .frame(width: 220.0, height: 55.0, alignment: .center)
@@ -41,7 +26,7 @@ struct StartMenuView: View {
                 }
                 
                 Button {
-                    goFamily = true
+                    navManager.goToFamily()
                 } label: {
                     Text(LocalizedStringKey("MyFamily"))
                         .frame(width: 220.0, height: 55.0, alignment: .center)
@@ -51,7 +36,7 @@ struct StartMenuView: View {
                 }
                 
                 Button {
-                    goPlanner = true
+                    navManager.goToPlanner()
                 } label: {
                     Text(LocalizedStringKey("Planner"))
                         .frame(width: 220.0, height: 55.0, alignment: .center)
@@ -61,7 +46,7 @@ struct StartMenuView: View {
                 }
                 
                 Button {
-                    goSettings = true
+                    navManager.goToSettings()
                 } label: {
                     Text(LocalizedStringKey("Settings"))
                         .frame(width: 190.0, height: 45.0, alignment: .center)
@@ -71,7 +56,7 @@ struct StartMenuView: View {
                 }
             }
             .padding(.top)
-            .navigationBarHidden(self.isNavigationBarHidden)
+            .navigationBarHidden(true)
     }
 }
 

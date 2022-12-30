@@ -23,10 +23,6 @@ struct AddChoreView: View {
     @State var templateMode: Bool = false
     @State var fromPlanner: Bool = false
 
-    
-    @Binding var newTempChore: Chore    
-    @Binding var fromAddView: Bool
-    
     var dateToDo: Date? = Date()
         
     var body: some View {

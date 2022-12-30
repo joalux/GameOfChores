@@ -21,13 +21,10 @@ struct TodoView2: View {
     @State var tempChore = Chore()
     
     @State var currentDay = ""
-    
-    
 
     var body: some View {
 
         VStack(){
-            NavigationLink(destination: AddChoreView(newTempChore: $tempChore, fromAddView: $fromAddView, dateToDo: Date()), isActive: $goAddView) { EmptyView() }
             
             Text("Week: \(Date().get(.weekOfYear)) Chores: \(vm.choresTodo.count)")
 
@@ -106,8 +103,8 @@ struct TodoView2: View {
                 }.listStyle(.plain)
                 .refreshable {
                     if vm.isConnected {
-                        await vm.getFirChores(getCompleted: false, refresh: true)
-                        await vm.getFirChores(getCompleted: true, refresh: true)
+                         vm.getFirChores(getCompleted: false, refresh: true)
+                         vm.getFirChores(getCompleted: true, refresh: true)
                     } else {
                         vm.getCoreChores(getCompleted: false)
                         

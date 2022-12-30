@@ -101,7 +101,7 @@ class CoreDataManager: ObservableObject {
         return families
     }
     
-    func connectFamily(firID: String, mail: String, addNew: Bool){
+    func connectFamily(firID: String, mail: String){
         var coreFam = getFamily()
                 
         var coreMebers = getFamilyMembers()

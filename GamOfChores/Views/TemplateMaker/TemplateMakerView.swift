@@ -7,7 +7,7 @@
 
 import SwiftUI
 import UIKit
-
+/*
 struct TemplateMakerView: View {
     @Environment(\.presentationMode) var presentatioMode
 
@@ -270,3 +270,4 @@ struct TemplateMakerView_Previews: PreviewProvider {
     }
 }
 
+*/
