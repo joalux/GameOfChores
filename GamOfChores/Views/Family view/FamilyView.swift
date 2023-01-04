@@ -10,54 +10,63 @@ import SwiftUI
 
 struct FamilyView: View {
     @ObservedObject var vm = FamilyViewViewModel()
-    
+    @EnvironmentObject var navManager: NavigationManager
+
     @State var noFam = false
     @State var goFam = false
     
     var body: some View {
         
         VStack() {
-            Divider()
-            NavigationLink(destination: AddFamilyView(), isActive: $goFam) {
-                EmptyView()
-            }.hidden()
-            if vm.hasFamily {
+            if vm.hasFamily  {
+                Text("Leader")
                 leaderView(leader: vm.leader)
             }
                   
             Divider().background(.blue)
+          
             List {
                 if vm.noFamily || vm.familyMembers.isEmpty{
                     Text("No family memebers")
                 }
                 else {
                     ForEach(vm.familyMembers) { member in
-                        TopListRow(member: member)
+                        if let name = member.name {
+                            TopListRow(member: member)
+                        }
+                        else {
+                            Text("No nsme")
+                        }
                     }
                 }
             }.listStyle(.plain)
-                .refreshable {
-                    vm.fetchFamily()
-                }
-           
-            .alert("No family", isPresented: $noFam) {
+            .refreshable {
+                vm.fetchFamily()
+            }
+            
+            if vm.noFamily {
                 Button("Add family") {
                     print("Adding family")
-                    goFam = true
+                    navManager.goToAddFamily()
+                    
                 }
             }
+           
+            
             Spacer()
         }
         .navigationBarTitle(LocalizedStringKey("MyFamily"))
         .onAppear(perform: {
             print("APPEAR!!!!")
             vm.fetchFamily()
+            
+            print("FAM FETCHED!!")
+            
             if vm.noFamily {
                 print("NO FAMILY")
-                noFam = true
             }
             print("FAMCOUNT = \(vm.familyMembers.count)")
-         
+            
         })
     }
 }

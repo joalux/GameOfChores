@@ -26,7 +26,7 @@ struct LoginView: View {
                 Button(action: {
                     CoreDataManager.shared.deleteFamily()
 
-                    vm.addFamily()
+                   // vm.addFamily()
                     vm.showConnectAlert = true
                 }, label: {
                     Text(LocalizedStringKey("Begin"))
@@ -56,7 +56,7 @@ struct LoginView: View {
                 
             }
             .onAppear {
-                vm.getFamily()
+               // vm.getFamily()
                 if vm.hasFamily {
                     print("HAS FAMILY!!!!")
                     navManager.goToStart()

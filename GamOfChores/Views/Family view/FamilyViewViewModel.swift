@@ -69,11 +69,19 @@ class FamilyViewViewModel: ObservableObject {
             }
         }
         else {
+            print("NOT CONNECTED!")
             familyMembers = CoreDataManager.shared.getFamilyMembers()
             print(familyMembers.count)
-            setFamily()
-            hasFamily = true
-            self.setLeader()
+            if familyMembers.count == 0 {
+                noFamily = true
+                hasFamily = false
+            }
+            else {
+                setFamily()
+                hasFamily = true
+                self.setLeader()
+
+            }
         }
     }
     

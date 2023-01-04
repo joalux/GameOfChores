@@ -23,6 +23,7 @@ struct AddFamilyView: View {
     @State var goSettings = false
     
     @State var fromSettings = false
+    @State var fromFamilyView = false
     
     @FocusState private var showingKeyboard: Bool
 
@@ -102,8 +103,7 @@ struct AddFamilyView: View {
                 Button(action: {
                     print("ADDING FAMILY!!!")
                     
-                    
-                    vm.addFamily()
+                   // vm.addFamily()
                     print(vm.famMembers.count)
                     if vm.coreFamily.isConnected {
                         firHelper.addFirMembers(firID: vm.coreFamily.firID!, famMembers: vm.famMembers)
@@ -112,6 +112,10 @@ struct AddFamilyView: View {
                         if fromSettings {
                             print("fam members added")
                             self.presentationMode.wrappedValue.dismiss()
+                        }
+                        else if fromFamilyView {
+                            print("fam members added")
+                            navManager.goToFamily()
                         }
                         else {
                             print("signup complete")
@@ -128,7 +132,7 @@ struct AddFamilyView: View {
                         .font(.subheadline)
                         .cornerRadius(10)
                 }).padding(.trailing)
-                    .disabled(vm.memberNames.isEmpty)
+                    //.disabled(vm.memberNames.isEmpty)
                     .alert(isPresented:$firHelper.firError) {
                       Alert(
                           title: Text("Error!"),
@@ -150,24 +154,11 @@ struct AddFamilyView: View {
             .toolbar {
                 EditButton()
             }
-          
-            /*
-            .alert(isPresented:$firHelper.firSuccess) {
-                Alert(
-                    title: Text("Success!"),
-                    message: Text("Your family has been added successfully"),
-                    dismissButton: Button(Text("Continue"), action: {
-                        print("")
-                    })
-                   
-                )
-            }*/
         }
     }
     
     func removeFamMember(at offsets: IndexSet) {
         if vm.coreFamily.isConnected {
-            
             FireBaseHelper.shared.removeMemAtOffsets(at: offsets)
         }
         else {

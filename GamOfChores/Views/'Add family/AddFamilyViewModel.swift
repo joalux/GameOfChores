@@ -32,15 +32,13 @@ class AddFamilyViewModel: ObservableObject {
     @Published var firError = false
         
     @Published var coreFamily = CoreDataManager.shared.getFamily()
-    
-    let dispatchQue = DispatchQueue(label: "FamilyQue")
-    
+        
     init() {
         print("___ADD FAM VM____")
         print("CORE FAM= \(coreFamily.familyID)")
         print("Connected = \(coreFamily.isConnected)")
         print("ID = \(coreFamily.firID ?? "No id")")
-        getFamMembers()
+        //getFamMembers()
     }
     
   
@@ -65,13 +63,7 @@ class AddFamilyViewModel: ObservableObject {
             famMembers.append(newMember)
             
         }
-        /*
-        if self.firSuccess == FireBaseHelper.shared.addFirMembers(firID: coreFamily.firID ?? "No id", famMembers: famMembers) {
-            print("You are now connected!")
-            self.firSuccess = true
-        }*/
-        
-        
+
         if coreFamily.isConnected {
             var firCount = 0
             
@@ -122,11 +114,6 @@ class AddFamilyViewModel: ObservableObject {
     
     func getFamMembers() {
         
-        /*if coreFamily.isConnected {
-            //Accessing StateObject's object without being installed on a View. This will create a new instance each time.
-            famMembers = firHelper.firMembers
-            firHelper.getFirMembers(firID: coreFamily.firID ?? "No id")
-        }*/
         let coreMembers = CoreDataManager.shared.getFamilyMembers()
         for member in coreMembers {
             print(member.name)

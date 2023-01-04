@@ -57,6 +57,9 @@ struct StartMenuView: View {
             }
             .padding(.top)
             .navigationBarHidden(true)
+            .onAppear {
+                print(navManager.path.count)
+            }
     }
 }
 

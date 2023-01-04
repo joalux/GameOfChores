@@ -21,6 +21,14 @@ enum Destination {
     
 }
 
+public class Router<T: Hashable>: ObservableObject {
+    @Published var paths: [T] = []
+    
+    func push(_ path: T) {
+        paths.append(path)
+    }
+}
+
 class NavigationManager: ObservableObject {
     @Published var path = NavigationPath()
 
