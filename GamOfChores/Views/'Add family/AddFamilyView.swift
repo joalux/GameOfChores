@@ -103,7 +103,7 @@ struct AddFamilyView: View {
                 Button(action: {
                     print("ADDING FAMILY!!!")
                     
-                   // vm.addFamily()
+                    vm.addFamily()
                     print(vm.famMembers.count)
                     if vm.coreFamily.isConnected {
                         firHelper.addFirMembers(firID: vm.coreFamily.firID!, famMembers: vm.famMembers)

@@ -21,13 +21,14 @@ enum Destination {
     
 }
 
+/*
 public class Router<T: Hashable>: ObservableObject {
     @Published var paths: [T] = []
     
     func push(_ path: T) {
         paths.append(path)
     }
-}
+}*/
 
 class NavigationManager: ObservableObject {
     @Published var path = NavigationPath()
@@ -35,6 +36,9 @@ class NavigationManager: ObservableObject {
     func goToStart(){
         print("goingd to start!!")
         path.append(Destination.startMenuView)
+    }
+    func popToStart(){
+        
     }
     func goToAddFamily(){
         print("goingd to add fam!!")

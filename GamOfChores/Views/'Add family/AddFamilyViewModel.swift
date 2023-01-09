@@ -64,7 +64,7 @@ class AddFamilyViewModel: ObservableObject {
             
         }
 
-        if coreFamily.isConnected {
+       /* if coreFamily.isConnected {
             var firCount = 0
             
             for member in famMembers {
@@ -93,7 +93,7 @@ class AddFamilyViewModel: ObservableObject {
                     }
                 }
             }
-        }
+        } */
         
         
         

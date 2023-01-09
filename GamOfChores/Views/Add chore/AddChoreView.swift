@@ -15,6 +15,8 @@ struct AddChoreView: View {
     
     @StateObject private var addChoreVM = AddChoreViewModel()
     @StateObject private var templateVM = TempleteMakerViewModel()
+    
+    @EnvironmentObject var navManager: NavigationManager
 
     @State var customChore = false
     @State var hasTimeLimit = false
@@ -225,13 +227,13 @@ struct AddChoreView: View {
                 
                 if customChore && addChoreVM.customType.isEmpty == false {
                     addChoreVM.addNewChore(isCustom: customChore, templateMode: templateMode)
-                                       
-                    presentatioMode.wrappedValue.dismiss()
+                                     
+                    navManager.path.removeLast()
 
                 } else if customChore == false {
                     addChoreVM.addNewChore(isCustom: customChore, templateMode: templateMode)
                     
-                    presentatioMode.wrappedValue.dismiss()
+                    navManager.path.removeLast()
 
                 }
             }) {

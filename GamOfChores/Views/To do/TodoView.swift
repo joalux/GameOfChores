@@ -170,7 +170,7 @@ struct TodoView: View {
                 //vm.setCurrentWeek()
 
             })
-            .navigationBarTitle("To do", displayMode: .inline)
+            .navigationBarTitle("To do: \(navManager.path.count)", displayMode: .inline)
         .toolbar {
             EditButton()
         }

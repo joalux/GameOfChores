@@ -35,23 +35,23 @@ class TodoViewModel: NSObject, ObservableObject {
         if CoreDataManager.shared.getFamily().isConnected {
             isConnected = true
          
-            await getFirChores(getCompleted: false, refresh: false)
-            await getFirChores(getCompleted: true, refresh: false)
+             getFirChores(getCompleted: false, refresh: false)
+             getFirChores(getCompleted: true, refresh: false)
             
             firHelper.getFirChores(getCompleted: false, refresh: false)
         }
          else {
+             
              isConnected = false
-            getCoreChores(getCompleted: false)
+             getCoreChores(getCompleted: false)
              getCoreChores(getCompleted: true)
 
         }
     }
     
     func getCoreChores(getCompleted: Bool){
-   
+        
         var coreChores = CoreDataManager.shared.getChores()
-                
         if getCompleted {
             sortChores(newChores: coreChores, sortCompleted: true, refresh: false)
         } else {
@@ -67,9 +67,6 @@ class TodoViewModel: NSObject, ObservableObject {
         if getCompleted {
 
             choreRef = "Completed chores"
-        }
-        else {
-            print("________Fetching to do!")
         }
         
         if let firID = CoreDataManager.shared.getFamily().firID {
@@ -122,10 +119,9 @@ class TodoViewModel: NSObject, ObservableObject {
     }
     
     func sortChores(newChores: [Chore], sortCompleted: Bool, refresh: Bool){
-        print("____SORTING CHORES!!!")
         if refresh {
             print("_____REFRESHING!!!!_______")
-            self.choresTodo.removeAll()
+           // self.choresTodo.removeAll()
         }
         
         for chore in newChores {
@@ -137,19 +133,15 @@ class TodoViewModel: NSObject, ObservableObject {
                 }
             } else {
                 if self.choresTodo.contains(where: { $0.choreID == chore.choreID}) == false {
-                    print("___ADDING NEW CHORE \(choresTodo.count)")
+                    /*print("___ADDING NEW CHORE \(choresTodo.count)")
                     print("_____Date: ", chore.dateToDo!)
                     print("_____Weekday: ", chore.dateToDo!.get(.weekday))
                     print("_____WeekdayString",setDay(dateTodo: chore.dateToDo!))
-                    print("_______WEEK: ", chore.dateToDo!.get(.weekOfYear))
+                    print("_______WEEK: ", chore.dateToDo!.get(.weekOfYear))*/
                     
                     if chore.dateToDo!.get(.weekday) == 1 {
-                        print("____WEEK", chore.dateToDo?.get(.weekOfYear))
-                        print("____Day", chore.dateToDo?.get(.weekday))
                         if let day = chore.dateToDo {
                             var sunday = Calendar.current.date(byAdding: .day, value: -7, to: day)!
-                            print("_____", sunday.get(.weekOfYear))
-                            print("____Day", sunday.get(.weekday))
                             chore.dateToDo = sunday
                             do {
                                 try chore.save()
@@ -164,6 +156,7 @@ class TodoViewModel: NSObject, ObservableObject {
             }
           
         }
+        /*
         print("____HAS CHORES!!", choresTodo.count)
         
         print("___TODAY____", Date())
@@ -177,7 +170,7 @@ class TodoViewModel: NSObject, ObservableObject {
             print("_____CHORE DAYINDEX:", chore.dateToDo?.get(.weekday))
             print("_____CHORE WEEK:", chore.dateToDo?.get(.weekOfYear))
         }
-        //setCurrentWeek()
+        //setCurrentWeek()*/
     }
     
     func removeChore(chore: Chore){
@@ -203,10 +196,10 @@ class TodoViewModel: NSObject, ObservableObject {
     }
     
     func setCurrentWeek() {
-        print("___TODAY____", Date())
+        /*print("___TODAY____", Date())
         print("___WEEKDAY____", Date().get(.weekday))
         print("___WEEKOFYEAR____", Date().get(.weekOfYear))
-        print("___DAY____", Date().get(.day))
+        print("___DAY____", Date().get(.day))*/
         
         if Date().get(.weekday) == 1 {
             print("__SUNDAY!!!")

@@ -43,20 +43,21 @@ struct LoginView: View {
                             message: Text(LocalizedStringKey("WantToConnectMessage")),
                             primaryButton: .default(Text(LocalizedStringKey("Yes")), action: {
                                 print("Connecting!!!")
+                                vm.addFamily()
                                 navManager.goToFirConnect()
                                 
                             }),
                             secondaryButton: .default(Text(LocalizedStringKey("No")), action: {
                                 print("no connect!!")
+                                vm.addFamily()
                                 navManager.goToAddFamily()
 
                             })
                         )
                     }
-                
             }
             .onAppear {
-               // vm.getFamily()
+                vm.getFamily()
                 if vm.hasFamily {
                     print("HAS FAMILY!!!!")
                     navManager.goToStart()
